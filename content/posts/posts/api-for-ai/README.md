@@ -1,5 +1,5 @@
 ---
-title: "An Analytical Overview of AI APIs: Bridging Model Power and Application Logic"
+title: "An Analytical Overview of AI APIs : Bridging Model Power and Application Logic"
 slug: api-for-ai
 date: 2026-02-28
 tags:

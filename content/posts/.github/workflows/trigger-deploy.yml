@@ -1,0 +1,17 @@
+name: Trigger App Rebuild
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger-rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger private app repo rebuild
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.APP_REPO_PAT }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/Mzaq1559/Blog_Website-My-Learning-Diary-/dispatches \
+            -d '{"event_type":"posts-updated"}'
