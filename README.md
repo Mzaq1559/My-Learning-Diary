@@ -51,11 +51,18 @@ The app runs entirely in the browser. There is no server — GitHub is both the 
 
 ```mermaid
 graph TD
-    Reader((Reader))   -->|Views site|     Pages[GitHub Pages]
-    Author((Author))   -->|Manages posts|  App[Vite + React CMS]
-    App                -->|Octokit REST|   Repo[(GitHub Repository)]
-    Repo               -->|Markdown files| Content[src/content/posts]
-    Repo               -->|Triggers build| Pages
+    Reader((Reader))
+    Author((Author))
+    Pages["GitHub Pages"]
+    App["Vite + React CMS"]
+    Repo["GitHub Repository"]
+    Content["src/content/posts"]
+
+    Reader -->|"Views site"| Pages
+    Author -->|"Manages posts"| App
+    App -->|"Octokit REST"| Repo
+    Repo -->|"Markdown files"| Content
+    Repo -->|"Triggers build"| Pages
 ```
 
 ---
