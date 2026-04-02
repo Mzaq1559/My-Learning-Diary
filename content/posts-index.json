@@ -112,9 +112,7 @@
     "date": "2026-02-28",
     "tags": [],
     "category": "AI & Machine Learning",
-    "cover": "./images/cover.png",
-    "series": "ai-and-deep-learning",
-    "seriesOrder": 12
+    "cover": "./images/cover.png"
   },
   {
     "title": "Pipelines for ML Automation",
