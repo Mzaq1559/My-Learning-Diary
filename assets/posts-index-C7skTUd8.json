@@ -1,0 +1,448 @@
+[
+  {
+    "title": "Building a Git-Based CMS in 1 Week—A Learning Sprint",
+    "slug": "building-a-git-based-cms-in-1-week",
+    "date": "2026-03-28",
+    "tags": [
+      "react",
+      "github-api",
+      "cms",
+      "typescript",
+      "project-log"
+    ],
+    "category": "Project Log",
+    "excerpt": "I challenged myself to build a fully functional blog CMS in 1 week using React and the GitHub API. Here's how I shipped a complete, polished product by ruthlessly cutting scope and letting Git do the heavy lifting.",
+    "cover": "./images/cover.jpg",
+    "series": "git-and-tools",
+    "seriesOrder": 3
+  },
+  {
+    "title": "An Analytical Overview of GPU: What It Is and Why It Matters in AI",
+    "slug": "gpu",
+    "date": "2026-03-26",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "gpu-and-hardware",
+    "seriesOrder": 1
+  },
+  {
+    "title": "CUDA Basics: How Programmers Use GPUs for Computing",
+    "slug": "cuda-basics",
+    "date": "2026-03-24",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "gpu-and-hardware",
+    "seriesOrder": 2
+  },
+  {
+    "title": "A Comparative Study of Tensor Cores and CUDA Cores",
+    "slug": "tensor-cores-vs-cuda-cores",
+    "date": "2026-03-23",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "gpu-and-hardware",
+    "seriesOrder": 3
+  },
+  {
+    "title": "What Are LLMs and How Do They Work",
+    "slug": "llms",
+    "date": "2026-03-22",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "ai-and-deep-learning",
+    "seriesOrder": 1
+  },
+  {
+    "title": "Generative AI Models You Should Know",
+    "slug": "generative-ai-models",
+    "date": "2026-03-21",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "ai-and-deep-learning",
+    "seriesOrder": 5
+  },
+  {
+    "title": "An Analytical Overview of Overfitting and How to Prevent It",
+    "slug": "overfitting",
+    "date": "2026-03-17",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "machine-learning",
+    "seriesOrder": 4
+  },
+  {
+    "title": "An Analytical Overview of Loss Functions in ML",
+    "slug": "loss-functions-in-ml",
+    "date": "2026-03-11",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "machine-learning",
+    "seriesOrder": 3
+  },
+  {
+    "title": "The Underlying Mechanics of Computer Vision",
+    "slug": "computer-vision",
+    "date": "2026-03-07",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "ai-and-deep-learning",
+    "seriesOrder": 8
+  },
+  {
+    "title": "Common Evaluation Metrics in ML",
+    "slug": "ml-evaluation-metrics",
+    "date": "2026-03-03",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "machine-learning",
+    "seriesOrder": 11
+  },
+  {
+    "title": "An Analytical Overview of AI APIs: Bridging Model Power and Application Logic",
+    "slug": "api-for-ai",
+    "date": "2026-02-28",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "ai-and-deep-learning",
+    "seriesOrder": 12
+  },
+  {
+    "title": "Pipelines for ML Automation",
+    "slug": "ml-automation-pipelines",
+    "date": "2026-02-23",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "machine-learning",
+    "seriesOrder": 12
+  },
+  {
+    "title": "An Analytical Overview of MLOps",
+    "slug": "mlops",
+    "date": "2026-02-22",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "machine-learning",
+    "seriesOrder": 13
+  },
+  {
+    "title": "A Comparative Study of GPUs and TPUs vs CPUs for AI Training",
+    "slug": "gpus-and-tpus-vs-cpus-for-ai-training",
+    "date": "2026-02-20",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "gpu-and-hardware",
+    "seriesOrder": 6
+  },
+  {
+    "title": "An Analytical Overview of Reinforcement Learning in Practice",
+    "slug": "reinforcement-learning",
+    "date": "2026-02-19",
+    "tags": [],
+    "category": "AI & Machine Learning",
+    "cover": "./images/cover.png",
+    "series": "ai-and-deep-learning",
+    "seriesOrder": 11
+  },
+  {
+    "title": "What Are Progressive Web Apps",
+    "slug": "progressive-web-apps",
+    "date": "2026-01-08",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 7
+  },
+  {
+    "title": "npm vs. Yarn vs. pnpm: An Analytical Overview of Dependency Management",
+    "slug": "npm-and-yarn",
+    "date": "2026-01-01",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 13
+  },
+  {
+    "title": "Modern JavaScript Features",
+    "slug": "modern-javascript-features",
+    "date": "2025-12-17",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 9
+  },
+  {
+    "title": "Methodologies for Manage Services: An Analytical Deep-Dive into Service Orchestration",
+    "slug": "managing-services",
+    "date": "2025-11-12",
+    "tags": [],
+    "category": "Systems & OS",
+    "cover": "./images/cover.png",
+    "series": "linux-and-systems",
+    "seriesOrder": 2
+  },
+  {
+    "title": "The Post Office of the Internet: An Analytical Overview of IP Routing",
+    "slug": "ip-routing",
+    "date": "2025-11-01",
+    "tags": [],
+    "category": "Systems & OS",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 5
+  },
+  {
+    "title": "The Linux Startup Sequence: An Analytical Deep-Dive",
+    "slug": "linux-startup-sequence",
+    "date": "2025-10-29",
+    "tags": [],
+    "category": "Systems & OS",
+    "cover": "./images/cover.png",
+    "series": "linux-and-systems",
+    "seriesOrder": 1
+  },
+  {
+    "title": "The Binary Bridge: An Analytical Overview of TCP vs UDP",
+    "slug": "tcp-vs-udp",
+    "date": "2025-10-24",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 4
+  },
+  {
+    "title": "The Architecture of Trust: The Underlying Mechanics of HTTPS",
+    "slug": "https",
+    "date": "2025-10-21",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 12
+  },
+  {
+    "title": "The Future of the Web: An Analytical Overview of QUIC and HTTP/3",
+    "slug": "quic",
+    "date": "2025-10-15",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 8
+  },
+  {
+    "title": "The Encryption Tunnel: An Analytical Overview of VPNs and Secure Routing",
+    "slug": "vpn",
+    "date": "2025-10-15",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 11
+  },
+  {
+    "title": "The 128-Bit Revolution: An Analytical Overview of IPv6",
+    "slug": "ipv6",
+    "date": "2025-10-12",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 6
+  },
+  {
+    "title": "The Architecture of Connectivity: An Analytical Overview of the OSI Model",
+    "slug": "the-osi-model",
+    "date": "2025-10-08",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "networking",
+    "seriesOrder": 1
+  },
+  {
+    "title": "The Mathematical Fortress: An Analytical Overview of Symmetric vs Asymmetric Encryption",
+    "slug": "symmetric-vs-asymmetric-encryption",
+    "date": "2025-09-24",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "security",
+    "seriesOrder": 6
+  },
+  {
+    "title": "The Ethical Breach: An Analytical Overview of Penetration Testing Methodologies",
+    "slug": "penetration-testing-tools",
+    "date": "2025-09-10",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "security",
+    "seriesOrder": 3
+  },
+  {
+    "title": "The Shadows of the Net: An Analytical Overview of the Dark Web and Cybercrime Ecosystems",
+    "slug": "the-dark-web",
+    "date": "2025-09-08",
+    "tags": [],
+    "category": "Networking & Security",
+    "cover": "./images/cover.png",
+    "series": "security",
+    "seriesOrder": 11
+  },
+  {
+    "title": "The Architecture of Collaboration: An Analytical Overview of the Git & GitHub Workflow",
+    "slug": "git-and-github-workflow",
+    "date": "2025-09-07",
+    "tags": [],
+    "category": "DevOps & Tools",
+    "cover": "./images/cover.png",
+    "series": "git-and-tools",
+    "seriesOrder": 1
+  },
+  {
+    "title": "The Mechanics of Versioning: An Analytical Overview of Branching and Merging",
+    "slug": "branching-and-merging",
+    "date": "2025-09-06",
+    "tags": [],
+    "category": "DevOps & Tools",
+    "cover": "./images/cover.png",
+    "series": "git-and-tools",
+    "seriesOrder": 2
+  },
+  {
+    "title": "The Abstraction of Metal: An Analytical Overview of the Evolution of Cloud Computing (IaaS, PaaS, SaaS)",
+    "slug": "evolution-of-cloud-computing",
+    "date": "2025-08-30",
+    "tags": [],
+    "category": "Cloud & Devops",
+    "cover": "./images/cover.png",
+    "series": "devops-and-cloud",
+    "seriesOrder": 6
+  },
+  {
+    "title": "The Distributed Operating System: An Analytical Overview of Kubernetes Architecture",
+    "slug": "kubernetes",
+    "date": "2025-08-27",
+    "tags": [],
+    "category": "Cloud & Devops",
+    "cover": "./images/cover.png",
+    "series": "devops-and-cloud",
+    "seriesOrder": 2
+  },
+  {
+    "title": "The Architecture of Artifacts: An Analytical Overview of Modern Build Tools",
+    "slug": "build-tools",
+    "date": "2025-08-24",
+    "tags": [],
+    "category": "DevOps & Tools",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 14
+  },
+  {
+    "title": "The Browser's Hidden Memory: An Analytical Deep-Dive into Cookies, localStorage, and sessionStorage",
+    "slug": "cookies-vs-local-storage",
+    "date": "2025-07-20",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 5
+  },
+  {
+    "title": "The Engine Behind Async JavaScript: A Deep Dive into the Event Loop",
+    "slug": "javascript-event-loop",
+    "date": "2025-07-18",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 8
+  },
+  {
+    "title": "JWT: How JSON Web Tokens Power Modern Authentication",
+    "slug": "jwt-authentication",
+    "date": "2025-07-12",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "security",
+    "seriesOrder": 9
+  },
+  {
+    "title": "How Browsers Paint the Web: A Deep Dive into the Rendering Pipeline",
+    "slug": "how-browsers-render-html",
+    "date": "2025-07-10",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 12
+  },
+  {
+    "title": "CSR vs SSR vs SSG: An Architectural Analysis of Rendering Strategies",
+    "slug": "csr-vs-ssr",
+    "date": "2025-07-05",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 6
+  },
+  {
+    "title": "REST API Design: Principles, Patterns, and Best Practices",
+    "slug": "rest-api",
+    "date": "2025-06-25",
+    "tags": [],
+    "category": "Web Development",
+    "cover": "./images/cover.png",
+    "series": "backend-and-apis",
+    "seriesOrder": 1
+  },
+  {
+    "title": "Building a Production-Ready FastAPI Backend from Scratch",
+    "slug": "fastapi-backend-from-scratch",
+    "date": "2024-03-15",
+    "tags": [
+      "fastapi",
+      "python",
+      "backend",
+      "docker"
+    ],
+    "category": "tech",
+    "series": "backend-and-apis",
+    "seriesOrder": 4
+  },
+  {
+    "title": "Hadoop + Redis: Building a Big Data Pipeline with a High-Speed Cache Layer",
+    "slug": "hadoop-and-redis-pipeline",
+    "date": "2023-12-10",
+    "tags": [
+      "hadoop",
+      "redis",
+      "big-data",
+      "python",
+      "fastapi"
+    ],
+    "category": "projects",
+    "series": "devops-and-cloud",
+    "seriesOrder": 9
+  }
+]
