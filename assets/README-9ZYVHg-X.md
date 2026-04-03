@@ -8,15 +8,17 @@ excerpt: A brief overview of the current Tchnologies and Databases
 cover: ./images/cover.svg
 ---
 
-##Understanding Databases##
+## Understanding Databases
 
-###A Comprehensive Guide to the World of Data Storage
+### A Comprehensive Guide to the World of Data Storage
 
 ─────────────────────────────
 
 Types, Tools, Architecture & Real-World Applications
 
-###Introduction
+![Cover illustration for the database guide](./images/cover.svg)
+
+### Introduction
 
 In the modern digital world, data is often described as the new oil.
 Every application you use, every website you visit, every purchase you
@@ -45,12 +47,12 @@ categories and their trade-offs, the most widely used products in each
 category, the management tools used to interact with them, and how cloud
 computing has transformed the entire landscape.
 
-**A Brief History of Databases**
+### A Brief History of Databases
 
 To understand why so many types of databases exist, it helps to
 understand where they came from.
 
-**The File System Era (1950s--1960s)**
+#### The File System Era (1950s--1960s)
 
 Before databases, applications stored data in flat files --- essentially
 text files on disk. Programs would read and write these files directly.
@@ -59,7 +61,7 @@ was no standard way to query data, no protection against two programs
 editing the same file simultaneously, and no way to define relationships
 between pieces of data.
 
-**Hierarchical and Network Databases (1960s--1970s)**
+#### Hierarchical and Network Databases (1960s--1970s)
 
 The first proper databases used hierarchical models, where data was
 organized in a tree structure (parent-child relationships). IBM\'s
@@ -70,7 +72,7 @@ structure. While more powerful, these systems required programmers to
 know exactly how the data was physically stored --- a significant
 limitation.
 
-**The Relational Revolution (1970s--1980s)**
+#### The Relational Revolution (1970s--1980s)
 
 In 1970, Edgar F. Codd, a mathematician at IBM, published a landmark
 paper introducing the relational model of data. His insight was simple
@@ -82,7 +84,7 @@ Server all trace their roots to this era. The relational model became so
 dominant that for decades it was virtually synonymous with the concept
 of a database.
 
-**The Internet and the NoSQL Movement (1990s--2010s)**
+#### The Internet and the NoSQL Movement (1990s--2010s)
 
 The explosive growth of the internet in the 1990s and 2000s created data
 challenges that traditional relational databases struggled to handle.
@@ -96,11 +98,11 @@ This pressure gave birth to the NoSQL movement --- a broad category of
 databases that abandoned some or all of the constraints of the
 relational model in exchange for scalability, flexibility, or
 performance. The term NoSQL, originally meaning \'No SQL,\' was later
-reinterpreted as \'Not Only SQL,\' acknowledging that these databases
+reinterpreted as \'Not Only SQL,\' acknowledging that these systems
 weren\'t necessarily replacing relational systems but complementing
 them.
 
-**The Cloud Era (2010s--Present)**
+#### The Cloud Era (2010s--Present)
 
 The rise of cloud computing brought another transformation. Amazon Web
 Services, Microsoft Azure, and Google Cloud Platform began offering
@@ -110,13 +112,15 @@ This democratized access to powerful database technology and introduced
 entirely new database paradigms, such as serverless databases that
 charge per query rather than per server hour.
 
-**Relational Databases (SQL)**
+![Timeline showing the evolution from file systems to cloud databases](./images/history_timeline.svg)
+
+### Relational Databases (SQL)
 
 Relational databases remain the backbone of the software industry. They
 are based on the relational model proposed by Codd and use Structured
 Query Language (SQL) to define, manipulate, and query data.
 
-**Core Concepts**
+#### Core Concepts
 
 **Tables and Schema:** Data is organized into tables, where each table
 represents a specific entity (e.g., customers, orders, products). Each
@@ -140,57 +144,32 @@ other), and Durability (once committed, data survives system failures).
 These properties make relational databases exceptionally reliable for
 financial and transactional workloads.
 
-**Structured Query Language (SQL)**
+![Diagram illustrating tables, rows, columns, primary keys, and foreign keys](./images/relational_model.svg)
+
+#### Structured Query Language (SQL)
 
 SQL is the universal language for interacting with relational databases.
 Despite variations between database vendors, core SQL is highly
 standardized. SQL operations fall into several categories:
 
-**DDL (Data Definition Language):** Commands like CREATE TABLE, ALTER
-TABLE, and DROP TABLE define and modify the structure of the database.
+- **DDL (Data Definition Language):** Commands like CREATE TABLE, ALTER TABLE, and DROP TABLE define and modify the structure of the database.
+- **DML (Data Manipulation Language):** Commands like SELECT, INSERT, UPDATE, and DELETE read and modify data.
+- **DCL (Data Control Language):** Commands like GRANT and REVOKE manage permissions and access control.
+- **TCL (Transaction Control Language):** Commands like COMMIT and ROLLBACK manage transactions.
 
-**DML (Data Manipulation Language):** Commands like SELECT, INSERT,
-UPDATE, and DELETE read and modify data.
+#### Major Relational Database Products
 
-**DCL (Data Control Language):** Commands like GRANT and REVOKE manage
-permissions and access control.
+| Database | Developer | License | Best Known For |
+|---|---|---|---|
+| MySQL | Oracle | Open Source (GPL) | Web applications, LAMP stack, ease of use |
+| PostgreSQL | Community | Open Source (MIT-like) | Standards compliance, advanced features, extensibility |
+| Microsoft SQL Server | Microsoft | Commercial | Enterprise Windows environments, BI integration |
+| Oracle Database | Oracle | Commercial | Large enterprises, mission-critical workloads |
+| SQLite | D. Richard Hipp | Public Domain | Embedded systems, mobile apps, local storage |
+| MariaDB | MariaDB Foundation | Open Source (GPL) | MySQL-compatible, community-driven alternative |
+| IBM Db2 | IBM | Commercial | Mainframes, legacy enterprise systems |
 
-**TCL (Transaction Control Language):** Commands like COMMIT and
-ROLLBACK manage transactions.
-
-**Major Relational Database Products**
-
-  ---------------- --------------- ---------------- ----------------------
-  **Database**     **Developer**   **License**      **Best Known For**
-
-  MySQL            Oracle          Open Source      Web applications, LAMP
-                                   (GPL)            stack, ease of use
-
-  PostgreSQL       Community       Open Source      Standards compliance,
-                                   (MIT-like)       advanced features,
-                                                    extensibility
-
-  Microsoft SQL    Microsoft       Commercial       Enterprise Windows
-  Server                                            environments, BI
-                                                    integration
-
-  Oracle Database  Oracle          Commercial       Large enterprises,
-                                                    mission-critical
-                                                    workloads
-
-  SQLite           D. Richard Hipp Public Domain    Embedded systems,
-                                                    mobile apps, local
-                                                    storage
-
-  MariaDB          MariaDB         Open Source      MySQL-compatible,
-                   Foundation      (GPL)            community-driven
-                                                    alternative
-
-  IBM Db2          IBM             Commercial       Mainframes, legacy
-                                                    enterprise systems
-  ---------------- --------------- ---------------- ----------------------
-
-**MySQL**
+#### MySQL
 
 MySQL is the world\'s most popular open-source relational database and
 has powered millions of web applications since its release in 1995. It
@@ -201,7 +180,7 @@ reliability, and ease of setup. It was acquired by Sun Microsystems in
 2008 and later by Oracle, a move that led to the community fork known as
 MariaDB.
 
-**PostgreSQL**
+#### PostgreSQL
 
 PostgreSQL, often called Postgres, is a powerful open-source
 object-relational database with a reputation for standards compliance
@@ -213,7 +192,7 @@ without the licensing costs of commercial alternatives. It has become
 increasingly popular in cloud environments and is the foundation for
 cloud services like Amazon Aurora.
 
-**Microsoft SQL Server**
+#### Microsoft SQL Server
 
 SQL Server is Microsoft\'s flagship relational database, first released
 in 1989. It is deeply integrated with the Microsoft ecosystem, including
@@ -224,7 +203,7 @@ Server Reporting Services (SSRS) and SQL Server Integration Services
 (SSIS). It comes in multiple editions ranging from Express (free,
 limited) to Enterprise (full-featured, expensive).
 
-**Oracle Database**
+#### Oracle Database
 
 Oracle Database is the gold standard for large-scale enterprise
 databases and has been for decades. It powers many of the world\'s
@@ -235,7 +214,7 @@ database products on the market, making it most common in organizations
 where the cost of database downtime or data loss would vastly exceed
 licensing fees.
 
-**SQLite**
+#### SQLite
 
 SQLite is unique in that it is not a separate server process but a
 library that is embedded directly into the application. It stores the
@@ -246,7 +225,7 @@ zero-configuration database is needed. SQLite is remarkably widely
 deployed --- there are estimated to be over one trillion SQLite
 databases in existence.
 
-**NoSQL Databases**
+### NoSQL Databases
 
 NoSQL is not a single type of database but a broad family of database
 systems that diverge from the relational model in various ways. They
@@ -262,7 +241,9 @@ immediately reflects the latest write, these systems allow for temporary
 inconsistencies that will eventually resolve --- a trade-off that
 enables massive horizontal scalability.
 
-**Document Databases**
+![Overview of NoSQL database types: document, key-value, column-family, graph](./images/nosql_types.svg)
+
+#### Document Databases
 
 Document databases store data as semi-structured documents, typically in
 JSON or BSON (Binary JSON) format. Each document can have a different
@@ -271,7 +252,7 @@ Documents can contain nested objects and arrays, naturally modeling
 complex real-world entities without requiring joins across multiple
 tables.
 
-**MongoDB**
+#### MongoDB
 
 MongoDB is the dominant document database and one of the most widely
 used databases of any kind. Released in 2009 by MongoDB Inc., it stores
@@ -288,14 +269,14 @@ rapidly or vary significantly between records. Its query language is
 JSON-based and considered more intuitive by developers already working
 in JavaScript.
 
-**CouchDB**
+#### CouchDB
 
 Apache CouchDB is another document database that emphasizes ease of
 replication and multi-master synchronization. It uses HTTP as its API
 and is particularly notable for its ability to sync data between devices
 --- a feature leveraged by applications that need offline functionality.
 
-**Key-Value Stores**
+#### Key-Value Stores
 
 Key-value databases are the simplest form of NoSQL database. Data is
 stored as a collection of key-value pairs, much like a dictionary or
@@ -303,7 +284,7 @@ hash map in programming. They offer extremely fast lookups by key but
 limited querying capability --- you can only retrieve data if you know
 the key.
 
-**Redis**
+#### Redis
 
 Redis (Remote Dictionary Server) is the most popular key-value store in
 the world, and arguably the most versatile. Originally designed as a
@@ -318,7 +299,7 @@ real-time leaderboards (using sorted sets), pub/sub messaging, and rate
 limiting. Despite being in-memory, Redis can persist data to disk and
 supports replication for high availability.
 
-**Amazon DynamoDB**
+#### Amazon DynamoDB
 
 DynamoDB is Amazon\'s fully managed key-value and document database,
 offered as a cloud service on AWS. It is designed to handle any scale
@@ -327,7 +308,7 @@ per second --- without requiring any capacity planning. DynamoDB
 underpins some of the world\'s largest-scale applications, including
 Amazon\'s own shopping cart.
 
-**Column-Family Databases**
+#### Column-Family Databases
 
 Column-family databases (also called wide-column stores) are organized
 into rows and columns like relational databases, but with a critical
@@ -335,7 +316,7 @@ difference: different rows can have different columns, and columns are
 grouped into families. They are optimized for queries over large
 datasets that read or write specific columns rather than entire rows.
 
-**Apache Cassandra**
+#### Apache Cassandra
 
 Cassandra was originally developed at Facebook to power their inbox
 search feature and was open-sourced in 2008. It is now maintained by the
@@ -350,7 +331,7 @@ Cassandra\'s trade-off is that it sacrifices some query flexibility (it
 does not support joins or subqueries in the traditional SQL sense) in
 exchange for unparalleled write speed and availability.
 
-**Apache HBase**
+#### Apache HBase
 
 HBase is built on top of the Hadoop Distributed File System (HDFS) and
 is designed for very large tables --- billions of rows and millions of
@@ -358,14 +339,14 @@ columns. It is closely modeled after Google\'s internal Bigtable system
 and is used for real-time read/write access to large datasets, often in
 conjunction with Hadoop-based batch processing.
 
-**Graph Databases**
+#### Graph Databases
 
 Graph databases model data as nodes (entities) and edges (relationships
 between entities), with properties on both. They are optimized for
 queries that traverse relationships, making them ideal for social
 networks, recommendation engines, fraud detection, and knowledge graphs.
 
-**Neo4j**
+#### Neo4j
 
 Neo4j is the most widely used graph database in the world. It uses a
 query language called Cypher, which allows for expressive, readable
@@ -375,14 +356,14 @@ This kind of query is complex and slow in a relational database
 (requiring multiple joins) but natural and fast in a graph database.
 Neo4j is used by companies like eBay, Walmart, and NASA.
 
-**Amazon Neptune**
+#### Amazon Neptune
 
 Neptune is Amazon\'s managed graph database service, supporting both
 property graph and RDF (Resource Description Framework) graph models. It
 supports two query languages: Gremlin (for property graphs) and SPARQL
 (for RDF), making it versatile for different graph use cases.
 
-**Search Engines as Databases**
+#### Search Engines as Databases
 
 While not traditional databases, search engines like Elasticsearch and
 Apache Solr function as specialized data stores optimized for full-text
@@ -391,7 +372,7 @@ documents and provides near-real-time search capabilities across
 billions of records. It is widely used for log analysis, application
 monitoring, and e-commerce search functionality.
 
-**Time-Series Databases**
+#### Time-Series Databases
 
 Time-series databases are optimized for storing and querying data that
 changes over time at regular or irregular intervals --- sensor readings,
@@ -406,7 +387,7 @@ optimizations. Prometheus, while primarily a monitoring tool, includes a
 built-in time-series database and is the standard for cloud-native
 infrastructure monitoring.
 
-**Database Management Tools**
+### Database Management Tools
 
 A database management tool (also called a database client or GUI client)
 is software that provides a user interface for connecting to, querying,
@@ -414,7 +395,7 @@ and administering a database. These are distinct from the database
 itself --- they are applications that speak to the database over a
 network connection or local socket.
 
-**SQL Server Management Studio (SSMS)**
+#### SQL Server Management Studio (SSMS)
 
 SSMS is Microsoft\'s flagship GUI tool for managing SQL Server
 databases. It provides a comprehensive interface for writing and
@@ -424,7 +405,7 @@ configuring backups. SSMS has been the standard tool for SQL Server
 administrators and developers for over two decades. It is Windows-only,
 free to download, and tightly integrated with SQL Server\'s features.
 
-**Azure Data Studio**
+#### Azure Data Studio
 
 Azure Data Studio is Microsoft\'s newer, cross-platform database tool
 built on the same foundation as Visual Studio Code. It runs on Windows,
@@ -435,7 +416,7 @@ source control integration, and an extension marketplace. Microsoft has
 been investing more heavily in Azure Data Studio and it represents the
 future direction for Microsoft\'s database tooling.
 
-**MySQL Workbench**
+#### MySQL Workbench
 
 MySQL Workbench is the official GUI tool for MySQL, developed by Oracle.
 It combines database design (with an entity-relationship diagram
@@ -444,7 +425,7 @@ It supports forward and reverse engineering of database schemas, making
 it useful for both creating new databases from diagrams and generating
 diagrams from existing databases.
 
-**pgAdmin**
+#### pgAdmin
 
 pgAdmin is the most widely used open-source administration and
 development platform for PostgreSQL. It provides a web-based or desktop
@@ -452,7 +433,7 @@ interface for managing PostgreSQL servers, executing queries, viewing
 table data, managing roles and permissions, and monitoring server
 activity.
 
-**DBeaver**
+#### DBeaver
 
 DBeaver is a universal database tool that supports virtually every major
 database --- MySQL, PostgreSQL, SQLite, Oracle, SQL Server, MongoDB,
@@ -461,14 +442,14 @@ Edition and a commercial Enterprise Edition. Its universal nature makes
 it popular among developers who work with multiple different databases
 and don\'t want to maintain separate tools for each.
 
-**TablePlus**
+#### TablePlus
 
 TablePlus is a modern, fast, and lightweight database GUI for macOS,
 Windows, and Linux. It supports a wide range of relational and some
 NoSQL databases with a clean, native interface. It is particularly
 popular among developers for its speed and simplicity.
 
-**DataGrip**
+#### DataGrip
 
 DataGrip, developed by JetBrains (the company behind IntelliJ IDEA and
 PyCharm), is a professional IDE for databases. It provides intelligent
@@ -476,7 +457,7 @@ code completion, automated refactoring, version control integration, and
 sophisticated schema navigation. It is a commercial product popular
 among professional database developers.
 
-**Cloud Databases and Database as a Service**
+### Cloud Databases and Database as a Service
 
 Cloud computing has fundamentally changed how databases are deployed and
 managed. Rather than purchasing servers, installing database software,
@@ -484,7 +465,7 @@ configuring backups, and managing updates --- all of which requires
 dedicated expertise --- organizations can now provision fully managed
 database services in minutes.
 
-**What is DBaaS?**
+#### What is DBaaS?
 
 Database as a Service (DBaaS) refers to cloud-hosted databases that are
 managed by the cloud provider. The provider handles provisioning,
@@ -493,40 +474,23 @@ simply connects to the database and uses it. This dramatically reduces
 operational overhead and lowers the barrier to entry for sophisticated
 database capabilities.
 
-**Major Cloud Database Services**
+#### Major Cloud Database Services
 
-  ------------------ -------------- ----------------------------- ------------------
-  **Service**        **Provider**   **Based On**                  **Category**
+| Service | Provider | Based On | Category |
+|---|---|---|---|
+| Amazon RDS | AWS | MySQL, PostgreSQL, Oracle, SQL Server, MariaDB | Managed relational |
+| Amazon Aurora | AWS | MySQL/PostgreSQL-compatible | High-performance managed relational |
+| Amazon DynamoDB | AWS | Proprietary | Managed key-value / document |
+| Azure SQL Database | Microsoft | SQL Server | Managed relational |
+| Azure Cosmos DB | Microsoft | Proprietary multi-model | Managed multi-model NoSQL |
+| Google Cloud Spanner | Google | Proprietary | Globally distributed relational |
+| Google Firestore | Google | Proprietary | Managed document database |
+| Snowflake | Snowflake Inc. | Proprietary | Cloud data warehouse |
+| MongoDB Atlas | MongoDB | MongoDB | Managed document database |
 
-  Amazon RDS         AWS            MySQL, PostgreSQL, Oracle,    Managed relational
-                                    SQL Server, MariaDB           
+![Cloud database architecture showing managed services and DBaaS](./images/cloud_databases.svg)
 
-  Amazon Aurora      AWS            MySQL/PostgreSQL-compatible   High-performance
-                                                                  managed relational
-
-  Amazon DynamoDB    AWS            Proprietary                   Managed key-value
-                                                                  / document
-
-  Azure SQL Database Microsoft      SQL Server                    Managed relational
-
-  Azure Cosmos DB    Microsoft      Proprietary multi-model       Managed
-                                                                  multi-model NoSQL
-
-  Google Cloud       Google         Proprietary                   Globally
-  Spanner                                                         distributed
-                                                                  relational
-
-  Google Firestore   Google         Proprietary                   Managed document
-                                                                  database
-
-  Snowflake          Snowflake Inc. Proprietary                   Cloud data
-                                                                  warehouse
-
-  MongoDB Atlas      MongoDB        MongoDB                       Managed document
-                                                                  database
-  ------------------ -------------- ----------------------------- ------------------
-
-**Azure and Microsoft\'s Cloud Ecosystem**
+#### Azure and Microsoft\'s Cloud Ecosystem
 
 Microsoft Azure deserves special attention because it is commonly
 confused with a database itself. Azure is actually a comprehensive cloud
@@ -543,7 +507,7 @@ between Azure the platform, Azure Data Studio the tool, and the specific
 Azure database services is a common source of confusion for those new to
 the field.
 
-**Serverless Databases**
+#### Serverless Databases
 
 A recent evolution in cloud databases is the serverless model, where the
 database automatically scales to zero when not in use and charges per
@@ -553,7 +517,7 @@ approach. Serverless databases are particularly well-suited for
 development environments, small projects, and applications with highly
 variable load.
 
-**Data Warehouses and Analytical Databases**
+#### Data Warehouses and Analytical Databases
 
 Databases can be broadly categorized by their workload type into two
 camps: OLTP and OLAP.
@@ -582,13 +546,15 @@ Redshift, Google BigQuery, and Azure Synapse Analytics are the major
 cloud competitors. Traditional enterprise data warehouses include
 Teradata and IBM Netezza.
 
-**How to Choose the Right Database**
+![Comparison of OLTP (transactional) and OLAP (analytical) database workloads](./images/oltp_vs_olap.svg)
+
+### How to Choose the Right Database
 
 Choosing a database is one of the most consequential technical decisions
 in software development, and there is rarely a single right answer. The
 decision depends on several factors:
 
-**Data Structure**
+#### Data Structure
 
 If your data is highly structured with clear relationships and
 well-defined schemas, a relational database is usually the best fit. If
@@ -598,7 +564,7 @@ document database may serve better. If your data is inherently
 graph-like (social connections, recommendation networks), a graph
 database is the obvious choice.
 
-**Scale and Performance Requirements**
+#### Scale and Performance Requirements
 
 For most applications serving thousands to hundreds of thousands of
 users, a well-tuned relational database is more than sufficient. When
@@ -608,7 +574,7 @@ or MongoDB are better suited. For caching and extremely low-latency
 reads, Redis is often the answer regardless of what the primary database
 is.
 
-**Consistency Requirements**
+#### Consistency Requirements
 
 Applications where data accuracy is non-negotiable --- banking,
 healthcare, inventory management --- need ACID-compliant databases.
@@ -617,7 +583,7 @@ different versions of the truth for a brief period (social media feeds,
 recommendation engines) can often tolerate the eventual consistency of
 NoSQL systems.
 
-**Cost**
+#### Cost
 
 Open-source databases like PostgreSQL, MySQL, and MongoDB Community
 Edition are free to use, though they require expertise to operate.
@@ -625,7 +591,7 @@ Commercial databases like Oracle and SQL Server carry significant
 licensing costs. Cloud-managed services have operational costs that vary
 enormously by usage volume.
 
-**Developer Experience and Ecosystem**
+#### Developer Experience and Ecosystem
 
 The existing skills of a development team, the libraries available for
 their programming language, and the integrations available with their
@@ -633,7 +599,7 @@ other tools all factor into the decision. A small team experienced with
 PostgreSQL will likely outperform a team using an unfamiliar database,
 even if the unfamiliar database is theoretically a better fit.
 
-**Conclusion**
+### Conclusion
 
 The world of databases is vast, varied, and constantly evolving. What
 began as simple flat files has grown into a sophisticated ecosystem of
@@ -666,14 +632,3 @@ industry --- it is a sign of maturity. Different problems genuinely
 require different tools, and the breadth of the modern database
 ecosystem reflects the extraordinary diversity of the problems that
 software is called upon to solve.
-![cover.svg](./images/cover.svg)
-
-![history_timeline.svg](./images/history_timeline.svg)
-
-![relational_model.svg](./images/relational_model.svg)
-
-![nosql_types.svg](./images/nosql_types.svg)
-
-![cloud_databases.svg](./images/cloud_databases.svg)
-
-![oltp_vs_olap.svg](./images/oltp_vs_olap.svg)
