@@ -1,0 +1,97 @@
+<svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect width="820" height="320" fill="#f8fbff" rx="12"/>
+  <rect x="0" y="0" width="820" height="5" rx="2" fill="#2e75b6"/>
+
+  <!-- CUSTOMERS TABLE -->
+  <rect x="40" y="30" width="230" height="200" rx="8" fill="white" stroke="#2e75b6" stroke-width="2"/>
+  <!-- Header -->
+  <rect x="40" y="30" width="230" height="34" rx="8" fill="#2e75b6"/>
+  <rect x="40" y="50" width="230" height="14" fill="#2e75b6"/>
+  <text x="155" y="53" text-anchor="middle" fill="white" font-size="13" font-weight="bold">CUSTOMERS</text>
+  <!-- Column headers -->
+  <rect x="40" y="64" width="230" height="24" fill="#d6e4f7"/>
+  <text x="55" y="80" fill="#1a3a5c" font-size="11" font-weight="bold">customer_id 🔑</text>
+  <text x="185" y="80" fill="#888" font-size="10">INT (PK)</text>
+  <!-- Rows -->
+  <line x1="40" y1="88" x2="270" y2="88" stroke="#e0e8f0" stroke-width="1"/>
+  <text x="55" y="103" fill="#333" font-size="11">name</text>
+  <text x="185" y="103" fill="#888" font-size="10">VARCHAR</text>
+  <line x1="40" y1="108" x2="270" y2="108" stroke="#e0e8f0" stroke-width="1"/>
+  <text x="55" y="123" fill="#333" font-size="11">email</text>
+  <text x="185" y="123" fill="#888" font-size="10">VARCHAR</text>
+  <line x1="40" y1="128" x2="270" y2="128" stroke="#e0e8f0" stroke-width="1"/>
+  <text x="55" y="143" fill="#333" font-size="11">created_at</text>
+  <text x="185" y="143" fill="#888" font-size="10">DATETIME</text>
+  <line x1="40" y1="148" x2="270" y2="148" stroke="#e0e8f0" stroke-width="1"/>
+  <!-- Sample data -->
+  <rect x="40" y="168" width="230" height="18" fill="#f0f6ff"/>
+  <text x="55" y="181" fill="#2e75b6" font-size="10">1 · Alice Smith · alice@ex.com</text>
+  <rect x="40" y="186" width="230" height="18" fill="white"/>
+  <text x="55" y="199" fill="#2e75b6" font-size="10">2 · Bob Jones · bob@ex.com</text>
+  <rect x="40" y="204" width="230" height="26" fill="#f0f6ff"/>
+  <text x="55" y="220" fill="#2e75b6" font-size="10">3 · Carol Lee · carol@ex.com</text>
+
+  <!-- ORDERS TABLE -->
+  <rect x="320" y="30" width="240" height="220" rx="8" fill="white" stroke="#27ae60" stroke-width="2"/>
+  <rect x="320" y="30" width="240" height="34" rx="8" fill="#27ae60"/>
+  <rect x="320" y="50" width="240" height="14" fill="#27ae60"/>
+  <text x="440" y="53" text-anchor="middle" fill="white" font-size="13" font-weight="bold">ORDERS</text>
+  <rect x="320" y="64" width="240" height="24" fill="#d4f0e0"/>
+  <text x="335" y="80" fill="#1a4a2a" font-size="11" font-weight="bold">order_id 🔑</text>
+  <text x="475" y="80" fill="#888" font-size="10">INT (PK)</text>
+  <line x1="320" y1="88" x2="560" y2="88" stroke="#e0f0e8" stroke-width="1"/>
+  <text x="335" y="103" fill="#333" font-size="11">customer_id 🔗</text>
+  <text x="475" y="103" fill="#888" font-size="10">INT (FK)</text>
+  <line x1="320" y1="108" x2="560" y2="108" stroke="#e0f0e8" stroke-width="1"/>
+  <text x="335" y="123" fill="#333" font-size="11">total_amount</text>
+  <text x="475" y="123" fill="#888" font-size="10">DECIMAL</text>
+  <line x1="320" y1="128" x2="560" y2="128" stroke="#e0f0e8" stroke-width="1"/>
+  <text x="335" y="143" fill="#333" font-size="11">status</text>
+  <text x="475" y="143" fill="#888" font-size="10">VARCHAR</text>
+  <line x1="320" y1="148" x2="560" y2="148" stroke="#e0f0e8" stroke-width="1"/>
+  <text x="335" y="163" fill="#333" font-size="11">order_date</text>
+  <text x="475" y="163" fill="#888" font-size="10">DATETIME</text>
+  <line x1="320" y1="168" x2="560" y2="168" stroke="#e0f0e8" stroke-width="1"/>
+  <rect x="320" y="168" width="240" height="18" fill="#eaf7ee"/>
+  <text x="335" y="181" fill="#27ae60" font-size="10">1 · cust#1 · $49.99 · shipped</text>
+  <rect x="320" y="186" width="240" height="18" fill="white"/>
+  <text x="335" y="199" fill="#27ae60" font-size="10">2 · cust#1 · $120.00 · pending</text>
+  <rect x="320" y="204" width="240" height="18" fill="#eaf7ee"/>
+  <text x="335" y="217" fill="#27ae60" font-size="10">3 · cust#2 · $35.50 · delivered</text>
+  <rect x="320" y="222" width="240" height="28" fill="white"/>
+  <text x="335" y="237" fill="#27ae60" font-size="10">4 · cust#3 · $88.00 · shipped</text>
+
+  <!-- PRODUCTS TABLE -->
+  <rect x="610" y="30" width="190" height="200" rx="8" fill="white" stroke="#e67e22" stroke-width="2"/>
+  <rect x="610" y="30" width="190" height="34" rx="8" fill="#e67e22"/>
+  <rect x="610" y="50" width="190" height="14" fill="#e67e22"/>
+  <text x="705" y="53" text-anchor="middle" fill="white" font-size="13" font-weight="bold">PRODUCTS</text>
+  <rect x="610" y="64" width="190" height="24" fill="#fce8d5"/>
+  <text x="625" y="80" fill="#6b3010" font-size="11" font-weight="bold">product_id 🔑</text>
+  <line x1="610" y1="88" x2="800" y2="88" stroke="#f0e0d0" stroke-width="1"/>
+  <text x="625" y="103" fill="#333" font-size="11">name</text>
+  <line x1="610" y1="108" x2="800" y2="108" stroke="#f0e0d0" stroke-width="1"/>
+  <text x="625" y="123" fill="#333" font-size="11">price</text>
+  <line x1="610" y1="128" x2="800" y2="128" stroke="#f0e0d0" stroke-width="1"/>
+  <text x="625" y="143" fill="#333" font-size="11">category</text>
+  <line x1="610" y1="148" x2="800" y2="148" stroke="#f0e0d0" stroke-width="1"/>
+  <rect x="610" y="168" width="190" height="18" fill="#fef4ec"/>
+  <text x="625" y="181" fill="#e67e22" font-size="10">1 · Laptop · $999</text>
+  <rect x="610" y="186" width="190" height="18" fill="white"/>
+  <text x="625" y="199" fill="#e67e22" font-size="10">2 · Mouse · $29</text>
+  <rect x="610" y="204" width="190" height="26" fill="#fef4ec"/>
+  <text x="625" y="220" fill="#e67e22" font-size="10">3 · Keyboard · $79</text>
+
+  <!-- Relationship arrows -->
+  <!-- Customers -> Orders (FK) -->
+  <line x1="270" y1="96" x2="320" y2="96" stroke="#555" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+  </defs>
+  <text x="287" y="91" text-anchor="middle" fill="#555" font-size="9">1 : N</text>
+
+  <!-- Caption -->
+  <text x="410" y="295" text-anchor="middle" fill="#555" font-size="12" font-style="italic">Relational Model: Tables linked via Primary (🔑) and Foreign (🔗) Keys</text>
+</svg>
