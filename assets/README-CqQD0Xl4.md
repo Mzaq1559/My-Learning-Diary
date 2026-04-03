@@ -8,15 +8,15 @@ excerpt: A brief overview of the current Tchnologies and Databases
 cover: ./images/cover.svg
 ---
 
-**Understanding Databases**
+##Understanding Databases##
 
-*A Comprehensive Guide to the World of Data Storage*
+###A Comprehensive Guide to the World of Data Storage
 
 ─────────────────────────────
 
 Types, Tools, Architecture & Real-World Applications
 
-**Introduction**
+###Introduction
 
 In the modern digital world, data is often described as the new oil.
 Every application you use, every website you visit, every purchase you
