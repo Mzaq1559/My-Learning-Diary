@@ -1,19 +1,13 @@
 ---
-title: "An Analytical Overview of GPU: What It Is and Why It Matters in AI"
+title: "Overview of GPU: What It Is and Why It Matters in AI"
 slug: gpu
 date: 2026-03-26
-tags:
-  - GPU
-  - AI Hardware
-  - Parallel Computing
-  - Deep Learning
-category: AI & Machine Learning
+tags: []
+category: "AI & Machine Learning"
 cover: ./images/cover.png
-series: gpu-and-hardware
-seriesOrder: 1
 ---
 
-# An Analytical Overview of GPU: What It Is and Why It Matters in AI
+# Overview of GPU: What It Is and Why It Matters in AI
 
 The Graphics Processing Unit — commonly known as the **GPU** — is one of the most consequential hardware innovations in the history of computing. Originally engineered to render pixels for video games, it has evolved into the primary engine powering modern artificial intelligence, scientific simulations, cryptocurrency systems, and high-performance data centers worldwide. The meteoric rise of deep learning over the past decade was not merely the result of better algorithms or more data — it was made possible by the GPU's extraordinary ability to parallelize computation at a scale that would have been unimaginable with conventional processors.
 

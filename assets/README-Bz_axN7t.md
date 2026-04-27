@@ -2,9 +2,8 @@
 title: "JavaScript Frameworks : Bridging Developer Experience and Application Architecture"
 slug: javascript-frameworks
 date: 2026-04-23
-tags:
-  [JavaScript, React, Vue, Angular, Svelte, Next.js, Frontend, Web Development]
-category: web-development
+tags: []
+category: web development
 ---
 
 # JavaScript Frameworks : Bridging Developer Experience and Application Architecture
