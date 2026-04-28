@@ -2,8 +2,9 @@
 title: "From JavaScript to TypeScript: A Complete Guide to Understanding the Difference"
 slug: from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference
 date: 2026-04-27
-tags: [TypeScript, JavaScript, Web Development, Programming, Beginner, Frontend, Backend, Node.js]
+tags: []
 category: Web Development
+cover: ./images/cover.png
 ---
 
 # From JavaScript to TypeScript: A Complete Guide to Understanding the Difference
@@ -14,27 +15,9 @@ By the end, you'll understand what each language is, how they compare, when to u
 
 ---
 
-## Table of Contents
-
-1. [What Is JavaScript?](#what-is-javascript)
-2. [What Is TypeScript?](#what-is-typescript)
-3. [The Core Difference: Static vs Dynamic Typing](#the-core-difference)
-4. [TypeScript Features In Depth](#typescript-features)
-5. [JavaScript Features That Still Matter](#javascript-features)
-6. [Side-by-Side Code Comparison](#side-by-side-comparison)
-7. [How TypeScript Compiles to JavaScript](#how-typescript-compiles)
-8. [Ecosystem and Tooling](#ecosystem-and-tooling)
-9. [Performance](#performance)
-10. [When to Use TypeScript vs JavaScript](#when-to-use)
-11. [Migrating from JavaScript to TypeScript](#migrating)
-12. [Common Misconceptions](#misconceptions)
-13. [Summary](#summary)
-
----
-
 ## 1. What Is JavaScript? {#what-is-javascript}
 
-![javascript-overview](./images/javascript-overview.jpg)
+![javascript-overview](./images/javascript-overview.png)
 
 JavaScript (JS) was created in **10 days** by Brendan Eich in 1995 while he was at Netscape. Originally called "Mocha" and then "LiveScript," it was renamed JavaScript for marketing reasons — despite having almost nothing to do with Java.
 
@@ -58,7 +41,7 @@ function greet(user) {
 }
 
 greet("Muhammad"); // ✅ Works
-greet(42);         // ✅ Also works — no error, just possibly unintended
+greet(42); // ✅ Also works — no error, just possibly unintended
 ```
 
 JavaScript gives you enormous freedom. That freedom can be a superpower or a footgun, depending on the size and complexity of your project.
@@ -67,9 +50,9 @@ JavaScript gives you enormous freedom. That freedom can be a superpower or a foo
 
 ## 2. What Is TypeScript? {#what-is-typescript}
 
-![typescript-overview](./images/typescript-overview.jpg)
+![typescript-overview](./images/typescript-overview.png)
 
-TypeScript (TS) is a **superset of JavaScript** developed and maintained by Microsoft. "Superset" means every valid JavaScript file is also a valid TypeScript file — TypeScript only *adds* to JavaScript, it never removes anything.
+TypeScript (TS) is a **superset of JavaScript** developed and maintained by Microsoft. "Superset" means every valid JavaScript file is also a valid TypeScript file — TypeScript only _adds_ to JavaScript, it never removes anything.
 
 The key addition is a **static type system**. You can annotate your variables, function parameters, return values, and more with types. TypeScript checks these types at compile time (before your code runs), catching entire classes of bugs early.
 
@@ -83,7 +66,7 @@ function greet(user: string): string {
 }
 
 greet("Muhammad"); // ✅ Works
-greet(42);         // ❌ Error: Argument of type 'number' is not assignable to parameter of type 'string'
+greet(42); // ❌ Error: Argument of type 'number' is not assignable to parameter of type 'string'
 ```
 
 TypeScript was released publicly in **October 2012**. It has since become one of the most loved languages in the developer community, consistently ranking in the top 5 of the Stack Overflow Developer Survey.
@@ -92,7 +75,7 @@ TypeScript was released publicly in **October 2012**. It has since become one of
 
 ## 3. The Core Difference: Static vs Dynamic Typing {#the-core-difference}
 
-![static-vs-dynamic-typing](./images/static-vs-dynamic-typing.jpg)
+![static-vs-dynamic-typing](./images/static-vs-dynamic-typing.png)
 
 This is the most fundamental difference between the two languages, and understanding it unlocks everything else.
 
@@ -101,10 +84,10 @@ This is the most fundamental difference between the two languages, and understan
 In a dynamically typed language, types are associated with **values**, not variables. A variable can hold any type at any time.
 
 ```javascript
-let x = 5;       // x is a number
-x = "hello";     // x is now a string — perfectly valid
-x = [1, 2, 3];   // x is now an array — still valid
-x = null;        // x is now null — no problem
+let x = 5; // x is a number
+x = "hello"; // x is now a string — perfectly valid
+x = [1, 2, 3]; // x is now an array — still valid
+x = null; // x is now null — no problem
 ```
 
 Types are checked **at runtime** — when the code is actually executing. This means type errors only surface when the code runs, often only in production under specific conditions.
@@ -114,8 +97,8 @@ function multiply(a, b) {
   return a * b;
 }
 
-multiply(5, 10);      // 50 ✅
-multiply("5", 10);    // 50 ✅ (JS coerces "5" to a number)
+multiply(5, 10); // 50 ✅
+multiply("5", 10); // 50 ✅ (JS coerces "5" to a number)
 multiply("hello", 10); // NaN — no error thrown, just wrong output
 ```
 
@@ -130,26 +113,26 @@ function multiply(a: number, b: number): number {
   return a * b;
 }
 
-multiply(5, 10);       // 50 ✅
+multiply(5, 10); // 50 ✅
 multiply("hello", 10); // ❌ Error caught immediately by the compiler
 ```
 
 ### Why does this matter?
 
-| Aspect | JavaScript (Dynamic) | TypeScript (Static) |
-|---|---|---|
-| Error discovery | At runtime | At compile time |
-| IDE support | Limited autocomplete | Full autocomplete + inline docs |
-| Refactoring | Risky — easy to miss usages | Safe — compiler catches all breaks |
-| Onboarding | Harder to understand unfamiliar code | Types serve as documentation |
-| Flexibility | Very high | Slightly lower (by design) |
-| Bug surface area | Larger | Smaller |
+| Aspect           | JavaScript (Dynamic)                 | TypeScript (Static)                |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| Error discovery  | At runtime                           | At compile time                    |
+| IDE support      | Limited autocomplete                 | Full autocomplete + inline docs    |
+| Refactoring      | Risky — easy to miss usages          | Safe — compiler catches all breaks |
+| Onboarding       | Harder to understand unfamiliar code | Types serve as documentation       |
+| Flexibility      | Very high                            | Slightly lower (by design)         |
+| Bug surface area | Larger                               | Smaller                            |
 
 ---
 
 ## 4. TypeScript Features In Depth {#typescript-features}
 
-![typescript-features-overview](./images/typescript-features-overview.jpg)
+![typescript-features-overview](./images/typescript-features-overview.png)
 
 TypeScript's type system is remarkably sophisticated. Here's a tour of its most important features.
 
@@ -159,7 +142,7 @@ TypeScript's type system is remarkably sophisticated. Here's a tour of its most 
 let isDone: boolean = false;
 let count: number = 42;
 let username: string = "Muhammad";
-let notSure: any = 4;        // Escape hatch — avoid when possible
+let notSure: any = 4; // Escape hatch — avoid when possible
 let nothing: void = undefined;
 let nul: null = null;
 let undef: undefined = undefined;
@@ -186,7 +169,7 @@ interface User {
   id: number;
   name: string;
   email: string;
-  age?: number;  // The ? makes this field optional
+  age?: number; // The ? makes this field optional
 }
 
 function createUser(user: User): void {
@@ -202,12 +185,12 @@ createUser({ id: 2, name: "Ali" }); // ❌ Missing required field: email
 Similar to interfaces but more flexible — can represent any type, not just objects.
 
 ```typescript
-type ID = string | number;   // Union type — can be either
+type ID = string | number; // Union type — can be either
 type Point = { x: number; y: number };
 type Callback = (error: Error | null, data: string) => void;
 
 let userId: ID = 123;
-userId = "abc-123";  // Both are valid
+userId = "abc-123"; // Both are valid
 ```
 
 ### 4.5 Union and Intersection Types
@@ -236,7 +219,7 @@ function identity<T>(arg: T): T {
 }
 
 const output = identity<string>("hello"); // output is string
-const num = identity<number>(42);          // num is number
+const num = identity<number>(42); // num is number
 ```
 
 ```typescript
@@ -266,11 +249,13 @@ enum Direction {
 }
 
 function move(dir: Direction) {
-  if (dir === Direction.Up) { /* ... */ }
+  if (dir === Direction.Up) {
+    /* ... */
+  }
 }
 
-move(Direction.Up);   // ✅
-move("Up");           // ❌ Not assignable to type 'Direction'
+move(Direction.Up); // ✅
+move("Up"); // ❌ Not assignable to type 'Direction'
 ```
 
 ### 4.8 Type Narrowing
@@ -321,7 +306,7 @@ type SafeUser = Omit<User, "password">;
 
 ## 5. JavaScript Features That Still Matter {#javascript-features}
 
-![javascript-modern-features](./images/javascript-modern-features.jpg)
+![javascript-modern-features](./images/javascript-modern-features.png)
 
 TypeScript extends JavaScript but doesn't replace its features. Modern JavaScript (ES2015+) is powerful in its own right.
 
@@ -344,7 +329,7 @@ const combined = [...arr1, ...arr2];
 ```javascript
 async function getData() {
   try {
-    const response = await fetch('/api/data');
+    const response = await fetch("/api/data");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -365,7 +350,7 @@ All of these work in TypeScript too — TypeScript adds types on top of them.
 
 ## 6. Side-by-Side Code Comparison {#side-by-side-comparison}
 
-![side-by-side-comparison](./images/side-by-side-comparison.jpg)
+![side-by-side-comparison](./images/side-by-side-comparison.png)
 
 Let's look at a realistic example: a user service module.
 
@@ -426,9 +411,9 @@ function formatUser(user: User): FormattedUser {
 }
 
 async function displayUser(id: number): Promise<void> {
-  const user = await getUser(id);          // TypeScript knows user is User
-  const formatted = formatUser(user);      // TypeScript knows formatted is FormattedUser
-  console.log(formatted.displayName);      // Full autocomplete on displayName
+  const user = await getUser(id); // TypeScript knows user is User
+  const formatted = formatUser(user); // TypeScript knows formatted is FormattedUser
+  console.log(formatted.displayName); // Full autocomplete on displayName
 }
 ```
 
@@ -438,7 +423,7 @@ The TypeScript version is self-documenting. Any developer opening this file imme
 
 ## 7. How TypeScript Compiles to JavaScript {#how-typescript-compiles}
 
-![typescript-compilation-flow](./images/typescript-compilation-flow.jpg)
+![typescript-compilation-flow](./images/typescript-compilation-flow.png)
 
 This is crucial: **TypeScript never runs in browsers or Node.js directly.** It must be **compiled** (or "transpiled") to JavaScript first.
 
@@ -463,14 +448,14 @@ Types exist **only at compile time**. At runtime, your code is plain JavaScript 
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",          // Which JS version to compile to
-    "module": "commonjs",        // Module system (commonjs for Node, ESNext for bundlers)
-    "strict": true,              // Enables all strict type checks — highly recommended
-    "outDir": "./dist",          // Where to put compiled JS files
-    "rootDir": "./src",          // Where your TS source files are
-    "declaration": true,         // Generate .d.ts type declaration files
-    "sourceMap": true,           // Generate source maps for debugging
-    "esModuleInterop": true      // Better compatibility with CommonJS modules
+    "target": "ES2020", // Which JS version to compile to
+    "module": "commonjs", // Module system (commonjs for Node, ESNext for bundlers)
+    "strict": true, // Enables all strict type checks — highly recommended
+    "outDir": "./dist", // Where to put compiled JS files
+    "rootDir": "./src", // Where your TS source files are
+    "declaration": true, // Generate .d.ts type declaration files
+    "sourceMap": true, // Generate source maps for debugging
+    "esModuleInterop": true // Better compatibility with CommonJS modules
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
@@ -503,13 +488,14 @@ The compiled output is clean, readable JavaScript.
 
 ## 8. Ecosystem and Tooling {#ecosystem-and-tooling}
 
-![ecosystem-tooling](./images/ecosystem-tooling.jpg)
+![ecosystem-tooling](./images/ecosystem-tooling.png)
 
 ### TypeScript's Impact on Developer Experience
 
 The biggest practical benefit of TypeScript isn't error-catching — it's **IDE support**.
 
 With TypeScript, your editor (VS Code, WebStorm, etc.) can:
+
 - **Autocomplete** property names and method names
 - **Show inline documentation** from JSDoc or type definitions
 - **Detect errors** without running your code
@@ -534,25 +520,26 @@ Many modern libraries (like Axios, Zod, Prisma, tRPC) ship TypeScript types dire
 
 ### Major Frameworks and TypeScript
 
-| Framework | TypeScript Support |
-|---|---|
-| Next.js | First-class, recommended by default |
-| React | Full support, `@types/react` |
-| Vue 3 | Full support, written in TS |
-| Angular | TypeScript is mandatory |
-| NestJS | TypeScript-first by design |
-| SvelteKit | Full support |
-| Express | Via `@types/express` |
+| Framework | TypeScript Support                  |
+| --------- | ----------------------------------- |
+| Next.js   | First-class, recommended by default |
+| React     | Full support, `@types/react`        |
+| Vue 3     | Full support, written in TS         |
+| Angular   | TypeScript is mandatory             |
+| NestJS    | TypeScript-first by design          |
+| SvelteKit | Full support                        |
+| Express   | Via `@types/express`                |
 
 ---
 
 ## 9. Performance {#performance}
 
-![performance-comparison](./images/performance-comparison.jpg)
+![performance-comparison](./images/performance-comparison.png)
 
 **At runtime, TypeScript and JavaScript have identical performance.** Since TypeScript compiles to JavaScript, the runtime behavior is the same. Types are erased at compile time.
 
 TypeScript does add:
+
 - **Compile time**: Your build step takes longer (usually seconds to a minute for large projects)
 - **Build tooling**: You need a compiler or a bundler configured for TypeScript
 
@@ -568,7 +555,7 @@ esbuild/Vite: ~50–300ms (type stripping only, no type check)
 
 ## 10. When to Use TypeScript vs JavaScript {#when-to-use}
 
-![when-to-use-decision](./images/when-to-use-decision.jpg)
+![when-to-use-decision](./images/when-to-use-decision.png)
 
 ### Use TypeScript when:
 
@@ -593,7 +580,7 @@ esbuild/Vite: ~50–300ms (type stripping only, no type check)
 
 ## 11. Migrating from JavaScript to TypeScript {#migrating}
 
-![migration-path](./images/migration-path.jpg)
+![migration-path](./images/migration-path.png)
 
 The good news: you don't have to migrate everything at once. TypeScript supports **incremental adoption**.
 
@@ -609,9 +596,9 @@ npx tsc --init   # Creates tsconfig.json
 ```json
 {
   "compilerOptions": {
-    "allowJs": true,         // Allow .js files in the project
-    "checkJs": false,        // Don't type-check .js files yet
-    "strict": false          // Start lenient, tighten later
+    "allowJs": true, // Allow .js files in the project
+    "checkJs": false, // Don't type-check .js files yet
+    "strict": false // Start lenient, tighten later
   }
 }
 ```
@@ -634,8 +621,8 @@ function processLegacyData(data: any) {
 ```json
 {
   "compilerOptions": {
-    "strict": true,              // Enable all at once, or...
-    "noImplicitAny": true,       // Enable one by one
+    "strict": true, // Enable all at once, or...
+    "noImplicitAny": true, // Enable one by one
     "strictNullChecks": true,
     "strictFunctionTypes": true
   }
@@ -646,7 +633,7 @@ function processLegacyData(data: any) {
 
 ## 12. Common Misconceptions {#misconceptions}
 
-![common-misconceptions](./images/common-misconceptions.jpg)
+![common-misconceptions](./images/common-misconceptions.png)
 
 **"TypeScript is a different language from JavaScript"**
 No. TypeScript is a superset — all JavaScript is valid TypeScript. It compiles back to JavaScript.
@@ -662,8 +649,8 @@ No. TypeScript has **type inference** — it automatically figures out types fro
 
 ```typescript
 // You don't need to write : string here
-let name = "Muhammad";   // TypeScript infers this is a string
-let nums = [1, 2, 3];    // TypeScript infers this is number[]
+let name = "Muhammad"; // TypeScript infers this is a string
+let nums = [1, 2, 3]; // TypeScript infers this is number[]
 ```
 
 **"TypeScript is only for large enterprise projects"**
@@ -673,20 +660,20 @@ No. Even solo developers on medium-sized projects benefit from the autocomplete 
 
 ## 13. Summary {#summary}
 
-![summary-diagram](./images/summary-diagram.jpg)
+![summary-diagram](./images/summary-diagram.png)
 
-| Feature | JavaScript | TypeScript |
-|---|---|---|
-| Typing | Dynamic | Static (optional) |
-| Error detection | Runtime | Compile time |
-| Compilation needed | No | Yes |
-| Learning curve | Lower | Slightly higher |
-| IDE support | Basic | Excellent |
-| Code documentation | Manual | Built into types |
-| Refactoring safety | Low | High |
-| Browser support | Native | Via compilation |
-| Ecosystem | Massive | Uses JS ecosystem |
-| Best for | Scripts, learning, prototypes | Production apps, teams, large codebases |
+| Feature            | JavaScript                    | TypeScript                              |
+| ------------------ | ----------------------------- | --------------------------------------- |
+| Typing             | Dynamic                       | Static (optional)                       |
+| Error detection    | Runtime                       | Compile time                            |
+| Compilation needed | No                            | Yes                                     |
+| Learning curve     | Lower                         | Slightly higher                         |
+| IDE support        | Basic                         | Excellent                               |
+| Code documentation | Manual                        | Built into types                        |
+| Refactoring safety | Low                           | High                                    |
+| Browser support    | Native                        | Via compilation                         |
+| Ecosystem          | Massive                       | Uses JS ecosystem                       |
+| Best for           | Scripts, learning, prototypes | Production apps, teams, large codebases |
 
 ### The bottom line
 
@@ -697,24 +684,3 @@ If you're just starting out, learn JavaScript first. Understand how the language
 If you already know JavaScript, investing a week to learn TypeScript basics will pay dividends for the rest of your career. Most modern job listings — especially for frontend and full-stack roles — list TypeScript as either required or strongly preferred.
 
 ---
-
-### Images to Create
-
-Here is the list of images referenced in this post. Save them in the `images/` folder with these exact filenames:
-
-| Filename | Description / Illustration Idea |
-|---|---|
-| `cover.jpg` | Split-screen logo art: JS yellow badge on left, TS blue badge on right, merging in the middle |
-| `javascript-overview.jpg` | Timeline of JavaScript from 1995 to 2026 with key milestones (ES6, Node.js, etc.) |
-| `typescript-overview.jpg` | TypeScript logo with "Superset of JavaScript" label and the year 2012 |
-| `static-vs-dynamic-typing.jpg` | Two-column diagram: Dynamic (errors at runtime, red ❌) vs Static (errors at compile time, green ✅ before run) |
-| `typescript-features-overview.jpg` | Mind map or grid showing TS features: Interfaces, Generics, Enums, Utility Types, Union Types |
-| `javascript-modern-features.jpg` | Code snippet cards showing destructuring, spread, async/await, optional chaining |
-| `side-by-side-comparison.jpg` | Two code editor windows: JS on left (no types), TS on right (with types), highlighting the difference |
-| `typescript-compilation-flow.jpg` | Flowchart: `.ts file` → `tsc compiler` → `type errors (if any)` → `.js file` → `browser/node` |
-| `ecosystem-tooling.jpg` | VS Code screenshot or mockup showing TypeScript autocomplete / IntelliSense dropdown in action |
-| `performance-comparison.jpg` | Bar chart: Runtime performance (identical), Compile time (tsc vs esbuild speed) |
-| `when-to-use-decision.jpg` | Decision flowchart: "Is the project large? Is it a team? Long-lived?" → TS. Otherwise → JS |
-| `migration-path.jpg` | Step-by-step roadmap: JS project → add TS config → rename files → fix types → strict mode |
-| `common-misconceptions.jpg` | Myth vs Reality cards busting the 5 common misconceptions |
-| `summary-diagram.jpg` | Venn diagram: JS circle, TS circle as a larger circle fully containing JS, with feature labels |

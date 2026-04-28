@@ -2,8 +2,12 @@
 title: "JavaScript Frameworks : Bridging Developer Experience and Application Architecture"
 slug: javascript-frameworks
 date: 2026-04-23
-tags: []
+tags:
+  - 
 category: web development
+cover: ./images/cover.png
+series: 
+seriesOrder: 
 ---
 
 # JavaScript Frameworks : Bridging Developer Experience and Application Architecture
