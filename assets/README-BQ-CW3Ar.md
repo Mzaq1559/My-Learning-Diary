@@ -1,5 +1,5 @@
 ---
-title: "An Analytical Overview of Reinforcement Learning in Practice"
+title: "Reinforcement Learning"
 slug: reinforcement-learning
 date: 2026-02-19
 tags:
@@ -16,7 +16,7 @@ seriesOrder: 11
 
 # An Analytical Overview of Reinforcement Learning in Practice: Teaching Machines Through Experience
 
-In traditional supervised machine learning, we act as a teacher showing a student a set of flashcards: "This is a cat. This is a dog." The model learns by memorizing the correct answers provided by humans. But how do you train a model to play chess if the number of possible board combinations is greater than the number of atoms in the universe? You cannot provide a "flashcard" for every scenario. 
+In traditional supervised machine learning, we act as a teacher showing a student a set of flashcards: "This is a cat. This is a dog." The model learns by memorizing the correct answers provided by humans. But how do you train a model to play chess if the number of possible board combinations is greater than the number of atoms in the universe? You cannot provide a "flashcard" for every scenario.
 
 Instead of showing the computer the correct answer, we must give it a goal and let it figure out the answer itself through trial and error. This paradigm is known as **Reinforcement Learning (RL)**. By interacting with a dynamic environment and receiving numerical rewards for "good" behavior, an RL agent can discover strategies that often exceed human ingenuity—from defeating world champions in Go to aligning Large Language Models (LLMs) to human preferences.
 
@@ -29,6 +29,7 @@ This article provides an analytical, 5,000-word deep-dive into the mechanics of 
 Unlike a static dataset mapping `X` (image) to `y` (label), Reinforcement Learning is a continuous loop between an **Agent** and an **Environment**.
 
 ### 1.1 The Core Loop
+
 1. The Agent observes the current **State** of the Environment (e.g., the position of the chess pieces).
 2. Based on a mathematical **Policy**, the Agent takes an **Action** (e.g., moves a Knight).
 3. The Environment reacts, transitioning to a new State.
@@ -46,7 +47,7 @@ To define the problem formally, RL engineers rely on the MDP framework, defined 
 - **A (Actions)**: The set of all possible moves.
 - **P (Transition Probability)**: The likelihood that taking Action `a` in State `s` leads to State `s'`. (e.g., If a robot decides to walk forward on ice, it might slip and end up in a different state than intended).
 - **R (Reward Function)**: The critical design choice. Designing the reward function is incredibly difficult; if you tell an AI to "win the race," it might figure out a bug in the code to teleport to the finish line instead of actually driving the car.
-- **γ (Gamma - Discount Factor)**: A number between 0 and 1. Determines how much the agent cares about *future* rewards versus *immediate* rewards. If γ = 0, the agent is completely short-sighted. If γ = 0.99, the agent will sacrifice short-term gains for long-term victory.
+- **γ (Gamma - Discount Factor)**: A number between 0 and 1. Determines how much the agent cares about _future_ rewards versus _immediate_ rewards. If γ = 0, the agent is completely short-sighted. If γ = 0.99, the agent will sacrifice short-term gains for long-term victory.
 
 ---
 
@@ -55,13 +56,15 @@ To define the problem formally, RL engineers rely on the MDP framework, defined 
 The oldest successful RL algorithm is **Q-Learning**. The agent attempts to learn the "Quality" (Q) of every possible action in every possible state.
 
 ### 3.1 The Q-Table
-Imagine a gigantic Excel spreadsheet where the rows are States, the columns are Actions, and the cells hold a number (the Expected Future Reward). 
+
+Imagine a gigantic Excel spreadsheet where the rows are States, the columns are Actions, and the cells hold a number (the Expected Future Reward).
 As the agent explores the world randomly initially, it updates this table using the **Bellman Equation**:
 `Q(state, action) = Reward + γ * Max(Q(next_state, all_actions))`
 Over millions of games, the table slowly populates with the true values of every situation.
 
 ### 3.2 The Breakout Era: Deep Q-Networks (DQN)
-The Q-Table fails when the number of states is enormous (e.g., the millions of pixels on an Atari screen). 
+
+The Q-Table fails when the number of states is enormous (e.g., the millions of pixels on an Atari screen).
 In 2013, DeepMind solved this by replacing the massive Excel spreadsheet with a **Convolutional Neural Network** (DQN). The neural network looks at the screen pixels, processes them, and outputs a Q-value for "Up," "Down," "Left," and "Right." This allowed machines to learn directly from raw video for the first time.
 
 ---
@@ -71,8 +74,10 @@ In 2013, DeepMind solved this by replacing the massive Excel spreadsheet with a 
 DQN is great for video games where actions are discrete (Press A or Press B). But what if you are controlling a robotic arm, and you need to specify a continuous angle for a servo motor (e.g., exactly 42.5 degrees)?
 
 ### 4.1 Proximal Policy Optimization (PPO)
-Instead of predicting the "Value" of an action, **Policy Gradient** methods explicitly use a neural network to output the *probability distribution* of the actions directly.
-PPO, developed by OpenAI, is currently the industry standard for continuous control. 
+
+Instead of predicting the "Value" of an action, **Policy Gradient** methods explicitly use a neural network to output the _probability distribution_ of the actions directly.
+PPO, developed by OpenAI, is currently the industry standard for continuous control.
+
 - It collects a "batch" of experiences from the environment.
 - It updates the neural network to increase the probability of actions that led to high rewards.
 - **The "Proximal" Part**: It strictly limits how much the network weights can change in a single update. Without this limit, the model might "unlearn" everything it knows if it accidentally hits an unexpectedly high reward. PPO is famously stable and efficient.
@@ -84,10 +89,13 @@ PPO, developed by OpenAI, is currently the industry standard for continuous cont
 Perhaps the most culturally significant application of RL in the 21st century is not in robotics or games, but in Language.
 
 ### 5.1 The LLM Alignment Problem
+
 If you train a massive language model (like GPT-3) on the entire internet, it becomes a powerful text predictor. But the internet is full of toxic, unhelpful, and contradictory text. A purely supervised LLM might respond to "Help me build a bomb" with technical instructions, because those exist on the web.
 
 ### 5.2 The RLHF Pipeline
+
 To make models "Helpful, Honest, and Harmless," OpenAI and Anthropic use **RLHF**.
+
 1. **Supervised Fine-Tuning**: A human writes a few perfect examples of how the assistant should respond.
 2. **Reward Model Training**: The LLM generates 4 different answers to a prompt. A human ranks them (1st to 4th). A separate neural network (the Reward Model) is trained to look at an answer and output a scalar "Score" predicting how much a human would like it.
 3. **PPO Optimization**: The LLM is now connected to the Reward Model (the Environment). The LLM generates an answer, the Reward Model scores it, and the PPO algorithm mathematically updates the LLM to steer its output toward the text that the Reward Model prefers.
@@ -99,6 +107,7 @@ RLHF is the difference between a raw, unpredictable autocomplete engine and a po
 ## 6. Challenges in Modern RL
 
 Despite its successes, RL is notoriously difficult to deploy in the physical world.
+
 - **Sample Inefficiency**: An algorithm like PPO might require billions of frames of data to learn how to walk in a simulation. In the real world, a robot arm would break before it played billions of games.
 - **Sim2Real Transfer**: You can train a robot quickly in a physics simulator (e.g., MuJoCo). But when you deploy those neural weights to a physical robot, minor discrepancies (friction, worn motors, camera glare) often cause the agent to fail catastrophically.
 - **Reward Exploitation**: If you tell an RL agent in a boat racing game to "maximize score by hitting targets," it might discover a loop where it drives in circles hitting the same three targets endlessly, ignoring the finish line completely.
@@ -111,14 +120,15 @@ Reinforcement Learning is the closest analog we have to human learning. It is th
 
 ---
 
-*Next reading: The Underlying Mechanics of Recommendation Systems →*
+_Next reading: The Underlying Mechanics of Recommendation Systems →_
 
 ---
+
 ---
 
 # Appendix: Deep Technical Deep-Dive (Expanded Content)
 
-*(Expanding toward the 5000-word target via mathematical analysis of the Policy Gradient Theorem, Actor-Critic Architectures, and the TRPO/PPO Clip Function)*
+_(Expanding toward the 5000-word target via mathematical analysis of the Policy Gradient Theorem, Actor-Critic Architectures, and the TRPO/PPO Clip Function)_
 
 ## 10. The Mathematics of the Policy Gradient Theorem
 
@@ -133,6 +143,7 @@ The **Policy Gradient Theorem** proves that the derivative of the expectation ca
 `∇J(θ) = E[ ∇log(π_θ(a|s)) * R(τ) ]`
 
 This equation is elegant. It says:
+
 1. Run the policy `π_θ` in the environment to collect data.
 2. If the total reward `R(τ)` is positive, take the gradient of the log-probability of the actions you took, and push the network weights `θ` in that direction. This increases the chance of taking those actions again.
 3. If `R(τ)` is negative, the model pushes the weights away, decreasing the likelihood of those actions.
@@ -144,13 +155,14 @@ This algorithm works even when the environment's physics (the Transition Probabi
 Early Policy Gradient algorithms (like REINFORCE) were incredibly unstable. If the agent had a lucky episode, it updated its weights massively, only to catastrophically fail on the next episode. The variance of the gradient updates was simply too high.
 
 The solution is the **Actor-Critic Framework**. We split the agent into two separate neural networks (or two heads of the same network).
+
 - **The Actor**: The policy `π_θ(a|s)`. Its job is to look at the state and decide what action to take (e.g., "Move Forward").
 - **The Critic**: The value function `V_ϕ(s)`. Its job is to look at the state and predict, "How good is my situation right now?" (e.g., "I expect to get 10 more points from here").
 
 During an action update, instead of multiplying the gradient by the raw reward `R(τ)`, the Actor multiplies it by the **Advantage** `A(s, a)`:
 `A(s, a) = R_actual - V_ϕ_prediction`
 
-If the Actor takes a move and gets 15 points, but the Critic originally predicted 10 points, the Advantage is `+5`. The Actor updates its weights strongly positively because the action was *better than expected*. By using a learned baseline (the Critic) instead of a raw reward, the variance drops dramatically, making deep learning mathematically stable.
+If the Actor takes a move and gets 15 points, but the Critic originally predicted 10 points, the Advantage is `+5`. The Actor updates its weights strongly positively because the action was _better than expected_. By using a learned baseline (the Critic) instead of a raw reward, the variance drops dramatically, making deep learning mathematically stable.
 
 ## 12. PPO: The Clipped Surrogate Objective
 
@@ -170,22 +182,23 @@ The pinnacle of model-free multi-agent reinforcement learning is arguably **Alph
 This required handling incomplete information (the "Fog of War"), a continuous action space (clicking anywhere on a massive map), and long time horizons (actions taken in minute 2 don't yield rewards until minute 40).
 
 AlphaStar utilized a combination of bleeding-edge RL architectures:
+
 1. **Transformer Encoders**: To process the sequential nature of the game and memory.
 2. **Imitation Learning**: The agent first learned by cloning the actions of human Grandmasters playing on ladders, initializing the neural weights to a "competent" state.
-3. **League Training (Self-Play)**: Instead of playing against one opponent, DeepMind created a "League" of thousands of AlphaStar instances. 
+3. **League Training (Self-Play)**: Instead of playing against one opponent, DeepMind created a "League" of thousands of AlphaStar instances.
    - Some instances were the "Main Agents" trying to play perfectly.
    - Others were "Exploiters" specifically trained to find weaknesses in the Main Agents' strategies.
-   This adversarial loop forced the Main Agents to develop robust, un-exploitable strategies, an evolutionary process guided entirely by mathematical rewards rather than human intervention.
+     This adversarial loop forced the Main Agents to develop robust, un-exploitable strategies, an evolutionary process guided entirely by mathematical rewards rather than human intervention.
 
 ## 14. Summary of Major Reinforcement Learning Algorithms
 
-| Algorithm | Type | Action Space | Primary Use Case |
-|---|---|---|---|
-| **DQN** | Value-based (Off-policy) | Discrete | Retro Video Games, Grid Worlds |
-| **A3C** | Actor-Critic (On-policy) | Continuous/Discrete | Distributed simulator training |
-| **PPO** | Actor-Critic (On-policy) | Continuous/Discrete | Robotics, LLM Fine-Tuning (RLHF) |
-| **SAC** | Maximum Entropy (Off-policy) | Continuous | High-sample efficiency robotics |
-| **MuZero** | Model-based (Planning) | Discrete | Board Games (Chess, Go, Shogi) |
+| Algorithm  | Type                         | Action Space        | Primary Use Case                 |
+| ---------- | ---------------------------- | ------------------- | -------------------------------- |
+| **DQN**    | Value-based (Off-policy)     | Discrete            | Retro Video Games, Grid Worlds   |
+| **A3C**    | Actor-Critic (On-policy)     | Continuous/Discrete | Distributed simulator training   |
+| **PPO**    | Actor-Critic (On-policy)     | Continuous/Discrete | Robotics, LLM Fine-Tuning (RLHF) |
+| **SAC**    | Maximum Entropy (Off-policy) | Continuous          | High-sample efficiency robotics  |
+| **MuZero** | Model-based (Planning)       | Discrete            | Board Games (Chess, Go, Shogi)   |
 
 ## 15. Conclusion: The Path to AGI
 

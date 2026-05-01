@@ -1,5 +1,5 @@
 ---
-title: "Generative AI Models You Should Know"
+title: "Generative AI Models"
 slug: generative-ai-models
 date: 2026-03-21
 tags:
@@ -14,7 +14,7 @@ series: ai-and-deep-learning
 seriesOrder: 5
 ---
 
-# Generative AI Models You Should Know
+# Generative AI Models
 
 Generative AI refers to a family of machine learning models capable of producing new data — synthesizing text, images, audio, video, code, and structured data — by learning the underlying statistical structure of training examples. Unlike discriminative models (which answer "what class does this input belong to?"), generative models answer a more ambitious question: "how is data like this structured, and how can I create more of it?"
 
@@ -35,6 +35,7 @@ Real-world data — natural images, human text, speech waveforms — lives on a 
 A generative model must learn to sample efficiently from the tiny slice of this high-dimensional space that corresponds to realistic data — without access to an analytical description of that distribution, only samples from it.
 
 Different model families solve this problem in fundamentally different ways:
+
 - **GANs**: Learn by adversarial competition — a generator and discriminator are trained against each other
 - **VAEs**: Learn a compressed latent space with explicit probabilistic structure
 - **Diffusion Models**: Learn to reverse a gradual noising process
@@ -59,6 +60,7 @@ min_G max_D V(G, D) = E_{x ~ p_data}[log D(x)] + E_{z ~ p_z}[log(1 - D(G(z)))]
 ```
 
 Interpretation:
+
 - The discriminator maximizes V — getting better at telling real from fake
 - The generator minimizes V — getting better at fooling the discriminator
 - At Nash equilibrium: D(x) = 0.5 for all x (can't distinguish real from fake)
@@ -84,23 +86,23 @@ for epoch in range(num_epochs):
     for real_images, _ in dataloader:
         real_images = real_images.cuda()
         batch_size = real_images.size(0)
-        
+
         # 1. Train Discriminator
         optimizer_D.zero_grad()
-        
+
         real_labels = torch.ones(batch_size, 1).cuda()
         fake_labels = torch.zeros(batch_size, 1).cuda()
-        
+
         real_loss = criterion(discriminator(real_images), real_labels)
-        
+
         z = torch.randn(batch_size, latent_dim).cuda()
         fake_images = generator(z).detach()
         fake_loss = criterion(discriminator(fake_images), fake_labels)
-        
+
         d_loss = (real_loss + fake_loss) / 2
         d_loss.backward()
         optimizer_D.step()
-        
+
         # 2. Train Generator
         optimizer_G.zero_grad()
         z = torch.randn(batch_size, latent_dim).cuda()
@@ -127,30 +129,30 @@ class Generator(nn.Module):
             nn.ConvTranspose2d(features * 2, img_channels, 4, 2, 1),  # 64×64
             nn.Tanh()
         )
-    
+
     def _block(self, in_ch, out_ch, kernel, stride, pad):
         return nn.Sequential(
             nn.ConvTranspose2d(in_ch, out_ch, kernel, stride, pad, bias=False),
             nn.BatchNorm2d(out_ch),
             nn.ReLU(True)
         )
-    
+
     def forward(self, z):
         return self.net(z.view(-1, z.size(1), 1, 1))
 ```
 
 ### 2.3 Notable GAN Variants
 
-| Model | Innovation | Key Application |
-|---|---|---|
-| DCGAN (2015) | ConvNet generator/discriminator | Image synthesis |
-| Wasserstein GAN (2017) | Stable training via Wasserstein distance | Training stability |
-| Progressive GAN (2018) | Start low-res, progressively add layers | 1024px face synthesis |
-| StyleGAN2 (2019) | Style injection via AdaIN normalization | Photorealistic faces (thispersondoesnotexist.com) |
-| CycleGAN (2017) | Unpaired image-to-image translation | Horse→zebra, summer→winter |
-| Pix2Pix (2017) | Paired image-to-image translation | Sketch→photo, map→satellite |
-| BigGAN (2018) | Class-conditional synthesis at scale | ImageNet generation |
-| StyleGAN3 (2021) | Alias-free synthesis | Animation-friendly faces |
+| Model                  | Innovation                               | Key Application                                   |
+| ---------------------- | ---------------------------------------- | ------------------------------------------------- |
+| DCGAN (2015)           | ConvNet generator/discriminator          | Image synthesis                                   |
+| Wasserstein GAN (2017) | Stable training via Wasserstein distance | Training stability                                |
+| Progressive GAN (2018) | Start low-res, progressively add layers  | 1024px face synthesis                             |
+| StyleGAN2 (2019)       | Style injection via AdaIN normalization  | Photorealistic faces (thispersondoesnotexist.com) |
+| CycleGAN (2017)        | Unpaired image-to-image translation      | Horse→zebra, summer→winter                        |
+| Pix2Pix (2017)         | Paired image-to-image translation        | Sketch→photo, map→satellite                       |
+| BigGAN (2018)          | Class-conditional synthesis at scale     | ImageNet generation                               |
+| StyleGAN3 (2021)       | Alias-free synthesis                     | Animation-friendly faces                          |
 
 ### 2.4 GAN Challenges
 
@@ -159,6 +161,7 @@ class Generator(nn.Module):
 **Training Instability**: Loss oscillation, vanishing gradients in the discriminator. Solution: Gradient penalty (WGAN-GP), spectral normalization.
 
 **Evaluation Metrics**: No simple loss metric for generation quality. Common metrics include:
+
 - **FID (Fréchet Inception Distance)**: Compares statistics of real vs generated feature distributions
 - **IS (Inception Score)**: Diversity and quality combined
 - **Precision/Recall**: Separate quality and coverage
@@ -190,26 +193,26 @@ class VAE(nn.Module):
         )
         self.fc_mu = nn.Linear(hidden_dim, latent_dim)
         self.fc_log_var = nn.Linear(hidden_dim, latent_dim)
-        
+
         # Decoder
         self.decoder = nn.Sequential(
             nn.Linear(latent_dim, hidden_dim), nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim), nn.ReLU(),
             nn.Linear(hidden_dim, input_dim), nn.Sigmoid()
         )
-    
+
     def encode(self, x):
         h = self.encoder_base(x)
         return self.fc_mu(h), self.fc_log_var(h)
-    
+
     def reparameterize(self, mu, log_var):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         return mu + eps * std  # z = μ + ε·σ (differentiable!)
-    
+
     def decode(self, z):
         return self.decoder(z)
-    
+
     def forward(self, x):
         mu, log_var = self.encode(x)
         z = self.reparameterize(mu, log_var)
@@ -223,11 +226,11 @@ class VAE(nn.Module):
 def vae_loss(x, x_hat, mu, log_var):
     # Reconstruction: how well does the decoder reproduce the input?
     recon_loss = F.binary_cross_entropy(x_hat, x, reduction='sum')
-    
+
     # KL divergence: how far is q(z|x) from the prior N(0, I)?
     # KL(N(μ,σ²) || N(0,I)) = -0.5 * Σ(1 + log σ² - μ² - σ²)
     kl_loss = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
-    
+
     return recon_loss + kl_loss
 ```
 
@@ -238,9 +241,10 @@ The **ELBO (Evidence Lower Bound)** trades reconstruction quality for latent spa
 ✅ **Explicit likelihood estimation**: Can compute exact ELBO for any data point  
 ✅ **Smooth, structured latent space**: Enables meaningful interpolation  
 ✅ **Stable training**: Simple loss, no adversarial dynamics  
-✅ **Anomaly detection**: Unusual data → high reconstruction error  
+✅ **Anomaly detection**: Unusual data → high reconstruction error
 
 Applications:
+
 - **Drug molecule generation**: Sample new molecules from Gaussian prior
 - **Image compression/editing**: Latent space interpolation
 - **Representation learning**: Learned embeddings for downstream tasks
@@ -275,14 +279,14 @@ x_t = √ᾱ_t x_0 + √(1-ᾱ_t) ε,  where ε ~ N(0,I)
 for x_0, _ in dataloader:
     t = torch.randint(0, T, (batch_size,), device=device)
     noise = torch.randn_like(x_0)
-    
+
     # Add noise: x_t = sqrt_alpha_bar[t] * x_0 + sqrt_one_minus_alpha_bar[t] * noise
-    x_t = (sqrt_alpha_bar[t, None, None, None] * x_0 + 
+    x_t = (sqrt_alpha_bar[t, None, None, None] * x_0 +
            sqrt_one_minus_alpha_bar[t, None, None, None] * noise)
-    
+
     # Predict the noise
     noise_pred = model(x_t, t)
-    
+
     # Simple MSE loss on noise prediction
     loss = F.mse_loss(noise_pred, noise)
     loss.backward()
@@ -295,26 +299,26 @@ for x_0, _ in dataloader:
 @torch.no_grad()
 def sample_ddpm(model, img_size, T=1000):
     x = torch.randn(1, 3, img_size, img_size).cuda()
-    
+
     for t in reversed(range(T)):
         t_tensor = torch.full((1,), t, device='cuda', dtype=torch.long)
-        
+
         # Predict noise
         noise_pred = model(x, t_tensor)
-        
+
         # Reverse step: remove predicted noise
         alpha = alphas[t]
         alpha_bar = alpha_bars[t]
         beta = betas[t]
-        
+
         if t > 0:
             noise = torch.randn_like(x)
         else:
             noise = 0
-        
+
         x = (1 / alpha.sqrt()) * (x - (1 - alpha) / (1 - alpha_bar).sqrt() * noise_pred)
         x = x + beta.sqrt() * noise
-    
+
     return x
 ```
 
@@ -355,12 +359,12 @@ The `guidance_scale` controls **classifier-free guidance (CFG)** — how strongl
 
 The Stable Diffusion ecosystem has evolved rapidly:
 
-| Model | Architecture | Key Feature | Resolution |
-|---|---|---|---|
-| SD 1.5 | UNet LDM | Baseline | 512×512 |
-| SDXL | UNet LDM (larger) | Two text encoders, 2-stage | 1024×1024 |
-| SD3 | Diffusion Transformer (DiT) | Flow matching, MMDiT | 1024×1024 |
-| FLUX.1 | DiT based | Open source, highest quality | 1024×1024+ |
+| Model  | Architecture                | Key Feature                  | Resolution |
+| ------ | --------------------------- | ---------------------------- | ---------- |
+| SD 1.5 | UNet LDM                    | Baseline                     | 512×512    |
+| SDXL   | UNet LDM (larger)           | Two text encoders, 2-stage   | 1024×1024  |
+| SD3    | Diffusion Transformer (DiT) | Flow matching, MMDiT         | 1024×1024  |
+| FLUX.1 | DiT based                   | Open source, highest quality | 1024×1024+ |
 
 ---
 
@@ -393,25 +397,25 @@ class AffineCouplingLayer(nn.Module):
         super().__init__()
         self.net = net  # Any neural network
         self.split_dim = split_dim
-    
+
     def forward(self, x):
         x1, x2 = x[:, :self.split_dim], x[:, self.split_dim:]
-        
+
         # x2 is conditioned on x1 — but x1 passes through unchanged
         log_scale, shift = self.net(x1).chunk(2, dim=1)
         scale = torch.exp(log_scale)
-        
+
         y1 = x1  # Identity
         y2 = x2 * scale + shift  # Affine transform conditioned on x1
-        
+
         log_det = log_scale.sum(dim=1)  # Exact log-det Jacobian!
         return torch.cat([y1, y2], dim=1), log_det
-    
+
     def inverse(self, y):
         y1, y2 = y[:, :self.split_dim], y[:, self.split_dim:]
         log_scale, shift = self.net(y1).chunk(2, dim=1)
         scale = torch.exp(log_scale)
-        
+
         x1 = y1
         x2 = (y2 - shift) / scale  # Exact inverse!
         return torch.cat([x1, x2], dim=1)
@@ -434,10 +438,12 @@ p(x₁, x₂, ..., x_n) = p(x₁) · p(x₂|x₁) · p(x₃|x₁,x₂) · ... ·
 **For text**: This is exactly what LLMs do — they model language as an autoregressive probability distribution over token sequences.
 
 **For images**:
+
 - **PixelCNN** (Van den Oord et al., 2016): Generates images pixel-by-pixel, conditioning each pixel on all previous pixels via masked convolutions
 - **ImageGPT**: Applies GPT-style transformers to sequences of pixel values
 
 **For audio**:
+
 - **WaveNet** (DeepMind, 2016): Generates raw audio waveform samples at 24kHz, 16 bits per sample, conditioning each sample on all previous ones via dilated causal convolutions
 
 ```python
@@ -445,9 +451,9 @@ p(x₁, x₂, ..., x_n) = p(x₁) · p(x₂|x₁) · p(x₃|x₁,x₂) · ... ·
 class DilatedCausalConv(nn.Module):
     def __init__(self, channels, dilation):
         super().__init__()
-        self.conv = nn.Conv1d(channels, channels, kernel_size=2, 
+        self.conv = nn.Conv1d(channels, channels, kernel_size=2,
                               dilation=dilation, padding=dilation)
-    
+
     def forward(self, x):
         # Causal: only relies on past samples
         return self.conv(x)[:, :, :-self.conv.dilation[0]]
@@ -459,7 +465,7 @@ class DilatedCausalConv(nn.Module):
 ✅ **High-quality samples** (especially for text and audio)  
 ✅ **Stable, well-understood training**  
 ❌ **Slow sequential generation** — must generate one element at a time  
-❌ **No natural latent space** for interpolation/editing  
+❌ **No natural latent space** for interpolation/editing
 
 ---
 
@@ -468,21 +474,25 @@ class DilatedCausalConv(nn.Module):
 The frontier has moved beyond single-modality generation toward **unified multimodal architectures**:
 
 ### 7.1 Text-to-Image
+
 - **DALL-E 3** (OpenAI): GPT-4 as caption writer + diffusion backbone; extremely prompt-adherent
 - **Midjourney**: Closed diffusion-based system; best aesthetic quality
 - **FLUX.1 [dev]** (Black Forest Labs): Open-weight DiT; best open-source quality
 
 ### 7.2 Text-to-Video
+
 - **Sora** (OpenAI): Diffusion Transformer operating on video patches; cinematic coherence
 - **Stable Video Diffusion**: Open-source video from images
 - **Runway Gen-3**: Production-quality video generation as a service
 
 ### 7.3 Audio and Music
+
 - **AudioCraft (MusicGen, AudioGen)**: Meta's open-source music and sound generation
 - **Suno / Udio**: Full song generation with lyrics and music
 - **Eleven Labs**: State-of-the-art text-to-speech with voice cloning
 
 ### 7.4 Code Generation
+
 - **GitHub Copilot** (GPT-4 based): Line/block completion in the IDE
 - **Claude for Code**: Full file and multi-file refactoring
 - **Devin / SWE-agent**: Autonomous software engineering agents
@@ -491,13 +501,13 @@ The frontier has moved beyond single-modality generation toward **unified multim
 
 ## 8. Comparative Summary
 
-| Model Family | Training | Sampling Speed | Sample Quality | Likelihood | Latent Space |
-|---|---|---|---|---|---|
-| GAN | Adversarial | Very Fast (1 forward pass) | High | No | Implicit |
-| VAE | ELBO minimization | Fast | Medium | Approximate | Explicit |
-| Diffusion | Score matching / noise prediction | Slow (50-1000 steps) | Highest | Approximate | None |
-| Flow | Exact MLE | Very Fast | Good | Exact | Explicit |
-| Autoregressive | MLE (next token) | Slow (sequential) | High | Exact | None |
+| Model Family   | Training                          | Sampling Speed             | Sample Quality | Likelihood  | Latent Space |
+| -------------- | --------------------------------- | -------------------------- | -------------- | ----------- | ------------ |
+| GAN            | Adversarial                       | Very Fast (1 forward pass) | High           | No          | Implicit     |
+| VAE            | ELBO minimization                 | Fast                       | Medium         | Approximate | Explicit     |
+| Diffusion      | Score matching / noise prediction | Slow (50-1000 steps)       | Highest        | Approximate | None         |
+| Flow           | Exact MLE                         | Very Fast                  | Good           | Exact       | Explicit     |
+| Autoregressive | MLE (next token)                  | Slow (sequential)          | High           | Exact       | None         |
 
 ---
 
@@ -509,4 +519,4 @@ The current generation of multimodal generative systems — combining large lang
 
 ---
 
-*Next reading: Fundamental Principles of Neural Network Layers →*
+_Next reading: Fundamental Principles of Neural Network Layers →_

@@ -1,5 +1,5 @@
 ---
-title: "An Analytical Overview of Overfitting and How to Prevent It"
+title: "Overview of Overfitting and How to Prevent It"
 slug: overfitting
 date: 2026-03-17
 tags:
@@ -14,7 +14,7 @@ series: machine-learning
 seriesOrder: 4
 ---
 
-# An Analytical Overview of Overfitting and How to Prevent It
+# Overview of Overfitting and How to Prevent It
 
 **Overfitting** is arguably the most fundamental challenge in statistical machine learning. It arises whenever a model learns to fit the training data so precisely — memorizing its idiosyncrasies, noise, and sampling artifacts — that it fails to generalize to truly unseen data. A model that achieves 99% accuracy on its training set but only 62% on a test set has overfit dramatically. The gap between training and validation performance is the signature of overfitting, and eliminating this gap — while not sacrificing the model's capacity to learn genuine patterns — is one of the core engineering challenges of building production ML systems.
 
@@ -46,27 +46,28 @@ Var(f̂(x))  = E[(f̂(x) - E[f̂(x)])²]  (sensitivity to training set variation
 ### 1.2 The Classical Bias-Variance Trade-off
 
 Increasing model complexity (more parameters, deeper networks, smaller regularization):
+
 - ↓ Bias: complex models can represent more complex true functions
 - ↑ Variance: complex models are more sensitive to the specific training data
 
 The classical view holds that optimal generalization is achieved at the "sweet spot" — complex enough to have low bias, regularized enough to have low variance.
 
-| Regime | Train Error | Test Error | Diagnosis |
-|---|---|---|---|
-| Underfitting | High | High | Bias too high → increase capacity |
-| Optimal | Low | Low | Good generalization |
-| Mild overfitting | Low | Moderate | Acceptable — apply mild regularization |
-| Severe overfitting | Very low | Very high | Variance too high → regularize or get more data |
+| Regime             | Train Error | Test Error | Diagnosis                                       |
+| ------------------ | ----------- | ---------- | ----------------------------------------------- |
+| Underfitting       | High        | High       | Bias too high → increase capacity               |
+| Optimal            | Low         | Low        | Good generalization                             |
+| Mild overfitting   | Low         | Moderate   | Acceptable — apply mild regularization          |
+| Severe overfitting | Very low    | Very high  | Variance too high → regularize or get more data |
 
 ### 1.3 The Double Descent Phenomenon
 
 Classical ML theory predicts a U-shaped test error curve as model capacity increases. Modern research (Belkin et al., 2019; Nakkiran et al., 2020) has revealed a more complex picture: the **double descent** curve.
 
-Beyond the classical overfitting region, as model complexity grows very large (particularly past the interpolation threshold where models fit training data exactly), test error often *decreases again*:
+Beyond the classical overfitting region, as model complexity grows very large (particularly past the interpolation threshold where models fit training data exactly), test error often _decreases again_:
 
 ```
 Test Error
-    │    
+    │
     │   ×
     │  × ×        ← Classical overfitting peak
     │ ×   ×
@@ -104,7 +105,7 @@ for epoch in range(100):
         optimizer.step()
         train_loss += loss.item()
     train_losses.append(train_loss / len(train_loader))
-    
+
     model.eval()
     val_loss = 0
     with torch.no_grad():
@@ -177,7 +178,7 @@ for param in model.parameters():
     param.grad += 2 * weight_decay * param.data
 ```
 
-**Why Adam + weight_decay ≠ Adam + L2 loss regularization**: Standard Adam adjusts learning rate per-parameter based on gradient magnitudes. If L2 reg is added to the loss, the shrinkage force is also scaled by the adaptive learning rate — parameters with large gradients are not regularized correctly. **AdamW** fixes this by applying weight decay *directly to the parameters*, independently of gradient statistics. This distinction is crucial for transformers (see Loshchilov & Hutter, 2017).
+**Why Adam + weight_decay ≠ Adam + L2 loss regularization**: Standard Adam adjusts learning rate per-parameter based on gradient magnitudes. If L2 reg is added to the loss, the shrinkage force is also scaled by the adaptive learning rate — parameters with large gradients are not regularized correctly. **AdamW** fixes this by applying weight decay _directly to the parameters_, independently of gradient statistics. This distinction is crucial for transformers (see Loshchilov & Hutter, 2017).
 
 ### 3.2 L1 Weight Regularization (Lasso)
 
@@ -224,7 +225,7 @@ class RegularizedMLP(nn.Module):
             nn.Dropout(p=dropout_p),    # Drop 50% during training
             nn.Linear(d_h, d_out)
         )
-    
+
     def forward(self, x):
         return self.net(x)
 
@@ -242,6 +243,7 @@ model.eval()     # Dropout disabled → full network (automatically scaled)
 3. **Noisy input interpretation**: From a Bayesian perspective, dropout approximates variational inference over the model parameters.
 
 **Optimal dropout rates** by layer type:
+
 - Dense layers (MLP): 0.3–0.5
 - Input layer: 0.1–0.2 (less aggressive)
 - Transformer attention: 0.1
@@ -261,7 +263,7 @@ class EarlyStopping:
         self.best_loss = float('inf')
         self.counter = 0
         self.best_state_dict = None
-    
+
     def step(self, val_loss, model):
         if val_loss < self.best_loss - self.min_delta:
             self.best_loss = val_loss
@@ -270,13 +272,13 @@ class EarlyStopping:
                 self.best_state_dict = {k: v.clone() for k, v in model.state_dict().items()}
         else:
             self.counter += 1
-        
+
         stop = self.counter >= self.patience
-        
+
         if stop and self.restore_best and self.best_state_dict is not None:
             model.load_state_dict(self.best_state_dict)
             print(f"Restoring best model (val_loss={self.best_loss:.4f})")
-        
+
         return stop
 
 stopper = EarlyStopping(patience=10, restore_best=True)
@@ -284,7 +286,7 @@ stopper = EarlyStopping(patience=10, restore_best=True)
 for epoch in range(500):
     train_one_epoch(model, train_loader, optimizer)
     val_loss = evaluate(model, val_loader)
-    
+
     if stopper.step(val_loss, model):
         print(f"Early stopping at epoch {epoch}")
         break
@@ -328,10 +330,10 @@ def mixup_data(x, y, alpha=0.4):
         lam = np.random.beta(alpha, alpha)
     else:
         lam = 1
-    
+
     batch_size = x.size(0)
     index = torch.randperm(batch_size).to(x.device)
-    
+
     mixed_x = lam * x + (1 - lam) * x[index]
     y_a, y_b = y, y[index]
     return mixed_x, y_a, y_b, lam
@@ -354,19 +356,19 @@ for x, y in train_loader:
 def cutmix_data(x, y, alpha=1.0):
     lam = np.random.beta(alpha, alpha)
     B, C, H, W = x.shape
-    
+
     # Random box
     cut_rat = np.sqrt(1 - lam)
     cut_w, cut_h = int(W * cut_rat), int(H * cut_rat)
     cx, cy = np.random.randint(W), np.random.randint(H)
     x1, x2 = max(0, cx - cut_w // 2), min(W, cx + cut_w // 2)
     y1, y2 = max(0, cy - cut_h // 2), min(H, cy + cut_h // 2)
-    
+
     idx = torch.randperm(B)
     mixed_x = x.clone()
     mixed_x[:, :, y1:y2, x1:x2] = x[idx, :, y1:y2, x1:x2]
     lam = 1 - (x2 - x1) * (y2 - y1) / (W * H)
-    
+
     return mixed_x, y, y[idx], lam
 ```
 
@@ -379,6 +381,7 @@ y_smooth = (1 - ε) × y_onehot + ε/K    (K = number of classes, ε = smoothing
 ```
 
 For K=1000 classes and ε=0.1:
+
 - Correct class: 0.9 + 0.1/1000 = 0.9001
 - Each wrong class: 0.1/1000 = 0.0001
 
@@ -416,7 +419,7 @@ class TransformerBlock(nn.Module):
         self.norm1 = nn.LayerNorm(d_model)
         self.norm2 = nn.LayerNorm(d_model)
         self.drop_path = DropPath(drop_path_rate) if drop_path_rate > 0 else nn.Identity()
-    
+
     def forward(self, x):
         x = x + self.drop_path(self.attn(self.norm1(x)))  # Path dropped with probability p
         x = x + self.drop_path(self.ff(self.norm2(x)))
@@ -437,7 +440,7 @@ fold_val_accuracies = []
 for fold, (train_idx, val_idx) in enumerate(skf.split(X, y)):
     X_train, X_val = X[train_idx], X[val_idx]
     y_train, y_val = y[train_idx], y[val_idx]
-    
+
     model = MyModel()
     trained_model = train(model, X_train, y_train)
     val_acc = evaluate(trained_model, X_val, y_val)
@@ -460,6 +463,7 @@ Standard practice: `weight_decay=0.1` for large transformer training (GPT-3, Lla
 ### 4.2 Dropout in LLMs
 
 Often set very low (0.0–0.1) or omitted entirely in modern LLMs:
+
 - Llama 1/2: `dropout=0.0` (no dropout)
 - GPT-3: `dropout=0.1`
 - BERT: `dropout=0.1` on attention and output projections
@@ -517,4 +521,4 @@ The optimal regularization strategy is always dataset- and architecture-specific
 
 ---
 
-*Next reading: Methodologies for Preparing Datasets for ML Projects →*
+_Next reading: Methodologies for Preparing Datasets for ML Projects →_
