@@ -9,7 +9,7 @@ cover: ./images/cover.png
 
 ## From a Static HTML Page to a Full React Storefront
 
-This one started as a plain HTML/CSS/Bootstrap semester project — a simple product listing page with no interactivity. Over time I got frustrated with how limited it was, so I rebuilt it from scratch using React and Vite. The result is a fully functional e-commerce frontend with a cart, auth modals, an admin dashboard, and proper state management.
+This one started as a plain HTML/CSS/Bootstrap semester project, a simple product listing page with no interactivity. Over time I got frustrated with how limited it was, so I rebuilt it from scratch using React and Vite. The result is a fully functional e-commerce frontend with a cart, auth modals, an admin dashboard, and proper state management.
 
 Here's a walkthrough of what I built and how it works.
 
