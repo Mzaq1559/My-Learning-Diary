@@ -1,88 +1,113 @@
 # 📝 My Learning Diary
 
-> A serverless, Git-backed blog CMS — write in Markdown, publish to GitHub, deploy automatically.
+> A serverless, Git-backed personal blog — written in Markdown, published straight to GitHub, and deployed automatically. No database. No backend server. Just Git as the source of truth.
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-Visit-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white)](https://Mzaq1559.github.io/My-Learning-Diary)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white)](https://pages.github.com/)
 
-**[🚀 Live Site](https://Mzaq1559.github.io/My-Learning-Diary)** · **[📂 Source Code](https://github.com/Mzaq1559/Blog_Website-My-Learning-Diary-)**
+**[🚀 View the live site →](https://Mzaq1559.github.io/My-Learning-Diary)**
 
 ---
 
-## Overview
+## 📌 What is this
 
-My Learning Diary is a personal blog platform with a built-in CMS — no backend, no database. Content lives as Markdown files directly in the GitHub repository. The admin panel lets you write, preview, and publish posts from the browser, with changes committing straight to GitHub via the Octokit REST API.
+**My Learning Diary** is a full-stack blogging platform I built from scratch — a React/TypeScript frontend paired with a **custom, in-browser Content Management System** that publishes directly to GitHub, with no traditional backend or database anywhere in the stack.
 
-![Live Blog Homepage](images/hero-full-site.png)
-
----
-
-## Features
-
-### For Readers
-- **Glassmorphic UI** — "Ivy-Neko" aesthetic with soft gradients and teal accents
-- **Project Timeline** — chronological learning journey with read-status badges
-- **Fully Responsive** — optimized across desktop, tablet, and mobile
-
-![Mobile Responsive Views](images/mobile-responsive.png)
-![Published Post](images/published-post-example.png)
-
-### For Authors
-- **No Database** — content is stored as Markdown files in the repo itself
-- **Tabbed Editor** — write Markdown with a live GitHub-style preview side by side
-- **Hierarchical Asset Management** — VS Code-inspired file tree with inline renaming and instant file previews
-- **One-Click Publish** — commits directly to GitHub via Octokit
-
-![Admin Dashboard](images/admin-dashboard.png)
-![Tabbed Markdown Editor](images/editor-tabs.png)
-![Hierarchical File Tree](images/hierarchical-file-tree.png)
-![Asset Preview Modal](images/asset-preview-modal.png)
-![Unified Editor View](images/unified-editor-view.png)
-![Inline Rename](images/inline-rename-action.png)
+This repository is the **deployed build artifact** — the compiled static site served live by GitHub Pages. The full application source (the React app, the Admin CMS, the GitHub API integration) lives in a separate private repository, since it manages authenticated write access to my content.
 
 ---
 
-## Architecture
+## ✨ Highlights
 
-The app runs entirely in the browser. There is no server — GitHub is both the database and the deployment pipeline.
+- **Zero-backend architecture** — Git *is* the database. Posts are Markdown files, media is committed as binary assets, and GitHub's REST API handles all reads and writes.
+- **Custom in-browser CMS** — a full Markdown editor with live GitHub-style preview, built with `@uiw/react-md-editor`, authenticated via a GitHub Personal Access Token.
+- **One-click publishing** — writing and saving a post from the Admin Dashboard commits directly to a dedicated content repository via Octokit, no CI pipeline required for content updates.
+- **Polished reader experience** — glassmorphic UI, smooth page transitions with Framer Motion, tag/category browsing, and a few playful extras (floating music player, Live2D widget).
+- **Three-repo separation of concerns** — source code, built site, and content each live in their own repository, mirroring how a production static-site pipeline would separate build, deploy, and content stages.
+
+---
+
+## 🏗 Architecture
+
+Three repositories, each with a single responsibility — source, deployed site, and content are fully decoupled, so publishing a post never touches code and shipping code never touches content.
 
 ```mermaid
 graph TD
-    Reader((Reader))
-    Author((Author))
-    Pages["GitHub Pages"]
-    App["Vite + React CMS"]
-    Repo["GitHub Repository"]
-    Content["src/content/posts"]
+    Reader((👤 Reader))
+    Author((✍️ Author))
 
-    Reader -->|"Views site"| Pages
-    Author -->|"Manages posts"| App
-    App -->|"Octokit REST"| Repo
-    Repo -->|"Markdown files"| Content
-    Repo -->|"Triggers build"| Pages
+    subgraph Private["🔒 Private Repository"]
+        SiteRepo["Source App<br/>React + TS + Vite"]
+    end
+
+    subgraph Build["⚙️ Build & Deploy"]
+        CI["npm run build"]
+    end
+
+    subgraph PublicDist["🌐 Public — This Repo"]
+        Pages["GitHub Pages<br/>Deployed Static Site"]
+        Media["Media Assets"]
+    end
+
+    subgraph PublicContent["📄 Public — Content Repo"]
+        PostsRepo["blog-posts<br/>Markdown Files"]
+    end
+
+    SiteRepo -->|"triggers"| CI
+    CI -->|"pushes dist/"| Pages
+
+    Reader -->|"views site"| Pages
+    Pages -->|"reads posts"| PostsRepo
+
+    Author -->|"authenticates with PAT"| Pages
+    Author -->|"writes/edits via Admin CMS"| Pages
+    Pages -->|"Octokit: commits Markdown"| PostsRepo
+    Pages -->|"Octokit: uploads images"| Media
+
+    style Private fill:#1a1a2e,stroke:#e94560,color:#fff
+    style Build fill:#16213e,stroke:#0f3460,color:#fff
+    style PublicDist fill:#0f3460,stroke:#38B2AC,color:#fff
+    style PublicContent fill:#0f3460,stroke:#38B2AC,color:#fff
 ```
 
----
+**How a post gets published:** the Author never touches this repo or the source repo directly — they log into the *live* Admin Dashboard, write in the Markdown editor, and hit publish. That commits straight to `blog-posts` via the GitHub REST API. No CI run, no redeploy, no downtime.
 
-## Tech Stack
+**How the site itself gets updated:** a code change in the private source repo is built with Vite and the resulting `dist/` is pushed here, where GitHub Pages serves it.
 
-- **Frontend** — React 18 + TypeScript
-- **Build Tool** — Vite
-- **Styling** — Tailwind CSS + CSS Modules
-- **CMS** — GitHub REST API via Octokit
-- **Hosting** — GitHub Pages
+**Stack:** React 18 · TypeScript · Vite · Tailwind CSS · React Router · Framer Motion · Octokit (GitHub REST API)
 
 ---
 
-## Source Code
+## 📂 About this repository specifically
 
-This repository contains the **compiled production build** only. The full source code, including the CMS, editor, and all components, is available in the private source repository.
+This repo contains the **compiled output** served by GitHub Pages — generated by `npm run build` in the source app and pushed here as part of deployment. It also stores media assets uploaded through the CMS.
 
-If you're interested in how it's built, feel free to reach out via [GitHub](https://github.com/Mzaq1559).
+| Piece | Location |
+|---|---|
+| Application source (React app + Admin CMS) | Private repository |
+| Blog post content (Markdown) | [`blog-posts`](https://github.com/Mzaq1559/blog-posts) |
+| **Live deployed site (this repo)** | `My-Learning-Diary` |
+
+Since this repo is generated output rather than hand-written source, it's kept read-only in practice — all real development happens upstream. If you're curious about the implementation (the CMS internals, the GitHub API integration, the editor), that lives in the private source repo; happy to walk through it if you reach out.
 
 ---
 
-*Built with TypeScript and too much coffee by [Muhammad Zulqarnain](https://github.com/Mzaq1559).*
+## 🔗 Links
+
+| | |
+|---|---|
+| 🚀 **Live Site** | [Mzaq1559.github.io/My-Learning-Diary](https://Mzaq1559.github.io/My-Learning-Diary) |
+| 📄 **Content Repo** | [github.com/Mzaq1559/blog-posts](https://github.com/Mzaq1559/blog-posts) |
+| 👤 **Author's GitHub** | [github.com/Mzaq1559](https://github.com/Mzaq1559) |
+
+> The private source repository (React app + Admin CMS implementation) isn't publicly linked here — reach out via GitHub if you'd like a walkthrough.
+
+---
+
+## 👤 About the author
+
+Built by **[Muhammad Zulqarnain](https://github.com/Mzaq1559)** — BSc Computer Science student, backend/full-stack developer, and someone who apparently thinks "I'll just add a CMS" is a reasonable Tuesday.
