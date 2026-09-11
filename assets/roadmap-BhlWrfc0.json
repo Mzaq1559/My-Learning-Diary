@@ -1,0 +1,234 @@
+{
+  "nodes": [
+    {
+      "id": "arrays-strings",
+      "label": "Arrays & Strings",
+      "category": "dsa",
+      "status": "completed",
+      "description": "Sliding window, two pointers, prefix sums, string manipulation and pattern matching.",
+      "x": 120,
+      "y": 80,
+      "children": ["linked-lists"]
+    },
+    {
+      "id": "linked-lists",
+      "label": "Linked Lists",
+      "category": "dsa",
+      "status": "completed",
+      "description": "Singly & doubly linked lists, reversal, cycle detection, merge operations.",
+      "x": 120,
+      "y": 200,
+      "children": ["trees"]
+    },
+    {
+      "id": "trees",
+      "label": "Trees",
+      "category": "dsa",
+      "status": "completed",
+      "description": "Binary trees, BSTs, AVL, DFS/BFS traversals, lowest common ancestor.",
+      "x": 120,
+      "y": 320,
+      "children": ["graphs"]
+    },
+    {
+      "id": "graphs",
+      "label": "Graphs",
+      "category": "dsa",
+      "status": "in-progress",
+      "description": "BFS, DFS, Dijkstra, topological sort, union-find — touched via coursework.",
+      "x": 120,
+      "y": 440,
+      "children": ["dynamic-programming"]
+    },
+    {
+      "id": "dynamic-programming",
+      "label": "Dynamic Programming",
+      "category": "dsa",
+      "status": "in-progress",
+      "description": "Memoization, tabulation, 1D/2D DP patterns — coursework exposure, not deeply practised.",
+      "x": 120,
+      "y": 560,
+      "children": ["advanced-algorithms"]
+    },
+    {
+      "id": "advanced-algorithms",
+      "label": "Advanced Algorithms",
+      "category": "dsa",
+      "status": "planned",
+      "description": "Segment trees, Fenwick trees, network flow, advanced graph algorithms.",
+      "x": 120,
+      "y": 680,
+      "children": []
+    },
+    {
+      "id": "linux",
+      "label": "Linux",
+      "category": "systems",
+      "status": "completed",
+      "description": "Daily Ubuntu dev environment — shell scripting, file system, process management, permissions.",
+      "x": 380,
+      "y": 80,
+      "children": ["os-fundamentals"]
+    },
+    {
+      "id": "os-fundamentals",
+      "label": "OS Fundamentals",
+      "category": "systems",
+      "status": "completed",
+      "description": "Process scheduling, virtual memory, IPC, concurrency primitives — covered in coursework.",
+      "x": 380,
+      "y": 200,
+      "children": ["docker"]
+    },
+    {
+      "id": "docker",
+      "label": "Docker",
+      "category": "systems",
+      "status": "completed",
+      "description": "Containerisation, Dockerfiles, docker-compose — used in DBMS lab and hackathon multi-service builds.",
+      "x": 380,
+      "y": 320,
+      "children": ["networking"]
+    },
+    {
+      "id": "networking",
+      "label": "Networking",
+      "category": "systems",
+      "status": "planned",
+      "description": "TCP/IP, HTTP, DNS, load balancing, sockets — theoretical knowledge, no shipped project yet.",
+      "x": 380,
+      "y": 440,
+      "children": ["cloud"]
+    },
+    {
+      "id": "cloud",
+      "label": "Cloud",
+      "category": "systems",
+      "status": "planned",
+      "description": "AWS / GCP fundamentals, serverless, managed services — on the roadmap.",
+      "x": 380,
+      "y": 560,
+      "children": []
+    },
+    {
+      "id": "html-css",
+      "label": "HTML / CSS",
+      "category": "web",
+      "status": "completed",
+      "description": "Semantic HTML5, Flexbox, Grid, animations, responsive design — foundation for all web projects.",
+      "x": 640,
+      "y": 80,
+      "children": ["javascript"]
+    },
+    {
+      "id": "javascript",
+      "label": "JavaScript",
+      "category": "web",
+      "status": "completed",
+      "description": "ES6+, async/await, closures, DOM manipulation — shipped in TextUtils and portfolio projects.",
+      "x": 640,
+      "y": 200,
+      "children": ["typescript"]
+    },
+    {
+      "id": "typescript",
+      "label": "TypeScript",
+      "category": "web",
+      "status": "completed",
+      "description": "Static typing, generics, utility types — used in hackathon clinic-management platform.",
+      "x": 640,
+      "y": 320,
+      "children": ["react"]
+    },
+    {
+      "id": "react",
+      "label": "React",
+      "category": "web",
+      "status": "completed",
+      "description": "Hooks, context, routing, component architecture — portfolio site, TextUtils, hackathon frontend.",
+      "x": 640,
+      "y": 440,
+      "children": ["fastapi", "sql"]
+    },
+    {
+      "id": "fastapi",
+      "label": "FastAPI",
+      "category": "web",
+      "status": "completed",
+      "description": "REST APIs, dependency injection, async endpoints — hackathon clinic-management backend.",
+      "x": 590,
+      "y": 560,
+      "children": []
+    },
+    {
+      "id": "sql",
+      "label": "SQL",
+      "category": "web",
+      "status": "completed",
+      "description": "SQL Server, complex queries, stored procedures, schema design — DBMS rental-management app.",
+      "x": 700,
+      "y": 560,
+      "children": []
+    },
+    {
+      "id": "python-ml",
+      "label": "Python for ML",
+      "category": "ai-ml",
+      "status": "completed",
+      "description": "NumPy, Pandas, Scikit-learn — time series forecasting and sentiment modelling projects.",
+      "x": 920,
+      "y": 80,
+      "children": ["neural-networks"]
+    },
+    {
+      "id": "neural-networks",
+      "label": "Neural Networks",
+      "category": "ai-ml",
+      "status": "planned",
+      "description": "Perceptrons, backpropagation, activation functions, training fundamentals.",
+      "x": 920,
+      "y": 200,
+      "children": ["deep-learning"]
+    },
+    {
+      "id": "deep-learning",
+      "label": "Deep Learning",
+      "category": "ai-ml",
+      "status": "planned",
+      "description": "CNNs, RNNs, transformers, PyTorch / TensorFlow — next on the learning path.",
+      "x": 920,
+      "y": 320,
+      "children": ["nlp", "computer-vision"]
+    },
+    {
+      "id": "nlp",
+      "label": "NLP",
+      "category": "ai-ml",
+      "status": "in-progress",
+      "description": "LLM integration, prompt engineering, AI service calls — applied in hackathon project.",
+      "x": 860,
+      "y": 440,
+      "children": ["mlops"]
+    },
+    {
+      "id": "computer-vision",
+      "label": "Computer Vision",
+      "category": "ai-ml",
+      "status": "planned",
+      "description": "Image classification, object detection, segmentation — planned after deep learning foundation.",
+      "x": 980,
+      "y": 440,
+      "children": ["mlops"]
+    },
+    {
+      "id": "mlops",
+      "label": "MLOps",
+      "category": "ai-ml",
+      "status": "planned",
+      "description": "Model serving, monitoring, CI/CD for ML, experiment tracking — future goal.",
+      "x": 920,
+      "y": 560,
+      "children": []
+    }
+  ]
+}
