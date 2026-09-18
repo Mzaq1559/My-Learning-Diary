@@ -81,11 +81,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/understanding-databases</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
