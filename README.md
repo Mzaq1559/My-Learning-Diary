@@ -108,6 +108,12 @@ Since this repo is generated output rather than hand-written source, it's kept r
 
 ---
 
+## 🤝 Contributors
+
+See [CONTRIBUTORS.md](./CONTRIBUTORS.md) for everyone — human and AI — who's worked on this project.
+
+---
+
 ## 👤 About the author
 
 Built by **[Muhammad Zulqarnain](https://github.com/Mzaq1559)** — BSc Computer Science student, backend/full-stack developer, and someone who apparently thinks "I'll just add a CMS" is a reasonable Tuesday.
