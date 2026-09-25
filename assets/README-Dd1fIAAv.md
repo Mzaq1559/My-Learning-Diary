@@ -39,12 +39,12 @@ Every time you write `a + b` or `a * b`, the result is a new `Value` whose `_pre
 
 ### Supported Operations
 
-| Operation          | How it's built                                      |
-| ------------------ | --------------------------------------------------- |
-| `+`, `-`, `*`, `/` | Direct operator overloads                           |
-| `**`               | `__pow__` with int/float exponent                   |
-| `tanh`             | Fused kernel _and_ manual `exp`-based decomposition |
-| `exp`              | Primitive used to build `tanh` from scratch         |
+| Operation          | How it's built                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| `+`, `-`, `*`, `/` | Direct operator overloads                                                                   |
+| `**`               | `__pow__` with int/float exponent                                                           |
+| `tanh`             | Implemented directly as one op, then rebuilt from `exp` (as in the tutorial) to check the gradients match |
+| `exp`              | Primitive used to build `tanh` from scratch                                                 |
 
 ### The Backward Pass
 
@@ -140,7 +140,7 @@ self.grad = 1.0 * out.grad
 self.grad += 1.0 * out.grad
 ```
 
-Small change, but it's the difference between a correct autograd engine and a broken one.
+Small change, but it's the difference between a correct autograd engine and a broken one. Karpathy demonstrates this exact case in the video.
 
 ---
 
@@ -157,7 +157,7 @@ o.backward()
 print(x1.grad.item())   # matches Value's x1.grad exactly
 ```
 
-That's when I understood why micrograd manually sets `requires_grad=True` on every node — in PyTorch, input tensors don't track gradients by default because the graph is optimised to skip leaf nodes unless you ask. Micrograd tracks everything explicitly so nothing is hidden.
+This is also where `requires_grad` made sense to me. PyTorch tensors don't track gradients by default: `requires_grad` is `False` until you turn it on for the leaf tensors you want gradients for, which is why the code above sets it explicitly on the inputs and weights. Micrograd has no such switch. Every `Value` records its own history, so nothing is hidden.
 
 ![PyTorch cross-validation output](./images/pytorch-validation.png)
 
@@ -177,7 +177,7 @@ That's when I understood why micrograd manually sets `requires_grad=True` on eve
 | Repo                                                                                                                                            | Description                               |
 | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [My Implementation](https://github.com/Mzaq1559/Following-the-tutorial-of-Micrograd-implementing-Backpropagation-on-a-Neural-Net-from-scratch-) | Full notebook — Value, MLP, training loop |
-| [Original Micrograd](https://github.com/Mzaq1559/micrograd)                                                                                     | Karpathy's reference implementation       |
+| [Original Micrograd](https://github.com/karpathy/micrograd)                                                                                     | Karpathy's reference implementation       |
 
 ## Tutorial
 

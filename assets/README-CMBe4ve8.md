@@ -247,9 +247,9 @@ kondlaisah.
 anchshizarie.
 ```
 
-Same seed, same names — which confirms the neural network learned the same distribution as the count-based model. The two approaches are mathematically equivalent for bigrams.
+Same seed, same names — which tells me the neural network learned essentially the same distribution as the count-based model. For bigrams the two approaches end up in practically the same place: the network is learning the table the counting model computes directly.
 
-![Generated names from both models side by side](./images/generated-names.png)
+![Generated names from both models side by side](./images/generated-names1.png)
 
 ---
 
@@ -282,9 +282,9 @@ Once I understood that `probs[i, j]` means "probability that character `j` follo
 | Smoothing     | Add fake counts       | L2 regularization on W              |
 | Loss function | NLL computed from P   | NLL computed from softmax(xenc @ W) |
 | Extensible?   | No                    | Yes                                 |
-| Results       | Identical             | Identical                           |
+| Results       | Same names, same seed | Same names, same seed               |
 
-Both are equivalent for bigrams. The point of doing it twice is to understand _why_ the neural network approach is worth the extra complexity — it extends to trigrams, to MLPs looking at 5 characters, all the way to transformers. The counting approach doesn't.
+The point of doing it twice is to understand _why_ the neural network approach is worth the extra complexity — it extends to trigrams, to MLPs looking at 5 characters, all the way to transformers. The counting approach doesn't.
 
 ---
 
@@ -301,11 +301,10 @@ Both are equivalent for bigrams. The point of doing it twice is to understand _w
 
 ## Repos
 
-| Repo                                                                                                                                            | Description                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [My Implementation](https://github.com/Mzaq1559/Following-the-tutorial-of-Micrograd-implementing-Backpropagation-on-a-Neural-Net-from-scratch-) | Original notebook written while following along |
-| [Rewritten Notebook](https://github.com/Mzaq1559/micrograd)                                                                                     | Cleaned-up version with full comments           |
-| [Original Makemore](https://github.com/karpathy/makemore)                                                                                       | Karpathy's repo                                 |
+| Repo                                                                                     | Description                                     |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [My Implementation](https://github.com/Mzaq1559/Following-tutorial-for-makemore)         | Notebook written while following along          |
+| [Original Makemore](https://github.com/karpathy/makemore)                                | Karpathy's repo                                 |
 
 ## Tutorial
 

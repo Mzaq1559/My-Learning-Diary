@@ -36,7 +36,47 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/claude-code-omniroute-gemini</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/job-application-mcp</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/building-autovision-vehicle-tracking-on-a-cpu</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/deploying-siteflowai-to-azure</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/medibook-ai-alibaba-cloud-hackathon-pakistan-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/learning-fastapi-issue-tracker</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/portfolio-real-stats-and-a-deploy-conflict</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/leaking-and-fixing-a-github-token</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/rcms-rental-car-management-system-dbms-lab</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -47,6 +87,11 @@
   </url>
   <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/learning-makemore-part-1-bigram-language-model</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/building-autosolver-delivery-dispatch-simulator</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
