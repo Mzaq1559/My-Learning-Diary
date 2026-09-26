@@ -36,12 +36,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/auto-job-applier-linkedin-ubuntu-wayland</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/claude-code-omniroute-gemini</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/job-application-mcp-licensing-and-v1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/job-application-mcp</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/job-application-mcp-tools-and-first-deploy-blockers</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/building-docvision-ai-classic-cv-pipeline</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -157,6 +177,11 @@
   </url>
   <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/loss-functions-in-ml</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/go-assistant-android-overlay-claude-vision</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
