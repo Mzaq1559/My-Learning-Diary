@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-NxYPVMF3.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CfnOqlZu.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
