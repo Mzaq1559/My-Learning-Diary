@@ -1,22 +1,19 @@
 {
-  "sha": "dc923139e1b0051ed1527e56d922c43723e7d3da",
+  "sha": null,
   "posts": [
     {
-      "slug": "auto-job-applier-linkedin-ubuntu-wayland",
       "title": "Getting Auto_job_applier_linkedIn Running on Ubuntu Wayland — Debugging X11, ChromeDriver, and LinkedIn DOM Failures",
+      "slug": "auto-job-applier-linkedin-ubuntu-wayland",
       "date": "2026-09-26",
+      "excerpt": "A detailed debugging log of getting a LinkedIn job-application automation project running on Ubuntu Wayland, from X11 authorization and Python-Xlib failures to ChromeDriver, Chrome profiles, PyAutoGUI, and LinkedIn DOM changes.",
       "tags": [],
       "category": "project-log",
-      "repoPath": "project-log/auto-job-applier-linkedin-ubuntu-wayland",
-      "order": 0,
-      "excerpt": "A detailed debugging log of getting a LinkedIn job-application automation project running on Ubuntu Wayland, from X11 authorization and Python-Xlib failures to ChromeDriver, Chrome profiles, PyAutoGUI, and LinkedIn DOM changes.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/auto-job-applier-linkedin-ubuntu-wayland"
     },
     {
-      "slug": "claude-code-omniroute-gemini",
       "title": "Running Claude Code Through OmniRoute with Gemini 3.8 Flash",
+      "slug": "claude-code-omniroute-gemini",
       "date": "2026-09-25",
       "tags": [
         "Claude Code",
@@ -28,17 +25,25 @@
         "Project Log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/claude-code-omniroute-gemini",
-      "order": 0,
       "excerpt": "A developer log of setting up Claude Code through OmniRoute, connecting Gemini 3.8 Flash as the underlying model, debugging the setup, and verifying that requests were actually being routed through the local gateway.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/claude-code-omniroute-gemini"
     },
     {
-      "slug": "job-application-mcp-licensing-and-v1",
-      "title": "From MIT to Source-Available: Licensing job-application-mcp for v1.0.0",
+      "title": "Building job-application-mcp — Turning a Job Application Project into a Real MCP System",
+      "slug": "job-application-mcp",
       "date": "2026-09-24",
+      "excerpt": "A detailed development log of building job-application-mcp, from MCP and AI-tool integration to OAuth 2.1, Claude Web, GitHub workflows, CI failures, and learning how to debug AI-assisted code properly.",
+      "tags": [],
+      "category": "project-log",
+      "cover": "./images/cover.png",
+      "repoPath": "project-log/job-application-mcp"
+    },
+    {
+      "title": "From MIT to Source-Available: Licensing job-application-mcp for v1.0.0",
+      "slug": "job-application-mcp-licensing-and-v1",
+      "date": "2026-09-24",
+      "excerpt": "The last stretch before tagging v1.0.0 wasn't more debugging — it was deciding what license the project should actually carry, and setting up the templates that let other people contribute to it.",
       "tags": [
         "Licensing",
         "Open Source",
@@ -46,30 +51,14 @@
         "Project Log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/job-application-mcp-licensing-and-v1",
-      "order": 0,
-      "excerpt": "The last stretch before tagging v1.0.0 wasn't more debugging — it was deciding what license the project should actually carry, and setting up the templates that let other people contribute to it.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/job-application-mcp-licensing-and-v1"
     },
     {
-      "slug": "job-application-mcp",
-      "title": "Building job-application-mcp — Turning a Job Application Project into a Real MCP System",
-      "date": "2026-09-24",
-      "tags": [],
-      "category": "project-log",
-      "repoPath": "project-log/job-application-mcp",
-      "order": 0,
-      "excerpt": "A detailed development log of building job-application-mcp, from MCP and AI-tool integration to OAuth 2.1, Claude Web, GitHub workflows, CI failures, and learning how to debug AI-assisted code properly.",
-      "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
-    },
-    {
-      "slug": "job-application-mcp-tools-and-first-deploy-blockers",
       "title": "job-application-mcp: Building the Tools, Then Hitting the First Deploy Blockers",
+      "slug": "job-application-mcp-tools-and-first-deploy-blockers",
       "date": "2026-09-22",
+      "excerpt": "Before OAuth and Azure ever entered the picture, job-application-mcp needed its actual MCP tools built — profile, resumes, jobs, applications — and its first transport bug fixed, a silent 307 redirect that would have broken any real client.",
       "tags": [
         "MCP",
         "Python",
@@ -79,17 +68,14 @@
         "Project Log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/job-application-mcp-tools-and-first-deploy-blockers",
-      "order": 0,
-      "excerpt": "Before OAuth and Azure ever entered the picture, job-application-mcp needed its actual MCP tools built — profile, resumes, jobs, applications — and its first transport bug fixed, a silent 307 redirect that would have broken any real client.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/job-application-mcp-tools-and-first-deploy-blockers"
     },
     {
-      "slug": "building-docvision-ai-classic-cv-pipeline",
       "title": "Building DocVision AI: A Full CV Pipeline, Pair-Programmed in One Sitting",
+      "slug": "building-docvision-ai-classic-cv-pipeline",
       "date": "2026-09-17",
+      "excerpt": "A document scanner that flattens a phone photo, cleans it up and OCRs it — using nothing but classic computer vision, no GPU, and built almost entirely through an AI pair-programming session over GitHub.",
       "tags": [
         "Computer Vision",
         "OpenCV",
@@ -99,17 +85,14 @@
         "Project Log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/building-docvision-ai-classic-cv-pipeline",
-      "order": 0,
-      "excerpt": "A document scanner that flattens a phone photo, cleans it up and OCRs it — using nothing but classic computer vision, no GPU, and built almost entirely through an AI pair-programming session over GitHub.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/building-docvision-ai-classic-cv-pipeline"
     },
     {
-      "slug": "building-autovision-vehicle-tracking-on-a-cpu",
       "title": "Building AutoVision — Vehicle Tracking and Speed Estimation on a CPU",
+      "slug": "building-autovision-vehicle-tracking-on-a-cpu",
       "date": "2026-09-14",
+      "excerpt": "A Streamlit app that detects, tracks and estimates the speed of vehicles in traffic video. Most of what I learned came from the playback and timing bugs in the first three days.",
       "tags": [
         "Computer Vision",
         "YOLO",
@@ -119,16 +102,12 @@
         "Performance"
       ],
       "category": "project-log",
-      "repoPath": "project-log/building-autovision-vehicle-tracking-on-a-cpu",
-      "order": 0,
-      "excerpt": "A Streamlit app that detects, tracks and estimates the speed of vehicles in traffic video. Most of what I learned came from the playback and timing bugs in the first three days.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/building-autovision-vehicle-tracking-on-a-cpu"
     },
     {
-      "slug": "deploying-siteflowai-to-azure",
       "title": "Deploying SiteFlowAI to Azure",
+      "slug": "deploying-siteflowai-to-azure",
       "date": "2026-09-12",
       "tags": [
         "docker",
@@ -140,17 +119,15 @@
         "project-log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/deploying-siteflowai-to-azure",
-      "order": 0,
       "excerpt": "Containerizing a teammate's construction-management app and getting it onto Azure App Service — a hardcoded ACR name and a SQLite database that kept forgetting its own demo users.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/deploying-siteflowai-to-azure"
     },
     {
-      "slug": "medibook-ai-alibaba-cloud-hackathon-pakistan-2026",
       "title": "Building MediBook AI — A Hackathon in 6 Days",
+      "slug": "medibook-ai-alibaba-cloud-hackathon-pakistan-2026",
       "date": "2026-09-04",
+      "excerpt": "A four-person hackathon build of an AI receptionist for small clinics, what broke along the way, and how the chatbot went from rules to RAG to a tool-calling agent afterwards.",
       "tags": [
         "AI",
         "FastAPI",
@@ -163,16 +140,12 @@
         "Groq"
       ],
       "category": "project-log",
-      "repoPath": "project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026",
-      "order": 0,
-      "excerpt": "A four-person hackathon build of an AI receptionist for small clinics, what broke along the way, and how the chatbot went from rules to RAG to a tool-calling agent afterwards.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026"
     },
     {
-      "slug": "learning-fastapi-issue-tracker",
       "title": "Learning FastAPI by Building an Issue Tracker",
+      "slug": "learning-fastapi-issue-tracker",
       "date": "2026-08-04",
       "tags": [
         "fastapi",
@@ -181,16 +154,13 @@
         "project-log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/learning-fastapi-issue-tracker",
-      "order": 0,
       "excerpt": "Following a YouTube tutorial to build a small issue-tracker API in FastAPI — routes, schemas, CRUD, a timing middleware, and CORS, one commit at a time.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/learning-fastapi-issue-tracker"
     },
     {
-      "slug": "portfolio-real-stats-and-a-deploy-conflict",
       "title": "Redoing My Portfolio: Real Stats, Real Projects",
+      "slug": "portfolio-real-stats-and-a-deploy-conflict",
       "date": "2026-07-03",
       "tags": [
         "react",
@@ -201,16 +171,13 @@
         "project-log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/portfolio-real-stats-and-a-deploy-conflict",
-      "order": 0,
       "excerpt": "Two separate passes on my portfolio site — a deploy pipeline that was fighting itself in July, and a content overhaul with real project counts and a Live2D card in September.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/portfolio-real-stats-and-a-deploy-conflict"
     },
     {
-      "slug": "leaking-and-fixing-a-github-token",
       "title": "I Leaked My GitHub Token — and Fixed It",
+      "slug": "leaking-and-fixing-a-github-token",
       "date": "2026-06-25",
       "tags": [
         "react",
@@ -221,16 +188,13 @@
         "project-log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/leaking-and-fixing-a-github-token",
-      "order": 0,
       "excerpt": "VITE_GITHUB_TOKEN was sitting right there in my blog's public JavaScript bundle. Here's what was actually happening, and the fix that moved it out.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/leaking-and-fixing-a-github-token"
     },
     {
-      "slug": "rcms-rental-car-management-system-dbms-lab",
       "title": "Rental Car Management System — A DBMS Lab Project, Twice",
+      "slug": "rcms-rental-car-management-system-dbms-lab",
       "date": "2026-06-09",
       "tags": [
         "FastAPI",
@@ -241,15 +205,12 @@
         "JavaScript"
       ],
       "category": "project-log",
-      "repoPath": "project-log/rcms-rental-car-management-system-dbms-lab",
-      "order": 0,
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/rcms-rental-car-management-system-dbms-lab"
     },
     {
-      "slug": "building-e-shop-react-frontend",
       "title": "Building an E-Shop — React Frontend from Scratch",
+      "slug": "building-e-shop-react-frontend",
       "date": "2026-05-24",
       "tags": [
         "React",
@@ -260,15 +221,12 @@
         "Context API"
       ],
       "category": "project-log",
-      "repoPath": "project-log/building-e-shop-react-frontend",
-      "order": 0,
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/building-e-shop-react-frontend"
     },
     {
-      "slug": "learning-makemore-part-1-bigram-language-model",
       "title": "Learning Makemore Part 1 — Bigram Language Model",
+      "slug": "learning-makemore-part-1-bigram-language-model",
       "date": "2026-05-24",
       "tags": [
         "AI",
@@ -279,16 +237,14 @@
         "Backpropagation"
       ],
       "category": "project-log",
-      "repoPath": "project-log/learning-makemore-part-1-bigram-language-model",
-      "order": 0,
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/learning-makemore-part-1-bigram-language-model"
     },
     {
-      "slug": "building-autosolver-delivery-dispatch-simulator",
       "title": "Building AutoSolver — A Delivery Dispatch Simulator for the Meituan Hackathon",
+      "slug": "building-autosolver-delivery-dispatch-simulator",
       "date": "2026-05-17",
+      "excerpt": "A one-week hackathon build of a delivery dispatch simulator with a React map dashboard and a FastAPI simulation engine, what I had to change to handle 10,000 orders, and what the code does and doesn't optimize.",
       "tags": [
         "FastAPI",
         "React",
@@ -299,16 +255,12 @@
         "Leaflet"
       ],
       "category": "project-log",
-      "repoPath": "project-log/building-autosolver-delivery-dispatch-simulator",
-      "order": 0,
-      "excerpt": "A one-week hackathon build of a delivery dispatch simulator with a React map dashboard and a FastAPI simulation engine, what I had to change to handle 10,000 orders, and what the code does and doesn't optimize.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/building-autosolver-delivery-dispatch-simulator"
     },
     {
-      "slug": "learning-micrograd-karpathy-neural-network-from-scratch",
       "title": "Learning Micrograd — Building a Neural Network from Scratch",
+      "slug": "learning-micrograd-karpathy-neural-network-from-scratch",
       "date": "2026-05-01",
       "tags": [
         "AI",
@@ -318,53 +270,43 @@
         "Backpropagation"
       ],
       "category": "project-log",
-      "repoPath": "project-log/learning-micrograd-karpathy-neural-network-from-scratch",
-      "order": 0,
       "cover": "./images/cover.svg",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/learning-micrograd-karpathy-neural-network-from-scratch"
     },
     {
-      "slug": "neuron-in-neural-networks",
       "title": "Neuron in Neural Networks",
+      "slug": "neuron-in-neural-networks",
       "date": "2026-04-30",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/neuron-in-neural-networks",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.svg",
       "series": "ai-and-deep-learning",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/neuron-in-neural-networks"
     },
     {
-      "slug": "from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference",
       "title": "From JavaScript to TypeScript: A Complete Guide to Understanding the Difference",
+      "slug": "from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference",
       "date": "2026-04-27",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference"
     },
     {
-      "slug": "javascript-frameworks",
       "title": "JavaScript Frameworks : Bridging Developer Experience and Application Architecture",
+      "slug": "javascript-frameworks",
       "date": "2026-04-23",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/javascript-frameworks",
-      "order": 0,
+      "category": "web development",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published",
+      "series": "",
+      "seriesOrder": null,
+      "repoPath": "posts/web-development/javascript-frameworks",
       "subposts": [
         {
-          "slug": "angular-a-practical-intermediate-guide-to-building-enterprise-applications",
           "title": "Angular : A Practical Intermediate Guide to Building Enterprise Applications",
+          "slug": "angular-a-practical-intermediate-guide-to-building-enterprise-applications",
           "date": "2026-04-23",
           "tags": [
             "Angular",
@@ -375,14 +317,11 @@
             "Components"
           ],
           "category": "web-development",
-          "repoPath": "posts/web-development/javascript-frameworks/subposts/angular-a-practical-intermediate-guide-to-building-enterprise-applications",
-          "order": 0,
-          "contentMissing": false,
           "parentSlug": "javascript-frameworks"
         },
         {
-          "slug": "nextjs-a-practical-intermediate-guide-to-full-stack-react-development",
           "title": "Next.js : A Practical Intermediate Guide to Full-Stack React Development",
+          "slug": "nextjs-a-practical-intermediate-guide-to-full-stack-react-development",
           "date": "2026-04-24",
           "tags": [
             "Next.js",
@@ -394,15 +333,12 @@
             "App Router",
             "Full-Stack"
           ],
-          "category": "web-development",
-          "repoPath": "posts/web-development/javascript-frameworks/subposts/nextjs-a-practical-intermediate-guide-to-full-stack-react-development",
-          "order": 0,
-          "contentMissing": false,
+          "category": "tech",
           "parentSlug": "javascript-frameworks"
         },
         {
-          "slug": "react-a-practical-intermediate-guide-to-building-modern-uis",
           "title": "React : A Practical Intermediate Guide to Building Modern UIs",
+          "slug": "react-a-practical-intermediate-guide-to-building-modern-uis",
           "date": "2026-04-23",
           "tags": [
             "React",
@@ -413,14 +349,11 @@
             "State Management"
           ],
           "category": "web-development",
-          "repoPath": "posts/web-development/javascript-frameworks/subposts/react-a-practical-intermediate-guide-to-building-modern-uis",
-          "order": 0,
-          "contentMissing": false,
           "parentSlug": "javascript-frameworks"
         },
         {
-          "slug": "vuejs-a-practical-intermediate-guide-to-reactive-ui-development",
           "title": "Vue.js : A Practical Intermediate Guide to Reactive UI Development",
+          "slug": "vuejs-a-practical-intermediate-guide-to-reactive-ui-development",
           "date": "2026-04-24",
           "tags": [
             "Vue",
@@ -431,16 +364,13 @@
             "Pinia"
           ],
           "category": "web-development",
-          "repoPath": "posts/web-development/javascript-frameworks/subposts/vuejs-a-practical-intermediate-guide-to-reactive-ui-development",
-          "order": 0,
-          "contentMissing": false,
           "parentSlug": "javascript-frameworks"
         }
       ]
     },
     {
-      "slug": "neurons-to-chatgpt-neural-networks-llms",
       "title": "From Neurons to ChatGPT: A Complete Guide to Neural Networks and Large Language Models",
+      "slug": "neurons-to-chatgpt-neural-networks-llms",
       "date": "2026-04-05",
       "tags": [
         "LLM",
@@ -452,16 +382,13 @@
         "Beginner",
         "ChatGPT"
       ],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.jpg",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms"
     },
     {
-      "slug": "sql-server-docker-azure-data-studio-northwind",
       "title": "Running SQL Server in Docker & Exploring Databases with Azure Data Studio",
+      "slug": "sql-server-docker-azure-data-studio-northwind",
       "date": "2026-04-05",
       "tags": [
         "SQL",
@@ -474,16 +401,13 @@
         "Beginner"
       ],
       "category": "project-log",
-      "repoPath": "project-log/sql-server-docker-azure-data-studio-northwind",
-      "order": 0,
       "excerpt": "Learn how to spin up Microsoft SQL Server 2022 in a Docker container, connect it with Azure Data Studio, create your first database and table, and explore the classic Northwind sample database using SQL queries and ER diagrams in DBeaver.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/sql-server-docker-azure-data-studio-northwind"
     },
     {
-      "slug": "how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio",
       "title": "First Time Running SQL Server in Docker (and Actually Using It)",
+      "slug": "how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio",
       "date": "2026-04-03",
       "tags": [
         "SQL",
@@ -493,15 +417,12 @@
         "Beginner"
       ],
       "category": "project-log",
-      "repoPath": "project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio",
-      "order": 0,
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio"
     },
     {
-      "slug": "building-a-git-based-cms-in-1-week",
       "title": "Building a Git-Based CMS in 1 Week—A Learning Sprint",
+      "slug": "building-a-git-based-cms-in-1-week",
       "date": "2026-03-28",
       "tags": [
         "react",
@@ -511,85 +432,68 @@
         "project-log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/building-a-git-based-cms-in-1-week",
-      "order": 0,
       "excerpt": "I challenged myself to build a fully functional blog CMS in 1 week using React and the GitHub API. Here's how I shipped a complete, polished product by ruthlessly cutting scope and letting Git do the heavy lifting.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/building-a-git-based-cms-in-1-week"
     },
     {
-      "slug": "gpu",
       "title": "Overview of GPU: What It Is and Why It Matters in AI",
+      "slug": "gpu",
       "date": "2026-03-26",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/gpu",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/gpu"
     },
     {
-      "slug": "tensor-cores-vs-cuda-cores",
       "title": "A Comparative Study of Tensor Cores and CUDA Cores",
+      "slug": "tensor-cores-vs-cuda-cores",
       "date": "2026-03-23",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/tensor-cores-vs-cuda-cores",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "gpu-and-hardware",
       "seriesOrder": 3,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/tensor-cores-vs-cuda-cores"
     },
     {
-      "slug": "generative-ai-models",
       "title": "Generative AI Models",
+      "slug": "generative-ai-models",
       "date": "2026-03-21",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/generative-ai-models",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "ai-and-deep-learning",
       "seriesOrder": 5,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/generative-ai-models"
     },
     {
-      "slug": "overfitting",
       "title": "Overview of Overfitting and How to Prevent It",
+      "slug": "overfitting",
       "date": "2026-03-17",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/overfitting",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "machine-learning",
       "seriesOrder": 4,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/overfitting"
     },
     {
-      "slug": "loss-functions-in-ml",
       "title": "Overview of Loss Functions in ML",
+      "slug": "loss-functions-in-ml",
       "date": "2026-03-11",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/loss-functions-in-ml",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "machine-learning",
       "seriesOrder": 3,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/loss-functions-in-ml"
     },
     {
-      "slug": "go-assistant-android-overlay-claude-vision",
       "title": "Go Assistant: An Android Overlay That Watches a Go Board and Talks to Claude Vision",
+      "slug": "go-assistant-android-overlay-claude-vision",
       "date": "2026-03-09",
+      "excerpt": "A Flutter + Kotlin Android app that screen-captures a Go board, sends it to Claude Vision, and draws the suggested move back over the screen as a floating overlay — plus the foreground-service bugs that showed up six months later.",
       "tags": [
         "Flutter",
         "Kotlin",
@@ -599,462 +503,362 @@
         "Project Log"
       ],
       "category": "project-log",
-      "repoPath": "project-log/go-assistant-android-overlay-claude-vision",
-      "order": 0,
-      "excerpt": "A Flutter + Kotlin Android app that screen-captures a Go board, sends it to Claude Vision, and draws the suggested move back over the screen as a floating overlay — plus the foreground-service bugs that showed up six months later.",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "project-log/go-assistant-android-overlay-claude-vision"
     },
     {
-      "slug": "computer-vision",
       "title": "The Underlying Mechanics of Computer Vision",
+      "slug": "computer-vision",
       "date": "2026-03-07",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/computer-vision",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "ai-and-deep-learning",
       "seriesOrder": 8,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/computer-vision"
     },
     {
-      "slug": "ml-evaluation-metrics",
       "title": "Common Evaluation Metrics in ML",
+      "slug": "ml-evaluation-metrics",
       "date": "2026-03-03",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/ml-evaluation-metrics",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "machine-learning",
       "seriesOrder": 11,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/ml-evaluation-metrics"
     },
     {
-      "slug": "api-for-ai",
       "title": "Overview of AI APIs : Bridging Model Power and Application Logic",
+      "slug": "api-for-ai",
       "date": "2026-02-28",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/api-for-ai",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/api-for-ai"
     },
     {
-      "slug": "ml-automation-pipelines",
       "title": "Pipelines for ML Automation",
+      "slug": "ml-automation-pipelines",
       "date": "2026-02-23",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/ml-automation-pipelines",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "machine-learning",
       "seriesOrder": 12,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/ml-automation-pipelines"
     },
     {
-      "slug": "mlops",
       "title": "Overview of MLOps",
+      "slug": "mlops",
       "date": "2026-02-22",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/mlops",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "machine-learning",
       "seriesOrder": 13,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/mlops"
     },
     {
-      "slug": "gpus-and-tpus-vs-cpus-for-ai-training",
       "title": "A Comparative Study of GPUs and TPUs vs CPUs for AI Training",
+      "slug": "gpus-and-tpus-vs-cpus-for-ai-training",
       "date": "2026-02-20",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "gpu-and-hardware",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training"
     },
     {
-      "slug": "reinforcement-learning",
       "title": "Reinforcement Learning",
+      "slug": "reinforcement-learning",
       "date": "2026-02-19",
       "tags": [],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/reinforcement-learning",
-      "order": 0,
+      "category": "AI & Machine Learning",
       "cover": "./images/cover.png",
       "series": "ai-and-deep-learning",
       "seriesOrder": 11,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/reinforcement-learning"
     },
     {
-      "slug": "progressive-web-apps",
       "title": "What Are Progressive Web Apps",
+      "slug": "progressive-web-apps",
       "date": "2026-01-08",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/progressive-web-apps",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 7,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/progressive-web-apps"
     },
     {
-      "slug": "npm-and-yarn",
       "title": "npm vs. Yarn vs. pnpm: An Analytical Overview of Dependency Management",
+      "slug": "npm-and-yarn",
       "date": "2026-01-01",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/npm-and-yarn",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 13,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/npm-and-yarn"
     },
     {
-      "slug": "modern-javascript-features",
       "title": "Modern JavaScript Features",
+      "slug": "modern-javascript-features",
       "date": "2025-12-17",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/modern-javascript-features",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 9,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/modern-javascript-features"
     },
     {
-      "slug": "managing-services",
       "title": "Methodologies for Manage Services: An Analytical Deep-Dive into Service Orchestration",
+      "slug": "managing-services",
       "date": "2025-11-12",
       "tags": [],
-      "category": "systems--os",
-      "repoPath": "posts/systems--os/managing-services",
-      "order": 0,
+      "category": "Systems & OS",
       "cover": "./images/cover.png",
       "series": "linux-and-systems",
       "seriesOrder": 2,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/systems--os/managing-services"
     },
     {
-      "slug": "ip-routing",
       "title": "The Post Office of the Internet: An Analytical Overview of IP Routing",
+      "slug": "ip-routing",
       "date": "2025-11-01",
       "tags": [],
-      "category": "systems--os",
-      "repoPath": "posts/systems--os/ip-routing",
-      "order": 0,
+      "category": "Systems & OS",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 5,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/systems--os/ip-routing"
     },
     {
-      "slug": "linux-startup-sequence",
       "title": "The Linux Startup Sequence: An Analytical Deep-Dive",
+      "slug": "linux-startup-sequence",
       "date": "2025-10-29",
       "tags": [],
-      "category": "systems--os",
-      "repoPath": "posts/systems--os/linux-startup-sequence",
-      "order": 0,
+      "category": "Systems & OS",
       "cover": "./images/cover.png",
       "series": "linux-and-systems",
       "seriesOrder": 1,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/systems--os/linux-startup-sequence"
     },
     {
-      "slug": "tcp-vs-udp",
       "title": "The Binary Bridge: An Analytical Overview of TCP vs UDP",
+      "slug": "tcp-vs-udp",
       "date": "2025-10-24",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/tcp-vs-udp",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 4,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/tcp-vs-udp"
     },
     {
-      "slug": "https",
       "title": "The Architecture of Trust: The Underlying Mechanics of HTTPS",
+      "slug": "https",
       "date": "2025-10-21",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/https",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 12,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/https"
     },
     {
-      "slug": "quic",
       "title": "The Future of the Web: An Analytical Overview of QUIC and HTTP/3",
+      "slug": "quic",
       "date": "2025-10-15",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/quic",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 8,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/quic"
     },
     {
-      "slug": "vpn",
       "title": "The Encryption Tunnel: An Analytical Overview of VPNs and Secure Routing",
+      "slug": "vpn",
       "date": "2025-10-15",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/vpn",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 11,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/vpn"
     },
     {
-      "slug": "ipv6",
       "title": "The 128-Bit Revolution: An Analytical Overview of IPv6",
+      "slug": "ipv6",
       "date": "2025-10-12",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/ipv6",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/ipv6"
     },
     {
-      "slug": "the-osi-model",
       "title": "The Architecture of Connectivity: An Analytical Overview of the OSI Model",
+      "slug": "the-osi-model",
       "date": "2025-10-08",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/the-osi-model",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "networking",
       "seriesOrder": 1,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/the-osi-model"
     },
     {
-      "slug": "symmetric-vs-asymmetric-encryption",
       "title": "The Mathematical Fortress: An Analytical Overview of Symmetric vs Asymmetric Encryption",
+      "slug": "symmetric-vs-asymmetric-encryption",
       "date": "2025-09-24",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/symmetric-vs-asymmetric-encryption",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "security",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/symmetric-vs-asymmetric-encryption"
     },
     {
-      "slug": "penetration-testing-tools",
       "title": "The Ethical Breach: An Analytical Overview of Penetration Testing Methodologies",
+      "slug": "penetration-testing-tools",
       "date": "2025-09-10",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/penetration-testing-tools",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "security",
       "seriesOrder": 3,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/penetration-testing-tools"
     },
     {
-      "slug": "the-dark-web",
       "title": "The Shadows of the Net: An Analytical Overview of the Dark Web and Cybercrime Ecosystems",
+      "slug": "the-dark-web",
       "date": "2025-09-08",
       "tags": [],
-      "category": "networking--security",
-      "repoPath": "posts/networking--security/the-dark-web",
-      "order": 0,
+      "category": "Networking & Security",
       "cover": "./images/cover.png",
       "series": "security",
       "seriesOrder": 11,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/networking--security/the-dark-web"
     },
     {
-      "slug": "git-and-github-workflow",
       "title": "The Architecture of Collaboration: An Analytical Overview of the Git & GitHub Workflow",
+      "slug": "git-and-github-workflow",
       "date": "2025-09-07",
       "tags": [],
-      "category": "devops--tools",
-      "repoPath": "posts/devops--tools/git-and-github-workflow",
-      "order": 0,
+      "category": "DevOps & Tools",
       "cover": "./images/cover.png",
       "series": "git-and-tools",
       "seriesOrder": 1,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/devops--tools/git-and-github-workflow"
     },
     {
-      "slug": "branching-and-merging",
       "title": "The Mechanics of Versioning: An Analytical Overview of Branching and Merging",
+      "slug": "branching-and-merging",
       "date": "2025-09-06",
       "tags": [],
-      "category": "devops--tools",
-      "repoPath": "posts/devops--tools/branching-and-merging",
-      "order": 0,
+      "category": "DevOps & Tools",
       "cover": "./images/cover.png",
       "series": "git-and-tools",
       "seriesOrder": 2,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/devops--tools/branching-and-merging"
     },
     {
-      "slug": "evolution-of-cloud-computing",
       "title": "The Abstraction of Metal: An Analytical Overview of the Evolution of Cloud Computing (IaaS, PaaS, SaaS)",
+      "slug": "evolution-of-cloud-computing",
       "date": "2025-08-30",
       "tags": [],
-      "category": "cloud--devops",
-      "repoPath": "posts/cloud--devops/evolution-of-cloud-computing",
-      "order": 0,
+      "category": "Cloud & Devops",
       "cover": "./images/cover.png",
       "series": "devops-and-cloud",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/cloud--devops/evolution-of-cloud-computing"
     },
     {
-      "slug": "kubernetes",
       "title": "The Distributed Operating System: An Analytical Overview of Kubernetes Architecture",
+      "slug": "kubernetes",
       "date": "2025-08-27",
       "tags": [],
-      "category": "cloud--devops",
-      "repoPath": "posts/cloud--devops/kubernetes",
-      "order": 0,
+      "category": "Cloud & Devops",
       "cover": "./images/cover.png",
       "series": "devops-and-cloud",
       "seriesOrder": 2,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/cloud--devops/kubernetes"
     },
     {
-      "slug": "build-tools",
       "title": "The Architecture of Artifacts: An Analytical Overview of Modern Build Tools",
+      "slug": "build-tools",
       "date": "2025-08-24",
       "tags": [],
-      "category": "devops--tools",
-      "repoPath": "posts/devops--tools/build-tools",
-      "order": 0,
+      "category": "DevOps & Tools",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 14,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/devops--tools/build-tools"
     },
     {
-      "slug": "cookies-vs-local-storage",
       "title": "The Browser's Hidden Memory: An Analytical Deep-Dive into Cookies, localStorage, and sessionStorage",
+      "slug": "cookies-vs-local-storage",
       "date": "2025-07-20",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/cookies-vs-local-storage",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 5,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/cookies-vs-local-storage"
     },
     {
-      "slug": "javascript-event-loop",
       "title": "The Engine Behind Async JavaScript: A Deep Dive into the Event Loop",
+      "slug": "javascript-event-loop",
       "date": "2025-07-18",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/javascript-event-loop",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 8,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/javascript-event-loop"
     },
     {
-      "slug": "jwt-authentication",
       "title": "JWT: How JSON Web Tokens Power Modern Authentication",
+      "slug": "jwt-authentication",
       "date": "2025-07-12",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/jwt-authentication",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "security",
       "seriesOrder": 9,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/jwt-authentication"
     },
     {
-      "slug": "how-browsers-render-html",
       "title": "How Browsers Paint the Web: A Deep Dive into the Rendering Pipeline",
+      "slug": "how-browsers-render-html",
       "date": "2025-07-10",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/how-browsers-render-html",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 12,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/how-browsers-render-html"
     },
     {
-      "slug": "csr-vs-ssr",
       "title": "CSR vs SSR vs SSG: An Architectural Analysis of Rendering Strategies",
+      "slug": "csr-vs-ssr",
       "date": "2025-07-05",
       "tags": [],
-      "category": "web-development",
-      "repoPath": "posts/web-development/csr-vs-ssr",
-      "order": 0,
+      "category": "Web Development",
       "cover": "./images/cover.png",
       "series": "backend-and-apis",
       "seriesOrder": 6,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/web-development/csr-vs-ssr"
     },
     {
-      "slug": "llms",
       "title": "Large Language Models (LLMs): A Comprehensive Guide",
+      "slug": "llms",
       "date": "2025-04-01",
       "tags": [
         "ai",
@@ -1063,17 +867,14 @@
         "nlp",
         "transformers"
       ],
-      "category": "ai--machine-learning",
-      "repoPath": "posts/ai--machine-learning/llms",
-      "order": 0,
+      "category": "ai & machine learning",
       "excerpt": "A deep dive into Large Language Models — how they work, how they are trained, and where they are headed.",
       "cover": "images/cover.png",
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/ai--machine-learning/llms"
     },
     {
-      "slug": "fastapi-backend-from-scratch",
       "title": "Building a Production-Ready FastAPI Backend from Scratch",
+      "slug": "fastapi-backend-from-scratch",
       "date": "2024-03-15",
       "tags": [
         "fastapi",
@@ -1082,16 +883,13 @@
         "docker"
       ],
       "category": "tech",
-      "repoPath": "posts/tech/fastapi-backend-from-scratch",
-      "order": 0,
       "series": "backend-and-apis",
       "seriesOrder": 4,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/tech/fastapi-backend-from-scratch"
     },
     {
-      "slug": "hadoop-and-redis-pipeline",
       "title": "Hadoop + Redis: Building a Big Data Pipeline with a High-Speed Cache Layer",
+      "slug": "hadoop-and-redis-pipeline",
       "date": "2023-12-10",
       "tags": [
         "hadoop",
@@ -1101,12 +899,9 @@
         "fastapi"
       ],
       "category": "projects",
-      "repoPath": "posts/projects/hadoop-and-redis-pipeline",
-      "order": 0,
       "series": "devops-and-cloud",
       "seriesOrder": 9,
-      "contentMissing": false,
-      "status": "published"
+      "repoPath": "posts/projects/hadoop-and-redis-pipeline"
     }
   ]
 }
