@@ -116,4 +116,4 @@ See [CONTRIBUTORS.md](./CONTRIBUTORS.md) for everyone — human and AI — who's
 
 ## 👤 About the author
 
-Built by **[Muhammad Zulqarnain](https://github.com/Mzaq1559)** — BSc Computer Science student, backend/full-stack developer, and someone who apparently thinks "I'll just add a CMS" is a reasonable Tuesday.
+Built by **[Muhammad Zulqarnain](https://github.com/Mzaq1559)** — 5th-semester BSc Computer Science student at UET Taxila (CGPA 3.60/4.00), backend/full-stack developer, and someone who apparently thinks "I'll just add a CMS" is a reasonable Tuesday.
