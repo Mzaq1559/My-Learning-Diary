@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-kNIKoecc.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CPH7VSe0.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -16641,7 +16641,7 @@ tags: [Python, Markdown, GitHub, Obsidian, Automation, Project Log]
 category: project-log
 excerpt: How I turned my exported Claude history into a structured 512-chat Markdown archive, debugged automatic categorization, and cleaned up the final repository.
 cover: ./images/cover.png
--------------------------
+---
 
 # Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
 

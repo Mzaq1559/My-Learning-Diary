@@ -7,7 +7,7 @@ tags: [Python, Markdown, GitHub, Obsidian, Automation, Project Log]
 category: project-log
 excerpt: How I turned my exported Claude history into a structured 512-chat Markdown archive, debugged automatic categorization, and cleaned up the final repository.
 cover: ./images/cover.png
--------------------------
+---
 
 # Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
 

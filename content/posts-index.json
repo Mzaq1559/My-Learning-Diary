@@ -16,8 +16,6 @@
       "category": "project-log",
       "excerpt": "How I turned my exported Claude history into a structured 512-chat Markdown archive, debugged automatic categorization, and cleaned up the final repository.",
       "cover": "./images/cover.png",
-      "I had accumulated a large amount of useful work inside Claude": "debugging sessions, learning notes, project discussions, setup instructions, application-related conversations, and random technical experiments.",
-      "The goal was simple": "",
       "repoPath": "project-log/context-vault-claude-history-obsidian-archive"
     },
     {
