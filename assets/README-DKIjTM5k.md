@@ -1,5 +1,4 @@
 ---
-
 title: Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
 slug: context-vault-claude-history-obsidian-archive
 date: 2026-09-30
@@ -87,11 +86,11 @@ I used a converter to transform the exported conversation data into Markdown fil
 
 Markdown was a deliberate choice because it is:
 
-* human-readable
-* easy to version with Git
-* supported by Obsidian
-* easy to process with Python
-* portable across editors and platforms
+- human-readable
+- easy to version with Git
+- supported by Obsidian
+- easy to process with Python
+- portable across editors and platforms
 
 Instead of keeping one huge export file, every conversation became a separate note.
 
@@ -109,17 +108,17 @@ That was important because the archive contains a large amount of personal and t
 
 I initially organized the archive into eight categories:
 
-| Category   | Conversations |
-| ---------- | ------------: |
-| academics  |           134 |
-| career     |            49 |
-| hackathon  |            16 |
-| learning   |            55 |
-| life       |            49 |
-| misc       |            29 |
-| personal   |           125 |
-| tech-setup |            55 |
-| **Total**  |       **512** |
+| Category | Conversations |
+|---|---:|
+| academics | 134 |
+| career | 49 |
+| hackathon | 16 |
+| learning | 55 |
+| life | 49 |
+| misc | 29 |
+| personal | 125 |
+| tech-setup | 55 |
+| **Total** | **512** |
 
 The categories were intentionally broad.
 
@@ -127,14 +126,14 @@ I did not want hundreds of tiny folders. I wanted enough structure to make the a
 
 The main categories were:
 
-* **academics** — university, coursework, exams, applications, and academic work
-* **career** — jobs, internships, freelancing, and professional development
-* **hackathon** — hackathon-related projects and competitions
-* **learning** — programming, AI/ML, and other learning-focused conversations
-* **life** — everyday life-related discussions
-* **misc** — conversations that were too vague or did not clearly fit another category
-* **personal** — personal projects, plans, and other personal conversations
-* **tech-setup** — operating systems, software installation, development environments, and technical setup
+- **academics** — university, coursework, exams, applications, and academic work
+- **career** — jobs, internships, freelancing, and professional development
+- **hackathon** — hackathon-related projects and competitions
+- **learning** — programming, AI/ML, and other learning-focused conversations
+- **life** — everyday life-related discussions
+- **misc** — conversations that were too vague or did not clearly fit another category
+- **personal** — personal projects, plans, and other personal conversations
+- **tech-setup** — operating systems, software installation, development environments, and technical setup
 
 This structure was simple enough to maintain while still giving me useful separation between different parts of my history.
 
@@ -156,10 +155,10 @@ Some of the mistakes made this very clear.
 
 For example:
 
-* `Agent Kim Reactivated` was incorrectly matched because of the `react` substring.
-* `Codebase audit and dependency cleanup` was affected by overly broad dependency matching.
-* `IBCC website holiday...` ended up in the wrong category because the classifier saw `website`.
-* Some vague titles simply fell through because there was not enough information for the keyword rules.
+- `Agent Kim Reactivated` was incorrectly matched because of the `react` substring.
+- `Codebase audit and dependency cleanup` was affected by overly broad dependency matching.
+- `IBCC website holiday...` ended up in the wrong category because the classifier saw `website`.
+- Some vague titles simply fell through because there was not enough information for the keyword rules.
 
 This was the point where the project stopped being a simple export-and-sort script and became an actual data-cleaning problem.
 
@@ -356,12 +355,12 @@ That was ultimately the reason I wanted Markdown in the first place.
 
 The final Context Vault contains:
 
-* **512 Claude conversations**
-* Markdown files for individual conversations
-* eight broad categories
-* documented category counts
-* a Git-based history of the cleanup
-* an archive that can be opened and searched in Obsidian
+- **512 Claude conversations**
+- Markdown files for individual conversations
+- eight broad categories
+- documented category counts
+- a Git-based history of the cleanup
+- an archive that can be opened and searched in Obsidian
 
 I could now open the archive directly in Obsidian instead of treating it as a collection of exported data files.
 
@@ -393,15 +392,15 @@ The current archive is only the foundation.
 
 Some things I want to explore next are:
 
-* better full-text search
-* Obsidian links between related conversations
-* automatic tags
-* duplicate detection
-* extracting reusable knowledge from old conversations
-* project-level indexes
-* better handling of ambiguous conversations
-* privacy/security checks before syncing the archive
-* turning recurring solutions into permanent documentation
+- better full-text search
+- Obsidian links between related conversations
+- automatic tags
+- duplicate detection
+- extracting reusable knowledge from old conversations
+- project-level indexes
+- better handling of ambiguous conversations
+- privacy/security checks before syncing the archive
+- turning recurring solutions into permanent documentation
 
 The long-term idea is bigger than simply storing old chats.
 
@@ -410,4 +409,3 @@ I want Context Vault to become a **personal knowledge archive** where old conver
 For now, the important milestone is complete:
 
 **512 conversations are now organized, version-controlled Markdown instead of being trapped inside an export.**
-
