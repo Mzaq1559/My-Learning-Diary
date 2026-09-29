@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-DIURi-RR.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CIp4MHYE.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -16656,8 +16656,6 @@ The goal was simple:
 
 Before starting the conversion, I used Claude to plan the overall workflow and think through how the exported conversations could be transformed into a usable archive.
 
-![Claude planning the conversion](./images/5.png)
-
 ---
 
 ## 1. Starting With the Raw Claude History
@@ -16669,8 +16667,6 @@ I requested an export of my conversation history and waited for the export proce
 ![Anthropic export/download email](./images/3.png)
 
 The export arrived as a collection of data that I could download and process locally.
-
-![Export manifest](./images/1.png)
 
 The exported data contained hundreds of conversations, but it was not organized in the way I wanted to work with it.
 
@@ -16715,8 +16711,6 @@ This immediately made the archive much easier to inspect and process with normal
 The next step was turning the exported conversations into individual Markdown notes.
 
 I used a converter to transform the exported conversation data into Markdown files.
-
-![Converter download](./images/7.png)
 
 Markdown was a deliberate choice because it is:
 
@@ -16827,8 +16821,6 @@ The important part was that the sorting process became repeatable. If I changed 
 Automation got the bulk of the work done, but it was not reasonable to trust the classifier blindly.
 
 At one point, Claude inspected the repository and the generated archive to understand how the files and categories were organized.
-
-![Claude reviewing the repository](./images/11.png)
 
 Claude later identified and corrected five clearly misfiled conversations.
 
