@@ -1,17 +1,10 @@
 ---
 title: Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
-slug: context-vault-claude-history-obsidian-archive
+slug: building-context-vault-claude-history-obsidian-archive
 date: 2026-09-30
-tags:
-  - Python
-  - Markdown
-  - GitHub
-  - Obsidian
-  - Automation
-  - Project Log
-category: project-log
+tags: [python, markdown, github, obsidian, automation, project-log]
+category: Project Log
 excerpt: "I turned my exported Claude conversation history into a 512-chat Markdown archive for Obsidian, then built and refined a categorization workflow to make the archive actually useful."
-cover: ./images/cover.png
 ---
 
 # Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
