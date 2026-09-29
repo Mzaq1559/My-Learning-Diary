@@ -36,6 +36,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/context-vault-claude-history-obsidian-archive</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/auto-job-applier-linkedin-ubuntu-wayland</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
