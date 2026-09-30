@@ -6,12 +6,12 @@
       "slug": "context-vault-claude-history-obsidian-archive",
       "date": "2026-09-30",
       "tags": [
-        "Python",
-        "Markdown",
-        "GitHub",
-        "Obsidian",
-        "Automation",
-        "Project Log"
+        "python",
+        "markdown",
+        "github",
+        "obsidian",
+        "automation",
+        "project-log"
       ],
       "category": "project-log",
       "excerpt": "How I turned my exported Claude history into a structured 512-chat Markdown archive, debugged automatic categorization, and cleaned up the final repository.",

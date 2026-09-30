@@ -2,8 +2,8 @@
 title: Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive
 slug: context-vault-claude-history-obsidian-archive
 date: 2026-09-30
-tags: [Python, Markdown, GitHub, Obsidian, Automation, Project Log]
-category: project-log
+tags: [python, markdown, github, obsidian, automation, project-log]
+category: Project Log
 excerpt: How I turned my exported Claude history into a structured 512-chat Markdown archive, debugged automatic categorization, and cleaned up the final repository.
 cover: ./images/cover.png
 ---
@@ -44,6 +44,8 @@ The eventual repository structure looked roughly like this:
 context-vault/
 ├── archive/
 │   └── claude/
+│       ├── CATEGORIES.md
+│       ├── INDEX-<account>.md    (one chat index per exported account)
 │       ├── academics/
 │       ├── career/
 │       ├── hackathon/
@@ -52,8 +54,11 @@ context-vault/
 │       ├── misc/
 │       ├── personal/
 │       └── tech-setup/
-├── CATEGORIES.md
-└── scripts/
+├── projects/
+├── topics/
+├── _templates/
+├── CLAUDE.md
+└── README.md
 ```
 
 I also had an additional export available through ChatGPT, which helped me understand the different export formats and the overall process of obtaining my conversation data.
@@ -68,7 +73,7 @@ The exported conversations were accompanied by multiple folders and files, so th
 
 ![Exported conversation folders](./images/8.png)
 
-This immediately made the archive much easier to inspect and process with normal Git and filesystem tooling.
+I had exported three of my Claude accounts, and each export came as its own set of folders: conversations, projects, memories, and account metadata such as login history. Only the conversations and project definitions were useful for the archive, so the converter ignores everything else.
 
 ---
 
@@ -90,9 +95,13 @@ Instead of keeping one huge export file, every conversation became a separate no
 
 This gave me a much more practical archive: I could open a single conversation, search filenames, use Git history, and later add links or tags without having to deal with the original export format.
 
+I kept the full date and time on everything, in the filename, in the frontmatter, and next to each message, so I can still tell when a conversation actually happened.
+
 Before pushing the generated archive anywhere, I also checked the files for accidentally exposed secrets or sensitive values.
 
 ![Secrets scan](./images/9.png)
+
+The converter automatically redacts anything that looks like an API key, token, password assignment, or database URL, and it writes a report of which files matched. It flagged 19 possible hits across the three accounts, and all of them were redacted. I also ran a second grep for obvious key patterns before committing. This is pattern matching, not a guarantee, so it reduces the risk rather than removing it.
 
 That was important because the archive contains a large amount of personal and technical conversation history. I wanted to make sure that converting the data into Markdown did not accidentally turn credentials or other sensitive information into committed repository content.
 
@@ -100,7 +109,7 @@ That was important because the archive contains a large amount of personal and t
 
 ## 3. Designing the Categories
 
-I initially organized the archive into eight categories:
+I organized the archive into eight categories. The counts below are the final numbers, after the cleanup described later in this post:
 
 | Category | Conversations |
 |---|---:|
@@ -175,6 +184,8 @@ The sorter became the main tool for repeatedly applying classification rules to 
 ![Sorter script](./images/13.png)
 
 This was much safer than repeatedly moving hundreds of files by hand.
+
+The biggest fix was not a rule, though. It was what the rules were reading. The first version searched the opening of each converted file, and that included Claude's own replies. Those replies often echo things from my stored context, with words like *hackathon*, *career*, or *exam*, so unrelated chats got pulled into the wrong folders: movie recommendations under `career`, DaVinci and Docker installs under `academics`. The second version checks the conversation title first, then falls back to the one-line summary from the export plus my first message only. A small override list covers MediBook chats whose titles said nothing about the project. I also added the `life` category at this point for entertainment, health, and everyday-admin conversations.
 
 I also kept the category information documented in `CATEGORIES.md`, so the final repository had an explicit record of how the archive was organized.
 
@@ -265,9 +276,11 @@ tech-setup    55
 total        512
 ```
 
-The important part was that the total still matched the original archive:
+The important part was that the total still matched what the converter had produced:
 
 **512 conversations in, 512 conversations out.**
+
+The raw exports listed 534 conversations across the three accounts. 22 of them had no messages, so the converter skipped them, which is where 512 comes from.
 
 No conversations had silently disappeared during the resorting and cleanup process.
 
@@ -312,6 +325,8 @@ I learned a few things from the process:
 Simple rules are excellent for handling obvious cases, but substring matches can create surprising false positives.
 
 A word can appear in a conversation without representing the actual topic of that conversation.
+
+It also matters what text you match against. Searching a whole conversation, including the AI's own replies, picks up words that have nothing to do with the topic.
 
 ### Automation should reduce manual work, not hide uncertainty
 
