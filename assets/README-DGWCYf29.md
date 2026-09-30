@@ -46,6 +46,7 @@ context-vault/
 │   └── claude/
 │       ├── CATEGORIES.md
 │       ├── INDEX-<account>.md    (one chat index per exported account)
+│       ├── <account>/_projects/  (converted Claude Project definitions)
 │       ├── academics/
 │       ├── career/
 │       ├── hackathon/
@@ -61,7 +62,7 @@ context-vault/
 └── README.md
 ```
 
-I also had an additional export available through ChatGPT, which helped me understand the different export formats and the overall process of obtaining my conversation data.
+While I was at it, I also started a data export request from ChatGPT's settings, since it offers the same kind of export. The vault only contains the Claude archive so far, but `archive/README.md` already reserves an `archive/chatgpt/` folder for it.
 
 ![ChatGPT export confirmation](./images/6.png)
 
