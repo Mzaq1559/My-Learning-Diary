@@ -5,8 +5,9 @@ date: 2026-10-04
 excerpt: "A full deployment walkthrough of BuildPay AI on Azure — including Docker, Azure Container Apps, PostgreSQL, a broken production login, frontend build configuration, CORS debugging, and the final fix."
 tags: [Azure, Docker, Next.js, FastAPI, PostgreSQL, Azure Container Apps, DevOps, Deployment, Debugging]
 category: Project Log
-cover: ./images/cover.png
 ---
+
+# Deploying BuildPay AI to Azure — From Local Docker Compose to a Working Production Stack
 
 ## What I Was Building
 
@@ -534,7 +535,7 @@ It was narrowing the problem down one layer at a time.
 
 ### Screenshot 3 — BuildPay AI Landing Page
 
-<!-- IMAGE: Deployed BuildPay AI landing page showing the v1.8 public product presentation. -->
+<!-- IMAGE: Deployed BuildPay AI landing page showing the public product presentation. -->
 
 The landing page was an important part of this deployment because the frontend had recently been restructured.
 
@@ -544,6 +545,7 @@ The new architecture intentionally separates the public experience from the auth
 
 ```
 /
+/ 
     Public landing page
 
 /login
@@ -836,7 +838,7 @@ Production API            ✓
 CORS                      ✓
         |
         v
-JWT Authentication        ✓
+JWT Authentication       ✓
         |
         v
 Dashboard                 ✓

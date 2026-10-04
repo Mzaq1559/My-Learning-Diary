@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-BYawvy3I.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as w,D as I,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CsELKZjo.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -17052,6 +17052,904 @@ For now, the important milestone is complete:
 
 **512 conversations are now organized, version-controlled Markdown instead of being trapped inside an export.**
 `,yn=`---
+title: "Deploying BuildPay AI to Azure — From Local Docker Compose to a Working Production Stack"
+slug: deploying-buildpay-ai-to-azure
+date: 2026-10-04
+excerpt: "A full deployment walkthrough of BuildPay AI on Azure — including Docker, Azure Container Apps, PostgreSQL, a broken production login, frontend build configuration, CORS debugging, and the final fix."
+tags: [Azure, Docker, Next.js, FastAPI, PostgreSQL, Azure Container Apps, DevOps, Deployment, Debugging]
+category: Project Log
+---
+
+# Deploying BuildPay AI to Azure — From Local Docker Compose to a Working Production Stack
+
+## What I Was Building
+
+BuildPay AI is an AI-assisted construction project controls and payment platform.
+
+The core principle is:
+
+> **AI prepares, checks, calculates, and flags — humans authorize.**
+
+The application covers:
+
+- Projects
+- BOQs (Bills of Quantities)
+- Check Requests
+- Measurements
+- Variations
+- IPCs / Payment Certificates
+- Documents and evidence
+- AI findings
+- Reports
+- Audit trails
+- Role-based approvals
+
+The backend is built with **FastAPI** and PostgreSQL. The frontend is a **Next.js + React** application using Tailwind CSS, Radix UI, Lucide, Framer Motion, and Recharts.
+
+The application has separate roles for Contractor, Consultant, Quantity Surveyor, Client, Project Manager, and Admin.
+
+After getting the local Docker Compose setup into a usable state, I decided it was time to deploy the complete stack to Azure.
+
+The goal was simple:
+
+> **Get the real BuildPay AI application running publicly on Azure, with the frontend, backend, database, authentication, and demo workflows connected.**
+
+The deployment worked.
+
+The login didn't.
+
+This post documents the entire process.
+
+---
+
+## The Application Architecture
+
+Locally, the stack was roughly:
+
+\`\`\`
+Frontend — Next.js :3000
+        |
+        v
+Backend — FastAPI :8000
+        |
+        v
+PostgreSQL :5432
+\`\`\`
+
+The Azure deployment changed that into:
+
+\`\`\`
+                         Internet
+                            |
+                            v
+              +-------------------------+
+              |   Azure Container Apps  |
+              |                         |
+              |     BuildPay Frontend  |
+              |       Next.js           |
+              |        :3000            |
+              +------------+------------+
+                           |
+                           | HTTPS
+                           v
+              +-------------------------+
+              |   Azure Container Apps  |
+              |                         |
+              |     BuildPay Backend   |
+              |       FastAPI           |
+              |        :8000            |
+              +------------+------------+
+                           |
+                           | PostgreSQL
+                           v
+              +-------------------------+
+              | Azure PostgreSQL        |
+              | Flexible Server         |
+              |                         |
+              | Database: buildpay      |
+              +-------------------------+
+
+              Azure Container Registry
+                       |
+              +--------+--------+
+              |                 |
+              v                 v
+        Backend Image     Frontend Image
+\`\`\`
+
+The main Azure resources were:
+
+- Resource group: \`buildpay-ai-rg\`
+- Container Apps environment: \`buildpay-ai-env\`
+- Container Registry: \`buildpayaiacr5908\`
+- Frontend Container App: \`buildpay-frontend\`
+- Backend Container App: \`buildpay-backend\`
+- PostgreSQL server: \`buildpay-pg-3136\`
+- Database: \`buildpay\`
+- Region: Central India
+
+Docker images were built locally, pushed to Azure Container Registry, and then deployed to Azure Container Apps.
+
+---
+
+## First Signs of Success
+
+The backend came up correctly.
+
+Its health endpoint returned:
+
+\`\`\`json
+{
+  "status": "healthy",
+  "app": "BuildPay AI",
+  "version": "1.0.0"
+}
+\`\`\`
+
+The frontend also loaded successfully.
+
+More importantly, the new public landing page appeared instead of the old dashboard-style root page.
+
+The intended application flow was now:
+
+\`\`\`
+Visitor
+  |
+  v
+Landing Page
+  |
+  v
+Login
+  |
+  v
+Dashboard
+  |
+  v
+Authenticated Project Workflows
+\`\`\`
+
+At this point it looked like the deployment was basically done.
+
+Then I tried logging in.
+
+---
+
+## The Login Failure
+
+I used the demo administrator account:
+
+\`\`\`
+admin@buildpay.ai
+\`\`\`
+
+Instead of reaching the dashboard, the frontend displayed:
+
+\`\`\`
+NetworkError when attempting to fetch resource
+\`\`\`
+
+<!-- IMAGE: BuildPay AI deployed login page showing the NetworkError when attempting to sign in. -->
+
+At first, this could have meant almost anything:
+
+- Backend unavailable
+- Database failure
+- Authentication failure
+- Azure networking problem
+- CORS problem
+- Wrong frontend API URL
+- Stale frontend build
+- Incorrect container deployment
+
+So rather than changing things randomly, I started testing each layer independently.
+
+---
+
+## Checking the Backend Directly
+
+The first question was:
+
+> Is the production authentication endpoint actually working?
+
+I tested it directly with \`curl\`.
+
+The production API returned:
+
+\`\`\`
+HTTP/2 200
+\`\`\`
+
+and returned the expected authentication response.
+
+That ruled out a lot.
+
+The backend was alive.
+
+The authentication endpoint was alive.
+
+The database-backed login flow was working.
+
+So the problem was likely somewhere between the browser and the API.
+
+---
+
+## Inspecting the Frontend Build
+
+The frontend API client uses:
+
+\`\`\`typescript
+process.env.NEXT_PUBLIC_API_URL
+\`\`\`
+
+with a localhost fallback for development.
+
+That is fine locally:
+
+\`\`\`
+http://localhost:8000/api/v1
+\`\`\`
+
+but obviously wrong in production.
+
+The deployed application needed to use the Azure backend:
+
+\`\`\`
+https://buildpay-backend.agreeablesky-3684807e.centralindia.azurecontainerapps.io/api/v1
+\`\`\`
+
+There was an important Next.js detail here.
+
+Because this is a \`NEXT_PUBLIC_*\` variable, the value used by browser-side code needs to be available during the **Next.js build**.
+
+Simply setting it in the final running container isn't enough.
+
+I therefore changed the frontend Dockerfile to accept the API URL as a build argument:
+
+\`\`\`dockerfile
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+\`\`\`
+
+and rebuilt the production image with:
+
+\`\`\`bash
+docker build --no-cache \\
+  --build-arg NEXT_PUBLIC_API_URL="$FRONTEND_API_URL" \\
+  -t "$ACR.azurecr.io/buildpay-frontend:latest" \\
+  ./frontend
+\`\`\`
+
+---
+
+## Inspecting the Actual Production Artifact
+
+This was one of the more useful debugging steps.
+
+Instead of trusting the source code, I inspected the generated Next.js build inside the Docker image.
+
+### Screenshot 1 — Terminal Debugging and Code Search
+
+<!-- IMAGE: Terminal showing Docker-based grep commands inspecting .next for the Azure backend URL and localhost:8000. -->
+
+I searched the generated \`.next\` output for the production Azure backend URL.
+
+It was there.
+
+Then I searched for:
+
+\`\`\`
+localhost:8000
+\`\`\`
+
+and got no results.
+
+That meant the **local Docker image itself was correct**.
+
+The generated browser bundle was no longer pointing at localhost.
+
+I thought the problem was solved.
+
+It wasn't.
+
+---
+
+## The Browser Developer Tools Changed Everything
+
+The most useful screenshot from the entire deployment was the browser's Network/Console inspection.
+
+### Screenshot 5 — Browser Network and Console Inspection
+
+<!-- IMAGE: BuildPay AI login page with browser Developer Tools showing the failed request. -->
+
+The browser showed the actual request being attempted.
+
+The page was hosted at the Azure frontend:
+
+\`\`\`
+https://buildpay-frontend.agreeablesky-3684807e.centralindia.azurecontainerapps.io
+\`\`\`
+
+but the request was going to:
+
+\`\`\`
+http://localhost:8000/api/v1/auth/login
+\`\`\`
+
+That was the smoking gun.
+
+The browser wasn't failing to reach Azure.
+
+It was trying to reach **my own machine**.
+
+That explained the generic:
+
+\`\`\`
+NetworkError when attempting to fetch resource
+\`\`\`
+
+---
+
+## But Why Was Azure Still Serving the Wrong Frontend?
+
+This was the confusing part.
+
+I had already proven that the local production image contained the correct Azure URL and no \`localhost:8000\` references.
+
+So I needed to verify exactly what Azure was serving.
+
+The Container App was using:
+
+\`\`\`
+buildpay-frontend:latest
+\`\`\`
+
+The problem with \`latest\` is that it is mutable.
+
+A tag can point to different image digests over time, which makes debugging and deployment verification unnecessarily ambiguous.
+
+So I stopped relying on \`latest\`.
+
+---
+
+## Switching to Immutable Image Tags
+
+I created a unique frontend deployment tag:
+
+\`\`\`
+api-url-fix-20261004144240
+\`\`\`
+
+Then tagged the known-good image and pushed it to Azure Container Registry.
+
+Finally, I explicitly updated the Container App to use that exact image.
+
+Azure confirmed that the running container was now using:
+
+\`\`\`
+buildpayaiacr5908.azurecr.io/buildpay-frontend:api-url-fix-20261004144240
+\`\`\`
+
+This gave me a concrete deployment artifact that I could identify instead of asking:
+
+> "Which version of latest is actually running?"
+
+That distinction ended up being very useful.
+
+---
+
+## Then I Found a Second Problem: CORS
+
+Once the frontend deployment was under control, I tested the API from the production origin.
+
+The browser-style CORS preflight initially returned:
+
+\`\`\`
+HTTP/2 400
+
+Disallowed CORS origin
+\`\`\`
+
+This was another interesting configuration mismatch.
+
+The backend had a \`FRONTEND_URL\` setting containing the Azure frontend URL.
+
+However, the FastAPI CORS middleware was using a separate static list:
+
+\`\`\`python
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001"
+]
+\`\`\`
+
+So the application knew what its frontend URL was, but the CORS middleware wasn't actually using it.
+
+---
+
+## Fixing CORS
+
+I changed the startup configuration so that the configured \`FRONTEND_URL\` is added to the allowed origins:
+
+\`\`\`python
+allowed_origins = list(settings.ALLOWED_ORIGINS)
+
+if settings.FRONTEND_URL and settings.FRONTEND_URL not in allowed_origins:
+    allowed_origins.append(settings.FRONTEND_URL)
+\`\`\`
+
+The middleware then uses:
+
+\`\`\`python
+CORSMiddleware(
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+\`\`\`
+
+This kept the local development origins while also supporting the deployed frontend.
+
+---
+
+## Verifying the CORS Fix
+
+I rebuilt the backend and, again, used an immutable image tag:
+
+\`\`\`
+cors-fix-20261004142113
+\`\`\`
+
+Azure confirmed that exact image was deployed.
+
+Then I ran the preflight request again.
+
+This time:
+
+\`\`\`
+HTTP/2 200
+\`\`\`
+
+and the response included:
+
+\`\`\`
+access-control-allow-origin:
+https://buildpay-frontend.agreeablesky-3684807e.centralindia.azurecontainerapps.io
+\`\`\`
+
+along with:
+
+\`\`\`
+access-control-allow-credentials: true
+\`\`\`
+
+That confirmed the backend was now correctly accepting requests from the deployed frontend.
+
+---
+
+## Testing the Real Login Request
+
+I didn't stop at the OPTIONS request.
+
+I tested the actual:
+
+\`\`\`
+POST /api/v1/auth/login
+\`\`\`
+
+using the production frontend origin.
+
+The backend returned:
+
+\`\`\`
+HTTP/2 200
+\`\`\`
+
+with the correct CORS headers.
+
+At this point, the important layers were all independently verified:
+
+| Layer | Result |
+|---|---|
+| Azure frontend | Working |
+| Azure backend health | Working |
+| PostgreSQL | Connected |
+| Authentication endpoint | Working |
+| CORS preflight | Working |
+| CORS on login POST | Working |
+| Production frontend image | Correct |
+| Azure frontend deployment | Correct |
+| Browser login | Final test remaining |
+
+---
+
+## Screenshot 4 — Debugging the Problem
+
+<!-- IMAGE: ChatGPT/debugging session showing the investigation, Docker verification commands, API testing, and reasoning around the deployment issue. -->
+
+The debugging process involved jumping between:
+
+- Source code
+- Docker images
+- Generated Next.js bundles
+- Azure Container Apps
+- HTTP requests
+- Browser developer tools
+- CORS behavior
+- Authentication
+
+The useful part wasn't any individual command.
+
+It was narrowing the problem down one layer at a time.
+
+---
+
+## The Landing Page Was Also Part of the Deployment
+
+### Screenshot 3 — BuildPay AI Landing Page
+
+<!-- IMAGE: Deployed BuildPay AI landing page showing the public product presentation. -->
+
+The landing page was an important part of this deployment because the frontend had recently been restructured.
+
+Previously, the root route effectively behaved like an application page.
+
+The new architecture intentionally separates the public experience from the authenticated application:
+
+\`\`\`
+/
+/ 
+    Public landing page
+
+/login
+    Authentication
+
+/dashboard
+    Authenticated application
+\`\`\`
+
+The landing page presents the product before asking the user to authenticate.
+
+It highlights things such as:
+
+- BOQ tracking
+- Payment calculations
+- Compliance checks
+- AI-assisted analysis
+- Quantity overrun alerts
+- Human-in-the-loop controls
+
+So this Azure deployment was testing more than infrastructure.
+
+It was also testing the new product entry flow.
+
+---
+
+## The Final Test
+
+After the frontend image and backend CORS configuration were fixed, I opened the deployed application again.
+
+The intended flow was:
+
+\`\`\`
+Landing Page
+      |
+      v
+Login
+      |
+      v
+Demo Admin Account
+      |
+      v
+Production API
+      |
+      v
+JWT Authentication
+      |
+      v
+Dashboard
+\`\`\`
+
+This time:
+
+**Sign in worked.**
+
+The NetworkError was gone.
+
+The browser was communicating with the Azure backend rather than localhost.
+
+That was the point where the deployment actually became useful rather than merely "deployed."
+
+---
+
+## Final Azure Architecture
+
+The final deployed system is:
+
+\`\`\`
+                         Internet
+                            |
+                            v
+              +-------------------------+
+              |   Azure Container Apps  |
+              |                         |
+              |     BuildPay Frontend  |
+              |       Next.js           |
+              |        :3000            |
+              +------------+------------+
+                           |
+                           | HTTPS
+                           v
+              +-------------------------+
+              |   Azure Container Apps  |
+              |                         |
+              |     BuildPay Backend   |
+              |       FastAPI           |
+              |        :8000            |
+              +------------+------------+
+                           |
+                           | PostgreSQL
+                           v
+              +-------------------------+
+              | Azure PostgreSQL        |
+              | Flexible Server         |
+              |                         |
+              | Database: buildpay      |
+              +-------------------------+
+
+              Azure Container Registry
+                       |
+              +--------+--------+
+              |                 |
+              v                 v
+        Backend Image     Frontend Image
+\`\`\`
+
+The frontend and backend are independently containerized, with images stored in ACR and deployed to Azure Container Apps.
+
+The backend receives sensitive values through Azure secrets.
+
+The frontend receives its public API URL at build time.
+
+---
+
+## What Actually Went Wrong
+
+Looking back, there were **two separate production configuration problems**.
+
+### Problem 1 — Frontend API URL
+
+The browser-side Next.js application had been built without the correct production \`NEXT_PUBLIC_API_URL\`.
+
+That left the development fallback:
+
+\`\`\`
+http://localhost:8000/api/v1
+\`\`\`
+
+inside the browser-side application.
+
+The fix was to pass the production API URL into the Next.js build stage.
+
+### Problem 2 — CORS
+
+After the frontend API URL was fixed, the backend still rejected the deployed frontend's origin.
+
+The backend had the production \`FRONTEND_URL\`, but the CORS middleware wasn't incorporating it into its allowed origins.
+
+The fix was to build the allowed-origin list from both the existing development origins and the configured deployment URL.
+
+---
+
+## What I Learned
+
+The biggest lesson from this deployment wasn't "how to deploy Docker to Azure."
+
+It was learning to separate **source code, build artifacts, deployed containers, and browser behavior**.
+
+When login failed, the first temptation was to say:
+
+> "The backend isn't working."
+
+But direct API testing proved otherwise.
+
+Then the investigation became:
+
+\`\`\`
+Is the backend working?
+        |
+       YES
+        |
+Is authentication working?
+        |
+       YES
+        |
+Is CORS working?
+        |
+   Initially NO
+        |
+Is the frontend build correct?
+        |
+       YES
+        |
+Is Azure serving the expected image?
+        |
+   Verify explicitly
+        |
+Is the browser using the expected API?
+        |
+       NO
+        |
+Fix deployment
+        |
+       YES
+        |
+Login works
+\`\`\`
+
+That sequence was much more useful than changing five things at once.
+
+---
+
+## Inspect the Artifact, Not Just the Source
+
+One of the strongest habits I want to keep from this deployment is:
+
+> **Don't trust your source code. Inspect the artifact that actually runs.**
+
+The source can contain:
+
+\`\`\`
+NEXT_PUBLIC_API_URL = Azure URL
+\`\`\`
+
+while the generated browser bundle can still contain:
+
+\`\`\`
+localhost:8000
+\`\`\`
+
+For frontend applications, especially with frameworks that inject public environment variables during build time, the compiled artifact is what matters.
+
+Searching the generated \`.next\` files gave me direct evidence.
+
+---
+
+## Immutable Deployments Are Worth It
+
+Using:
+
+\`\`\`
+latest
+\`\`\`
+
+is convenient.
+
+It is also less useful when debugging production deployments.
+
+Switching to explicit tags such as:
+
+\`\`\`
+api-url-fix-20261004144240
+cors-fix-20261004142113
+\`\`\`
+
+made it obvious exactly which image was running.
+
+For a larger production setup, I would go further and use:
+
+- Git commit SHA image tags
+- Automated CI/CD
+- Deployment manifests
+- Revision tracking
+- Automated smoke tests
+- Health checks
+- Rollback procedures
+
+But even unique tags were a significant improvement over repeatedly pushing \`latest\`.
+
+---
+
+## What I'd Improve Next
+
+The application is now deployed and the core login path works, but I wouldn't call this a fully hardened production SaaS yet.
+
+There are still operational areas I would improve:
+
+- Proper secret rotation and management
+- Database backups and restore testing
+- File/upload storage
+- Rate limiting
+- Monitoring and alerting
+- CI/CD deployment automation
+- Better production logging
+- More comprehensive automated end-to-end tests
+- Production scaling configuration
+- Stricter security headers and configuration
+- Separate production and demo-data strategies
+
+The goal of this deployment was to get the complete application running publicly first.
+
+Hardening comes next.
+
+---
+
+## Final Status
+
+The important production path is now working:
+
+\`\`\`
+Public Landing Page       ✓
+        |
+        v
+Login Page                ✓
+        |
+        v
+Production API            ✓
+        |
+        v
+CORS                      ✓
+        |
+        v
+JWT Authentication       ✓
+        |
+        v
+Dashboard                 ✓
+\`\`\`
+
+BuildPay AI has officially moved from:
+
+> **"a project running on my machine"**
+
+to:
+
+> **"an actual application deployed on Azure."**
+
+And honestly, the most valuable part wasn't getting the first green deployment.
+
+It was learning how to debug the gap between:
+
+> **"My code is correct."**
+
+and
+
+> **"The browser is actually running the code I think it is."**
+
+---
+
+## Screenshot Timeline
+
+The screenshots from this deployment capture the debugging journey:
+
+### Screenshot 1
+**Terminal inspection of the production frontend Docker image.**
+
+I used Docker and \`grep\` to inspect the generated Next.js files and verify the production API URL.
+
+### Screenshot 2
+**The failed production login.**
+
+The deployed BuildPay AI login page displayed the \`NetworkError when attempting to fetch resource\` message.
+
+### Screenshot 3
+**The deployed BuildPay AI landing page.**
+
+This confirmed that the new public landing experience was successfully deployed.
+
+### Screenshot 4
+**The debugging session.**
+
+The investigation moved between source code, Docker, API testing, Azure configuration, and browser behavior.
+
+### Screenshot 5
+**The browser Network/Console breakthrough.**
+
+The browser revealed that the production frontend was attempting to call \`localhost:8000\`, exposing the actual cause of the login failure.
+
+---
+
+*Project: [BuildPay AI](https://github.com/Mzaq1559/BuildPay-AI)*
+`,bn=`---
 title: Deploying SiteFlowAI to Azure
 slug: deploying-siteflowai-to-azure
 date: 2026-09-12
@@ -17165,7 +18063,7 @@ Azure App Service's default ephemeral storage is easy to overlook if you're used
 | Link | Description |
 |------|-------------|
 | [GitHub: SiteFlowAI](https://github.com/SidraPervaiz1122/SiteFlowAI) | Full backend, frontend, Docker and deployment setup |
-`,bn=`---
+`,wn=`---
 title: "Go Assistant: An Android Overlay That Watches a Go Board and Talks to Claude Vision"
 slug: go-assistant-android-overlay-claude-vision
 date: 2026-03-09
@@ -17244,7 +18142,7 @@ The foreground-service type requirement is a good example of an Android API surf
 | Link | Description |
 |------|-------------|
 | [GitHub: Go_Assistant](https://github.com/Mzaq1559/Go_Assistant) | Flutter/Kotlin app, overlay service, Claude Vision integration |
-`,wn=`---
+`,vn=`---
 title: "First Time Running SQL Server in Docker (and Actually Using It)"
 slug: how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio
 date: 2026-04-03
@@ -17485,7 +18383,7 @@ ORDER BY Age DESC;
 In this exercise, we deployed **SQL Server using Docker**, connected it through **Azure Data Studio**, and performed several SQL operations including table creation, data insertion, querying, updating, deleting, and sorting records.
 
 Nothing here was hard, exactly, but it was the first time I'd set up a database from a blank container myself instead of connecting to something a lab environment already had running for me. That distinction mattered more than it sounds — the next time I needed SQL Server in Docker (for a full-stack DBMS project with a real backend on top of it), none of this setup was unfamiliar anymore.
-`,vn=`---
+`,Tn=`---
 title: "From MIT to Source-Available: Licensing job-application-mcp for v1.0.0"
 slug: job-application-mcp-licensing-and-v1
 date: 2026-09-24
@@ -17541,7 +18439,7 @@ This stretch is a useful reminder that "finishing" a project for a v1 release is
 |------|-------------|
 | [GitHub: job-application-mcp](https://github.com/Mzaq1559/job-application-mcp) | Full MCP server, tools, and deployment history |
 | [job-application-mcp: OAuth, Azure, and the Claude Web connection](./job-application-mcp) | The OAuth 2.1 / Auth0 / Azure Container Apps phase earlier the same day |
-`,Tn=`---
+`,kn=`---
 title: "job-application-mcp: Building the Tools, Then Hitting the First Deploy Blockers"
 slug: job-application-mcp-tools-and-first-deploy-blockers
 date: 2026-09-22
@@ -17626,7 +18524,7 @@ The 307 redirect bug is a good example of something that looks completely fine w
 |------|-------------|
 | [GitHub: job-application-mcp](https://github.com/Mzaq1559/job-application-mcp) | Full MCP server, tools, and deployment history |
 | [job-application-mcp: OAuth, Azure, and the Claude Web connection](./job-application-mcp) | The later OAuth 2.1 / Auth0 / Azure Container Apps phase of this project |
-`,kn=`---
+`,Sn=`---
 title: Building job-application-mcp — Turning a Job Application Project into a Real MCP System
 slug: job-application-mcp
 date: 2026-09-24
@@ -18942,7 +19840,7 @@ The project is still unfinished.
 So am I.
 
 And that is exactly why I'm keeping the development log.
-`,Sn=`---
+`,In=`---
 title: I Leaked My GitHub Token — and Fixed It
 slug: leaking-and-fixing-a-github-token
 date: 2026-06-25
@@ -19038,7 +19936,7 @@ Vite's \`VITE_\` prefix convention is a contract, not a suggestion — if a vari
 ---
 
 *I don't have a record of whether the token was ever actually exposed in a live production deploy, or caught before it went out — the repo history shows the fix, not the incident report. Worth treating this as "here's the mistake in the code and the fix," not "here's a public breach story."*
-`,In=`---
+`,An=`---
 title: Learning FastAPI by Building an Issue Tracker
 slug: learning-fastapi-issue-tracker
 date: 2026-08-04
@@ -19089,7 +19987,7 @@ Following a tutorial by typing the code myself, rather than copying it, is where
 | Link | Description |
 |------|-------------|
 | [GitHub: FastAPI-issue_tracker-](https://github.com/Mzaq1559/FastAPI-issue_tracker-) | Full CRUD issue tracker API built while learning FastAPI |
-`,An=`---
+`,Pn=`---
 title: Learning Makemore Part 1 — Bigram Language Model
 slug: learning-makemore-part-1-bigram-language-model
 date: 2026-05-24
@@ -19406,7 +20304,7 @@ The point of doing it twice is to understand _why_ the neural network approach i
 ## What's Next
 
 Part 2: MLP — instead of looking at one character, the model will look at a **context window** of multiple characters and use a proper multi-layer perceptron to predict the next one. That's where it starts feeling like a real language model.
-`,Pn=`---
+`,Cn=`---
 title: Learning Micrograd — Building a Neural Network from Scratch
 slug: learning-micrograd-karpathy-neural-network-from-scratch
 date: 2026-05-01
@@ -19596,7 +20494,7 @@ This is also where \`requires_grad\` made sense to me. PyTorch tensors don't tra
 ## What's Next
 
 Next in the series: building a character-level language model from scratch — [makemore](https://github.com/karpathy/makemore).
-`,Cn=`---
+`,xn=`---
 title: Building MediBook AI — A Hackathon in 6 Days
 slug: medibook-ai-alibaba-cloud-hackathon-pakistan-2026
 date: 2026-09-04
@@ -19834,7 +20732,7 @@ Per the README the project is web-first (no native mobile), English-primary with
 | [GitHub: MediBook AI](https://github.com/Mzaq1559/MEDIBOOK_AI) | Backend, frontend, AI service and Docker. \`main\` is the agentic version; \`baseline\` and \`rag\` are the earlier ones. |
 
 Seeded demo accounts for a local setup are listed in the repo README.
-`,xn=`---
+`,Mn=`---
 title: "Redoing My Portfolio: Real Stats, Real Projects"
 slug: portfolio-real-stats-and-a-deploy-conflict
 date: 2026-07-03
@@ -19898,7 +20796,7 @@ Two deploy mechanisms pointed at the same target is a good way to get intermitte
 | Link | Description |
 |------|-------------|
 | [GitHub: PortFolio](https://github.com/Mzaq1559/PortFolio) | React/TypeScript/Vite portfolio, deployed via GitHub Actions to GitHub Pages |
-`,Mn="---\ntitle: \"Rental Car Management System — A DBMS Lab Project, Twice\"\nslug: rcms-rental-car-management-system-dbms-lab\ndate: 2026-06-09\ntags: [FastAPI, Python, SQL Server, Docker, DBMS, JavaScript]\ncategory: Project Log\ncover: ./images/cover.png\n---\n\n## What I Was Building\n\nFor my Database Management Systems lab this semester, the assignment was a full-stack system built around a real relational schema — not just a set of SQL exercises, an actual application with a backend and a UI sitting on top of a database. I picked a car rental system: branches, vehicles, customers, reservations, and invoices. It sounds like a simple CRUD app until you get to the part where a vehicle can't be booked twice for overlapping dates and every reservation needs to produce a correct tax-inclusive invoice automatically.\n\nStack: **FastAPI** backend, **vanilla HTML/CSS/JS** frontend (no framework — the lab requirements didn't call for one and I didn't want to spend the time budget on tooling instead of the database work), and a SQL Server database running in Docker, connected from Python via `pyodbc`.\n\n<!-- IMAGE: RCMS dashboard/vehicles tab showing the fleet list with status filters -->\n\n---\n\n## First Build: PostgreSQL, Then a Restart\n\nI actually built the first version of this against **PostgreSQL**, since that's what I'd used before and it's what most tutorials default to. Schema, seed data, and the FastAPI routes were all written and working against Postgres.\n\nThen it became clear the lab specifically wanted SQL Server — which, fair, that's the DBMS actually being taught in the course. So partway through I went back and rewrote the schema and every database-facing query for MSSQL and `pyodbc` instead of `psycopg2`. Not a small change: MSSQL and Postgres disagree on things I hadn't had to think about before — identity/auto-increment syntax, quoting rules, and how you get the ID of a row you just inserted. That last one turned into the actual debugging story of this project.\n\nLooking back at the migration commit (June 9), the mechanical changes were bigger than that list suggests. `%s` placeholders became `?`, `SERIAL` became `INT IDENTITY(1,1)`, `BOOLEAN` became `BIT`, `NOW()` became `GETDATE()`, `||` string concatenation became `+`, and `JOIN ... USING (...)` had to be rewritten as explicit `ON` joins. The old code also relied on psycopg2's `RealDictCursor` to get rows back as dictionaries. `pyodbc` returns plain rows, so I wrote two small helpers, `row_to_dict` and `rows_to_list`, that build the dictionaries from `cursor.description`. The `with get_conn() as conn` blocks became `try/finally` with an explicit `conn.close()`.\n\nThe same commit also introduced a mismatch. The new schema file split `customers.full_name` into `first_name` and `last_name` and renamed `invoices.issued_at` to `created_at`, while `main.py` in that commit still used the old names. The next three commits removed the old schema and seed files, added an MSSQL seed and updated the schema. The current `main.py` uses `full_name` and `issued_at` again, so the final schema evidently went back to those names. I haven't opened `schema_mssql.sql` to check it line by line.\n\n---\n\n## The Bug: Getting the ID Back After an INSERT\n\nWhen you create a reservation, the API needs the new reservation's ID immediately afterward — to generate the invoice in the same request. In Postgres this is a non-issue (`RETURNING id`). In SQL Server, the equivalent is `SCOPE_IDENTITY()`, and the first version I wrote wasn't returning what I expected.\n\nThe problem was scoping. `SCOPE_IDENTITY()` returns the last identity value inserted **in the current scope** — but depending on how the insert and the follow-up SELECT were structured through `pyodbc`, that scope wasn't always what I assumed it was, and I'd occasionally get back `NULL` or the wrong row's ID instead of the reservation I'd just created.\n\nIn the migration commit itself, `RETURNING *` was replaced with a second query after the commit: `SELECT * FROM reservations WHERE reservation_id = SCOPE_IDENTITY()`. My reading of why that misbehaved is that `pyodbc` sends each `execute()` as its own batch, and `SCOPE_IDENTITY()` only sees identity values from the batch that did the insert, so a follow-up statement doesn't see the row. I haven't confirmed that with a minimal repro, so treat it as my best explanation rather than a proven one.\n\nThe fix was to stop treating \"insert\" and \"get the new ID\" as two separate statements and instead use SQL Server's `OUTPUT INSERTED` clause directly on the `INSERT`:\n\n```sql\nINSERT INTO Reservations (vehicle_id, customer_id, start_date, end_date, status)\nOUTPUT INSERTED.reservation_id\nVALUES (?, ?, ?, ?, 'active');\n```\n\n`OUTPUT INSERTED.<column>` hands back the row's value as part of the same statement, no separate round trip and no ambiguity about which scope you're reading from. Once I switched every insert-then-read pattern in the backend to this form, the ID mismatches went away.\n\nIn the current `main.py`, both inserts (customers and reservations) use `OUTPUT INSERTED.<id>` and read the ID from `fetchone()`. The invoice insert and the vehicle status update then happen before a single `commit()`, so if the invoice insert fails the reservation isn't left behind.\n\n<!-- IMAGE: Swagger/OpenAPI docs (/docs) showing the POST /reservations endpoint and response schema with the returned reservation_id -->\n\n---\n\n## Preventing Double-Booking\n\nThe other piece that had to be correct, not just working: two overlapping reservations should never both succeed for the same vehicle. Before inserting a new reservation, the backend checks for any existing active reservation on that vehicle whose date range overlaps the requested one, and rejects the booking if it finds one. The vehicle's `status` column also flips to `rented` on booking and back to `available` on cancellation, so the fleet view in the UI always reflects what's actually bookable without a manual refresh cycle.\n\nReading it back now, a few things stand out. The vehicle has to be `available` before the overlap check even runs, so a car with a reservation next month can't be booked for the week before it; the status flag and the date-range check overlap in what they do. There's no locking between the check and the insert, so two simultaneous requests could both pass it. And the check that `end_date` is after `start_date` runs after the overlap query instead of before it. None of that matters for a single-user lab demo, but it means \"prevents double-booking\" is true only under those conditions.\n\n---\n\n## Automated Invoicing\n\nEvery reservation generates an invoice in the same transaction: rental days × the vehicle's daily rate for the subtotal, then an 18% tax on top for the total. Doing this at booking time instead of on-demand meant the invoice numbers stayed consistent with the reservation history, which mattered once I started generating the project report and needed the numbers in the report to match what the database actually held.\n\n---\n\n## Building Out the Frontend: the Add Customer Modal\n\nThe frontend is one `index.html` file — a single-page app with tabs for Vehicles, Customers, Reservations, and Invoices, talking to the FastAPI backend over `fetch`. Customer registration started as a bare form at the bottom of the Customers tab, which worked but didn't match the rest of the UI. I rebuilt it as a proper modal — same dark theme as the rest of the app, opens on top of the customer list instead of pushing it down the page, and clears/validates its own fields on close. Small change, but it's the difference between something that works for a lab demo and something that feels like part of one coherent app instead of a form bolted onto the end of a page.\n\n<!-- IMAGE: Add Customer modal open over the customer list -->\n\n---\n\n## Seed Data\n\n`sql/seed_mssql.sql` populates the database with branches, 50 vehicles, 100 customers, and a spread of historical reservations — enough that the fleet and invoice views actually look like a system with real usage instead of three test rows, which matters a lot when you're demoing this for a grade.\n\n<!-- IMAGE: Entity-relationship diagram of the final SQL Server schema (locations, vehicles, customers, reservations, invoices, maintenance) with the foreign keys, drawn from the real schema file rather than from memory. Place it here, in the Seed Data section, since it shows what the seed script is populating. -->\n\n---\n\n## Writing the Report\n\nPart of the lab deliverable was a formal project report with an embedded ER diagram. Instead of hand-assembling that in Word, I generated it programmatically using Node.js's `docx` library — same approach I used for a separate MTH603 report later in the semester. Feeding the ERD image and the schema documentation through a script instead of formatting it by hand in Word saved a lot of the tedious part and made it trivial to regenerate if the schema changed.\n\n---\n\n## What I'd Do Differently\n\nPicking the database engine before writing a single line of schema, instead of defaulting to whatever I already knew, would have saved the migration entirely. It wasn't wasted time exactly — rewriting the data layer for MSSQL is what forced me to actually understand `SCOPE_IDENTITY()` versus `OUTPUT INSERTED`, instead of just copying a Postgres pattern that happened to work — but I'd rather learn that lesson on purpose next time, not because I picked the wrong DB first.\n\nThe other honest gap: there's no auth on any endpoint. For a lab project graded on the data model and the booking logic, that was an acceptable scope cut. It wouldn't be if this were going anywhere near a real deployment.\n\nOne more habit I'd like to drop: the migration commit also contains `backend/.env` and `__pycache__` files, so I'd committed both. It's a local lab database, but that shouldn't become a habit.\n\n---\n\n## Stack\n\n| Piece | Choice |\n|---|---|\n| Backend | FastAPI + Pydantic |\n| Database driver | pyodbc |\n| Database | Microsoft SQL Server (Docker) |\n| Frontend | Vanilla HTML/CSS/JS, no framework |\n| Report generation | Node.js `docx` library |\n\n---\n\n*Source on [GitHub](https://github.com/Mzaq1559/IDBS-Lab_Project)*\n",Dn=`---
+`,Dn="---\ntitle: \"Rental Car Management System — A DBMS Lab Project, Twice\"\nslug: rcms-rental-car-management-system-dbms-lab\ndate: 2026-06-09\ntags: [FastAPI, Python, SQL Server, Docker, DBMS, JavaScript]\ncategory: Project Log\ncover: ./images/cover.png\n---\n\n## What I Was Building\n\nFor my Database Management Systems lab this semester, the assignment was a full-stack system built around a real relational schema — not just a set of SQL exercises, an actual application with a backend and a UI sitting on top of a database. I picked a car rental system: branches, vehicles, customers, reservations, and invoices. It sounds like a simple CRUD app until you get to the part where a vehicle can't be booked twice for overlapping dates and every reservation needs to produce a correct tax-inclusive invoice automatically.\n\nStack: **FastAPI** backend, **vanilla HTML/CSS/JS** frontend (no framework — the lab requirements didn't call for one and I didn't want to spend the time budget on tooling instead of the database work), and a SQL Server database running in Docker, connected from Python via `pyodbc`.\n\n<!-- IMAGE: RCMS dashboard/vehicles tab showing the fleet list with status filters -->\n\n---\n\n## First Build: PostgreSQL, Then a Restart\n\nI actually built the first version of this against **PostgreSQL**, since that's what I'd used before and it's what most tutorials default to. Schema, seed data, and the FastAPI routes were all written and working against Postgres.\n\nThen it became clear the lab specifically wanted SQL Server — which, fair, that's the DBMS actually being taught in the course. So partway through I went back and rewrote the schema and every database-facing query for MSSQL and `pyodbc` instead of `psycopg2`. Not a small change: MSSQL and Postgres disagree on things I hadn't had to think about before — identity/auto-increment syntax, quoting rules, and how you get the ID of a row you just inserted. That last one turned into the actual debugging story of this project.\n\nLooking back at the migration commit (June 9), the mechanical changes were bigger than that list suggests. `%s` placeholders became `?`, `SERIAL` became `INT IDENTITY(1,1)`, `BOOLEAN` became `BIT`, `NOW()` became `GETDATE()`, `||` string concatenation became `+`, and `JOIN ... USING (...)` had to be rewritten as explicit `ON` joins. The old code also relied on psycopg2's `RealDictCursor` to get rows back as dictionaries. `pyodbc` returns plain rows, so I wrote two small helpers, `row_to_dict` and `rows_to_list`, that build the dictionaries from `cursor.description`. The `with get_conn() as conn` blocks became `try/finally` with an explicit `conn.close()`.\n\nThe same commit also introduced a mismatch. The new schema file split `customers.full_name` into `first_name` and `last_name` and renamed `invoices.issued_at` to `created_at`, while `main.py` in that commit still used the old names. The next three commits removed the old schema and seed files, added an MSSQL seed and updated the schema. The current `main.py` uses `full_name` and `issued_at` again, so the final schema evidently went back to those names. I haven't opened `schema_mssql.sql` to check it line by line.\n\n---\n\n## The Bug: Getting the ID Back After an INSERT\n\nWhen you create a reservation, the API needs the new reservation's ID immediately afterward — to generate the invoice in the same request. In Postgres this is a non-issue (`RETURNING id`). In SQL Server, the equivalent is `SCOPE_IDENTITY()`, and the first version I wrote wasn't returning what I expected.\n\nThe problem was scoping. `SCOPE_IDENTITY()` returns the last identity value inserted **in the current scope** — but depending on how the insert and the follow-up SELECT were structured through `pyodbc`, that scope wasn't always what I assumed it was, and I'd occasionally get back `NULL` or the wrong row's ID instead of the reservation I'd just created.\n\nIn the migration commit itself, `RETURNING *` was replaced with a second query after the commit: `SELECT * FROM reservations WHERE reservation_id = SCOPE_IDENTITY()`. My reading of why that misbehaved is that `pyodbc` sends each `execute()` as its own batch, and `SCOPE_IDENTITY()` only sees identity values from the batch that did the insert, so a follow-up statement doesn't see the row. I haven't confirmed that with a minimal repro, so treat it as my best explanation rather than a proven one.\n\nThe fix was to stop treating \"insert\" and \"get the new ID\" as two separate statements and instead use SQL Server's `OUTPUT INSERTED` clause directly on the `INSERT`:\n\n```sql\nINSERT INTO Reservations (vehicle_id, customer_id, start_date, end_date, status)\nOUTPUT INSERTED.reservation_id\nVALUES (?, ?, ?, ?, 'active');\n```\n\n`OUTPUT INSERTED.<column>` hands back the row's value as part of the same statement, no separate round trip and no ambiguity about which scope you're reading from. Once I switched every insert-then-read pattern in the backend to this form, the ID mismatches went away.\n\nIn the current `main.py`, both inserts (customers and reservations) use `OUTPUT INSERTED.<id>` and read the ID from `fetchone()`. The invoice insert and the vehicle status update then happen before a single `commit()`, so if the invoice insert fails the reservation isn't left behind.\n\n<!-- IMAGE: Swagger/OpenAPI docs (/docs) showing the POST /reservations endpoint and response schema with the returned reservation_id -->\n\n---\n\n## Preventing Double-Booking\n\nThe other piece that had to be correct, not just working: two overlapping reservations should never both succeed for the same vehicle. Before inserting a new reservation, the backend checks for any existing active reservation on that vehicle whose date range overlaps the requested one, and rejects the booking if it finds one. The vehicle's `status` column also flips to `rented` on booking and back to `available` on cancellation, so the fleet view in the UI always reflects what's actually bookable without a manual refresh cycle.\n\nReading it back now, a few things stand out. The vehicle has to be `available` before the overlap check even runs, so a car with a reservation next month can't be booked for the week before it; the status flag and the date-range check overlap in what they do. There's no locking between the check and the insert, so two simultaneous requests could both pass it. And the check that `end_date` is after `start_date` runs after the overlap query instead of before it. None of that matters for a single-user lab demo, but it means \"prevents double-booking\" is true only under those conditions.\n\n---\n\n## Automated Invoicing\n\nEvery reservation generates an invoice in the same transaction: rental days × the vehicle's daily rate for the subtotal, then an 18% tax on top for the total. Doing this at booking time instead of on-demand meant the invoice numbers stayed consistent with the reservation history, which mattered once I started generating the project report and needed the numbers in the report to match what the database actually held.\n\n---\n\n## Building Out the Frontend: the Add Customer Modal\n\nThe frontend is one `index.html` file — a single-page app with tabs for Vehicles, Customers, Reservations, and Invoices, talking to the FastAPI backend over `fetch`. Customer registration started as a bare form at the bottom of the Customers tab, which worked but didn't match the rest of the UI. I rebuilt it as a proper modal — same dark theme as the rest of the app, opens on top of the customer list instead of pushing it down the page, and clears/validates its own fields on close. Small change, but it's the difference between something that works for a lab demo and something that feels like part of one coherent app instead of a form bolted onto the end of a page.\n\n<!-- IMAGE: Add Customer modal open over the customer list -->\n\n---\n\n## Seed Data\n\n`sql/seed_mssql.sql` populates the database with branches, 50 vehicles, 100 customers, and a spread of historical reservations — enough that the fleet and invoice views actually look like a system with real usage instead of three test rows, which matters a lot when you're demoing this for a grade.\n\n<!-- IMAGE: Entity-relationship diagram of the final SQL Server schema (locations, vehicles, customers, reservations, invoices, maintenance) with the foreign keys, drawn from the real schema file rather than from memory. Place it here, in the Seed Data section, since it shows what the seed script is populating. -->\n\n---\n\n## Writing the Report\n\nPart of the lab deliverable was a formal project report with an embedded ER diagram. Instead of hand-assembling that in Word, I generated it programmatically using Node.js's `docx` library — same approach I used for a separate MTH603 report later in the semester. Feeding the ERD image and the schema documentation through a script instead of formatting it by hand in Word saved a lot of the tedious part and made it trivial to regenerate if the schema changed.\n\n---\n\n## What I'd Do Differently\n\nPicking the database engine before writing a single line of schema, instead of defaulting to whatever I already knew, would have saved the migration entirely. It wasn't wasted time exactly — rewriting the data layer for MSSQL is what forced me to actually understand `SCOPE_IDENTITY()` versus `OUTPUT INSERTED`, instead of just copying a Postgres pattern that happened to work — but I'd rather learn that lesson on purpose next time, not because I picked the wrong DB first.\n\nThe other honest gap: there's no auth on any endpoint. For a lab project graded on the data model and the booking logic, that was an acceptable scope cut. It wouldn't be if this were going anywhere near a real deployment.\n\nOne more habit I'd like to drop: the migration commit also contains `backend/.env` and `__pycache__` files, so I'd committed both. It's a local lab database, but that shouldn't become a habit.\n\n---\n\n## Stack\n\n| Piece | Choice |\n|---|---|\n| Backend | FastAPI + Pydantic |\n| Database driver | pyodbc |\n| Database | Microsoft SQL Server (Docker) |\n| Frontend | Vanilla HTML/CSS/JS, no framework |\n| Report generation | Node.js `docx` library |\n\n---\n\n*Source on [GitHub](https://github.com/Mzaq1559/IDBS-Lab_Project)*\n",Rn=`---
 title: "Running SQL Server in Docker & Exploring Databases with Azure Data Studio"
 slug: sql-server-docker-azure-data-studio-northwind
 date: 2026-04-05
@@ -20083,6 +20981,6 @@ In this lab we:
 Running databases in Docker removes all installation friction and lets you focus on what actually matters — writing SQL and understanding how relational databases work.
 
 ---
-`,B=Object.assign({"/src/content/posts/ai--machine-learning/api-for-ai/README.md":me,"/src/content/posts/ai--machine-learning/computer-vision/README.md":ge,"/src/content/posts/ai--machine-learning/generative-ai-models/README.md":fe,"/src/content/posts/ai--machine-learning/gpu/README.md":ye,"/src/content/posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training/README.md":be,"/src/content/posts/ai--machine-learning/llms/README.md":we,"/src/content/posts/ai--machine-learning/loss-functions-in-ml/README.md":ve,"/src/content/posts/ai--machine-learning/ml-automation-pipelines/README.md":Te,"/src/content/posts/ai--machine-learning/ml-evaluation-metrics/README.md":ke,"/src/content/posts/ai--machine-learning/mlops/README.md":Se,"/src/content/posts/ai--machine-learning/neuron-in-neural-networks/README.md":Ie,"/src/content/posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms/README.md":Ae,"/src/content/posts/ai--machine-learning/overfitting/README.md":Pe,"/src/content/posts/ai--machine-learning/reinforcement-learning/README.md":Ce,"/src/content/posts/ai--machine-learning/tensor-cores-vs-cuda-cores/README.md":xe,"/src/content/posts/cloud--devops/evolution-of-cloud-computing/README.md":Me,"/src/content/posts/cloud--devops/kubernetes/README.md":De,"/src/content/posts/devops--tools/branching-and-merging/README.md":Re,"/src/content/posts/devops--tools/build-tools/README.md":Le,"/src/content/posts/devops--tools/git-and-github-workflow/README.md":Ee,"/src/content/posts/networking--security/https/README.md":_e,"/src/content/posts/networking--security/ipv6/README.md":Oe,"/src/content/posts/networking--security/penetration-testing-tools/README.md":Ne,"/src/content/posts/networking--security/quic/README.md":Ue,"/src/content/posts/networking--security/symmetric-vs-asymmetric-encryption/README.md":Be,"/src/content/posts/networking--security/tcp-vs-udp/README.md":Ge,"/src/content/posts/networking--security/the-dark-web/README.md":Fe,"/src/content/posts/networking--security/the-osi-model/README.md":He,"/src/content/posts/networking--security/vpn/README.md":je,"/src/content/posts/projects/hadoop-and-redis-pipeline/README.md":We,"/src/content/posts/systems--os/ip-routing/README.md":ze,"/src/content/posts/systems--os/linux-startup-sequence/README.md":qe,"/src/content/posts/systems--os/managing-services/README.md":Ve,"/src/content/posts/tech/fastapi-backend-from-scratch/README.md":Ke,"/src/content/posts/web-development/cookies-vs-local-storage/README.md":Je,"/src/content/posts/web-development/csr-vs-ssr/README.md":Ye,"/src/content/posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference/README.md":Qe,"/src/content/posts/web-development/how-browsers-render-html/README.md":Xe,"/src/content/posts/web-development/javascript-event-loop/README.md":$e,"/src/content/posts/web-development/javascript-frameworks/README.md":Ze,"/src/content/posts/web-development/javascript-frameworks/subposts/angular-a-practical-intermediate-guide-to-building-enterprise-applications/README.md":en,"/src/content/posts/web-development/javascript-frameworks/subposts/nextjs-a-practical-intermediate-guide-to-full-stack-react-development/README.md":nn,"/src/content/posts/web-development/javascript-frameworks/subposts/react-a-practical-intermediate-guide-to-building-modern-uis/README.md":tn,"/src/content/posts/web-development/javascript-frameworks/subposts/vuejs-a-practical-intermediate-guide-to-reactive-ui-development/README.md":an,"/src/content/posts/web-development/jwt-authentication/README.md":on,"/src/content/posts/web-development/modern-javascript-features/README.md":rn,"/src/content/posts/web-development/npm-and-yarn/README.md":sn,"/src/content/posts/web-development/progressive-web-apps/README.md":ln,"/src/content/project-log/auto-job-applier-linkedin-ubuntu-wayland/README.md":cn,"/src/content/project-log/building-a-git-based-cms-in-1-week/README.md":hn,"/src/content/project-log/building-autosolver-delivery-dispatch-simulator/README.md":dn,"/src/content/project-log/building-autovision-vehicle-tracking-on-a-cpu/README.md":un,"/src/content/project-log/building-docvision-ai-classic-cv-pipeline/README.md":pn,"/src/content/project-log/building-e-shop-react-frontend/README.md":mn,"/src/content/project-log/claude-code-omniroute-gemini/README.md":gn,"/src/content/project-log/context-vault-claude-history-obsidian-archive/README.md":fn,"/src/content/project-log/deploying-siteflowai-to-azure/README.md":yn,"/src/content/project-log/go-assistant-android-overlay-claude-vision/README.md":bn,"/src/content/project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio/README.md":wn,"/src/content/project-log/job-application-mcp-licensing-and-v1/README.md":vn,"/src/content/project-log/job-application-mcp-tools-and-first-deploy-blockers/README.md":Tn,"/src/content/project-log/job-application-mcp/README.md":kn,"/src/content/project-log/leaking-and-fixing-a-github-token/README.md":Sn,"/src/content/project-log/learning-fastapi-issue-tracker/README.md":In,"/src/content/project-log/learning-makemore-part-1-bigram-language-model/README.md":An,"/src/content/project-log/learning-micrograd-karpathy-neural-network-from-scratch/README.md":Pn,"/src/content/project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026/README.md":Cn,"/src/content/project-log/portfolio-real-stats-and-a-deploy-conflict/README.md":xn,"/src/content/project-log/rcms-rental-car-management-system-dbms-lab/README.md":Mn,"/src/content/project-log/sql-server-docker-azure-data-studio-northwind/README.md":Dn}),M=de,$=Array.isArray(M)?null:M.sha,re=Array.isArray(M)?M:M.posts,p="Mzaq1559",u="blog-posts",se="Mzaq1559",le="My-Learning-Diary",m="main";async function G(){const e=await y();try{await e.repos.getContent({owner:p,repo:u,path:I,ref:m,headers:{"If-None-Match":""}});return}catch(n){if((n==null?void 0:n.status)===404){const a=F(`
-`);await e.repos.createOrUpdateFileContents({owner:p,repo:u,path:`${I}/.gitkeep`,message:"Initialize drafts directory",content:a,branch:m});return}throw n}}function ce(e){return`https://raw.githubusercontent.com/${p}/${u}/${m}/${e}`}function Un(){return!!oe()}function Z(e){const n=f(e),a=n.startsWith(`${k}/`)||n.startsWith(`${I}/`)||n.startsWith(`${v}/`);return`https://raw.githubusercontent.com/${a?p:se}/${a?u:le}/${m}/${n}`}const _=new Map;async function Bn(e){var o;const n=await y(),a=f(e);if(_.has(a))return _.get(a);const t=a.startsWith(`${k}/`)||a.startsWith(`${v}/`)||a.startsWith(`${I}/`),i=t?p:se,r=t?u:le;try{if(r===u&&!pe(a))return null;const{data:s}=await n.repos.getContent({owner:i,repo:r,path:a,ref:m});if(a.startsWith(`${k}/`)||a.startsWith(`${v}/`)){const c=Z(a);return _.set(a,c),c}if(s&&typeof s=="object"&&"content"in s&&typeof s.content=="string"){const c=atob(s.content),h=new Uint8Array(c.length);for(let C=0;C<c.length;C++)h[C]=c.charCodeAt(C);const g=((o=a.split(".").pop())==null?void 0:o.toLowerCase())||"jpeg",d=g==="svg"?"image/svg+xml":`image/${g}`,b=new Blob([h],{type:d}),T=URL.createObjectURL(b);return _.set(a,T),T}return Z(a)}catch(s){return(s==null?void 0:s.status)===404||console.error(`getAuthenticatedBlobUrl failed for ${a}:`,s),null}}const Rn="__private__:";function Gn(e,n,a,t,i){if(!e)return;const r=!e.startsWith("http://")&&!e.startsWith("https://")&&!e.startsWith("/");if(e.startsWith("./")||e.startsWith("../")||r){let o=e,s=t?`${t}/${x}/${n}`:n;if(e.startsWith("./"))o=e.slice(2);else if(e.startsWith("../")){const l=s.split("/"),c=e.split("/");for(;c[0]===".."&&l.length>0;)c.shift(),l.pop();s=l.join("/"),o=c.join("/")}{let l=i;if(!l&&!a){const g=z();if(g){const d=X(g.posts,n)||X(g.projectLogPosts,n);d&&(l=d.repoPath)}}let c;if(a)c=w(n);else if(l)c=l;else{const g=z();(g==null?void 0:g.projectLogPosts.some(b=>b.slug===n))?c=f(`${v}/${s}`):s.startsWith(`${v}/`)||s.startsWith(`${k}/`)||s.includes(`/${v}/`)?c=f(s):c=f(`${k}/${s}`)}const h=ie(c,o);return`${Rn}${h}`}}return e}async function y(){const{Octokit:e}=await ue(async()=>{const{Octokit:a}=await import("./index-jNMlCxdY.js");return{Octokit:a}},[]),n=oe();return new e({auth:n||void 0})}function F(e){const n=new TextEncoder().encode(e);let a="";for(let t=0;t<n.length;t++)a+=String.fromCharCode(n[t]);return btoa(a)}function ee(e){return[...e].sort((n,a)=>{const t=new Date(n.date).getTime(),i=new Date(a.date).getTime();return(Number.isFinite(i)?i:0)-(Number.isFinite(t)?t:0)})}function H(e){const n=atob(e),a=new Uint8Array(n.length);for(let t=0;t<n.length;t++)a[t]=n.charCodeAt(t);return new TextDecoder().decode(a)}async function S(e){const n=await y();try{return await n.repos.getContent({owner:p,repo:u,path:`${v}/${e}/README.md`,ref:m}),`${v}/${e}`}catch{}try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:k,ref:m});if(!Array.isArray(a))return null;for(const t of a)if(!(t.type!=="dir"||t.name===v))try{return await n.repos.getContent({owner:p,repo:u,path:`${k}/${t.name}/${e}/README.md`,ref:m}),`${k}/${t.name}/${e}`}catch{}}catch{}return null}const ne=new Set(["images","assets","files"]);async function D(e,n,a="published"){const t=await y(),i=[];try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(r))return i;const o=r.find(d=>d.type==="dir"&&d.name===x),s=r.filter(d=>d.type==="dir"&&d.name!=="subposts"&&!ne.has(d.name.toLowerCase()));let l=[];if(o)try{const{data:d}=await t.repos.getContent({owner:p,repo:u,path:o.path,ref:m,headers:{"If-None-Match":""}});Array.isArray(d)&&(l=d.filter(b=>b.type==="dir"&&!ne.has(b.name.toLowerCase())))}catch{}const c=new Set(s.map(d=>d.name)),h=[...s,...l.filter(d=>!c.has(d.name))],g=(await Promise.all(h.map(async d=>{try{let b="";try{const{data:j}=await t.repos.getContent({owner:p,repo:u,path:`${d.path}/README.md`,ref:m,headers:{"If-None-Match":""}});"content"in j&&typeof j.content=="string"&&(b=H(j.content))}catch{}const{metadata:T,body:C}=P(b||"",d.name),E={...T,slug:T.slug||d.name,content:C,parentSlug:n,repoPath:f(d.path)};delete E.status;const Q=await D(d.path,E.slug);return Q.length>0&&(E.subposts=Q),E}catch{return null}}))).filter(d=>d!==null);i.push(...g)}catch{}return i}function V(e,n){const a=[],t=`${e}/${x}/`;for(const[i,r]of Object.entries(B))if(i.startsWith(t)){const s=i.slice(t.length).split("/");if(s.length===2&&s[1]==="README.md"){const l=s[0],{metadata:c,body:h}=P(r,l),g={...c,slug:c.slug||l,content:h,parentSlug:n,repoPath:A(e,l)},d=V(`${e}/${x}/${l}`,g.slug);d.length>0&&(g.subposts=d),a.push(g)}}return a}async function Ln(){const e=Object.entries(B).filter(([a])=>{const t=a.split("/");return t.length===7&&t[3]==="posts"&&t[5]!=="subposts"||t.length===6&&t[3]==="project-log"}).map(([a,t])=>{const i=a.split("/"),r=i[i.length-2],o=i.slice(0,-1).join("/"),{metadata:s,body:l}=P(t,r),c=V(o,r),h=a.startsWith("/src/content/")?f(a.replace("/src/content/","").split("/").slice(0,-1).join("/")):o;return{...s,slug:s.slug||r,content:l,repoPath:h,...c.length>0&&{subposts:c}}}),n=new Map;try{const a=await ae(),t=[...a.posts,...a.projectLogPosts];for(const i of t)n.set(i.slug,i)}catch(a){console.warn("listPosts: postDiscovery failed, falling back to bundled index.",a),re.forEach(t=>n.set(t.slug,{...t,content:t.content||""}))}return e.forEach(a=>n.set(a.slug,a)),Array.from(n.values())}async function Fn(){await G();const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:I,ref:m});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir");return(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:`${i.path}/README.md`,ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=H(r.content),{metadata:s,body:l}=P(o,i.name),c={...s,slug:s.slug||i.name,content:l,repoPath:f(i.path)},h=await D(i.path,c.slug);return h.length>0&&(c.subposts=h),c}catch{return null}}))).filter(i=>i!==null)}catch{return[]}}async function Hn(e){const n=Object.keys(B).find(o=>o.includes(`/${e}/README.md`));if(n){const o=B[n],{metadata:s,body:l}=P(o,e),c=n.split("/").slice(0,-1).join("/"),h=V(c,e),g=n.startsWith("/src/content/")?f(n.replace("/src/content/","").split("/").slice(0,-1).join("/")):c;return{...s,slug:s.slug||e,content:l,repoPath:g,...h.length>0&&{subposts:h}}}{const o=z(),s=(o==null?void 0:o._sha)??null;if($!==null&&s!==null&&$===s){const c=(g,d)=>{for(const b of g){if(b.slug===d)return b;if(b.subposts){const T=c(b.subposts,d);if(T)return T}}return null},h=c(re,e);if(h&&h.content)return{...h,slug:h.slug||e}}}const a=await S(e);if(a){const o=await K(`${a}/README.md`,e);if(o){const{sha:s,...l}=o,c={...l,slug:l.slug||e,repoPath:f(a)},h=await D(a,c.slug);return h.length>0&&(c.subposts=h),c}}const t=await Ln(),i=(o,s)=>{for(const l of o){if(l.slug===s)return l;if(l.subposts){const c=i(l.subposts,s);if(c)return c}}return null},r=i(t,e);return r||null}async function jn(e){const n=await S(e);if(!n)return null;const a=await K(`${n}/README.md`,e);if(!a)return null;const{sha:t,...i}=a,r={...i,slug:i.slug||e,repoPath:f(n)},o=await D(n,r.slug);return o.length>0&&(r.subposts=o),r}async function En(e){await G();const n=await K(`${I}/${e}/README.md`,e);if(!n)return null;const{sha:a,...t}=n,i={...t,slug:t.slug||e,repoPath:w(e)},r=await D(`${I}/${e}`,i.slug);return r.length>0&&(i.subposts=r),i}async function K(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!("content"in t)||typeof t.content!="string")return null;const i=H(t.content),{metadata:r,body:o}=P(i,n);return{...r,content:o,sha:"sha"in t?t.sha:void 0}}catch{return null}}async function _n(e){const n=await y();try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m});return!("content"in a)||typeof a.content!="string"?null:{content:a.content,sha:a.sha}}catch{return null}}async function Wn(e,n,a){const t=await y(),r=`${U(n.category,e)}/README.md`,o=Y(n);let s=a;if(!s)try{const{data:l}=await t.repos.getContent({owner:p,repo:u,path:r,ref:m,headers:{"If-None-Match":""}});"sha"in l&&(s=l.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:r,message:`${s?"Update":"Create"} post: ${n.title}`,content:F(o),sha:s,branch:m}),!0}catch{return!1}}async function zn(e,n,a,t=!0,i){t&&await G();const r=await y();let o;if(t)o=`${A(w(e),n)}/README.md`;else{const c=await S(e);if(!c)return!1;o=`${A(f(c),n)}/README.md`}const s=Y(a);let l=i;if(!l)try{const{data:c}=await r.repos.getContent({owner:p,repo:u,path:o,ref:m,headers:{"If-None-Match":""}});"sha"in c&&(l=c.sha)}catch{}try{return await r.repos.createOrUpdateFileContents({owner:p,repo:u,path:o,message:`${l?"Update":"Create"} subpost: ${a.title}`,content:F(s),sha:l,branch:m}),!0}catch{return!1}}async function qn(e,n,a){await G();const t=await y(),i=`${w(e)}/README.md`,r=Y(n);let o=a;if(!o)try{const{data:s}=await t.repos.getContent({owner:p,repo:u,path:i,ref:m,headers:{"If-None-Match":""}});"sha"in s&&(o=s.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:i,message:`${o?"Update":"Save"} draft: ${n.title}`,content:F(r),sha:o,branch:m}),!0}catch{return!1}}async function Vn(e,n){const a=await S(e);return!a||!await L(`${f(a)}/README.md`,`Delete post: ${e}`,n)?!1:(await R(a),!0)}async function Kn(e,n,a=!0,t){let i;if(a)i=w(n),i=A(w(e),n);else{const o=await S(e);if(!o)return!1;i=A(f(o),n)}return await L(`${i}/README.md`,`Delete subpost: ${n}`,t)?(await R(i),!0):!1}async function Jn(e,n){const a=w(e);return await L(`${a}/README.md`,`Delete draft: ${e}`,n)?(await R(a),!0):!1}async function R(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;a=t}catch{return}for(const t of a)t.type==="file"?await L(t.path,`Cleanup: ${t.name}`,t.sha):t.type==="dir"&&await R(t.path)}async function L(e,n,a){const t=await y();let i=a;try{if(!i)try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in r&&(i=r.sha)}catch(r){const o=r;if((o==null?void 0:o.status)===404)return!0;throw r}return i?(await t.repos.deleteFile({owner:p,repo:u,path:e,message:n,sha:i,branch:m}),!0):(console.error(`deleteFileAtPath: could not resolve SHA for "${e}"`),!1)}catch(r){const o=r instanceof Error?r.message:String(r);return console.error(`deleteFileAtPath failed for "${e}": ${o}`,r),!1}}async function he(e,n){const a=await y();try{const t=await _n(e);if(!t)return!1;let i;try{const{data:r}=await a.repos.getContent({owner:p,repo:u,path:n,ref:m,headers:{"If-None-Match":""}});!Array.isArray(r)&&"sha"in r&&(i=r.sha)}catch{}return await a.repos.createOrUpdateFileContents({owner:p,repo:u,path:n,message:`Rename from ${e} to ${n}`,content:t.content,sha:i,branch:m}),await L(e,`Cleanup old file after rename to ${n}`,t.sha),!0}catch(t){return console.error("moveFile failed:",t),!1}}async function q(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;for(const i of t)if(i.type==="file"){const r=i.path.substring(e.length+1),o=`${n}/${r}`;await he(i.path,o)}else i.type==="dir"&&await q(i.path,`${n}/${i.name}`)}catch{}}async function Yn(e,n,a){let t,i;if(a){t=w(e);const o=await En(e);if(!o)return console.error(`movePostDirectory: could not read draft "${e}"`),!1;i=U(o.category,n)}else{const o=await S(e);if(!o)return console.error(`movePostDirectory: could not resolve path for "${e}"`),!1;t=f(o),i=w(n)}return await he(`${t}/README.md`,`${i}/README.md`)?(await q(`${t}/images`,`${i}/images`),await q(`${t}/${x}`,`${i}/${x}`),await R(t),!0):!1}async function J(e,n,a,t){const i=await y();let r=t;if(!r)try{const{data:o}=await i.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in o&&(r=o.sha)}catch{}try{return await i.repos.createOrUpdateFileContents({owner:p,repo:u,path:e,message:a,content:n,sha:r,branch:m}),!0}catch(o){return console.error("uploadFileRepoPath:",o),!1}}async function Qn(e,n,a,t,i,r){const o=n.replace(/[^\w.\-+/]+/g,"_");let s;if(i)r?s=A(w(r),e):s=w(e);else if(r){const h=await S(r),g=h?f(h):U("uncategorized",r);s=A(g,e)}else{const h=await S(e);s=h?f(h):U("uncategorized",e)}const l=ie(s,o);return await J(l,a,`Upload asset: ${o}`)?`./images/${o}`:null}async function Xn(e,n,a){const t=n.replace(/[^\w.\-+/]+/g,"_"),i=e?`${e}/${t}`:t;return await J(i,a,`Upload to ${e||"root"}: ${t}`)?ce(i):null}async function $n(){try{const n=await ae();if(n!=null&&n.projectLogPosts&&n.projectLogPosts.length>0)return ee(n.projectLogPosts)}catch(n){console.warn("getProjectLogPosts: getPostTree failed",n)}const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:v,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir"),t=(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:f(i.path)+"/README.md",ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=H(r.content),{metadata:s,body:l}=P(o,i.name,"project-log",i.path);return{...s,slug:s.slug||i.name,category:"project-log",content:l,repoPath:i.path}}catch{return null}}))).filter(i=>i!==null);return ee(t)}catch{return[]}}async function Zn(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});Array.isArray(t)&&(a=t.map(i=>({type:i.type==="dir"?"dir":"file",name:i.name,path:i.path,rawUrl:ce(i.path)})))}catch(t){console.warn(`listDirectory (remote) failed for ${e}:`,t)}return a.sort((t,i)=>t.type!==i.type?t.type==="dir"?-1:1:t.name.localeCompare(i.name))}async function et(e){const n=e?`${e}/.gitkeep`:".gitkeep";return J(n,"",`Create folder: ${e||"root"}`)}async function nt(){const e=await y();try{const{data:n}=await e.users.getAuthenticated();return n.login}catch{return null}}function P(e,n){let a=e.trim(),t={title:"Untitled",slug:n||"",date:new Date().toISOString().split("T")[0],tags:[],category:"uncategorized"};for(;a.startsWith("---");){const i=a.slice(3).match(/\n---\s*\r?\n/);if(!i)break;const r=i.index+3,o=a.slice(3,r).trim(),s=r+i[0].length;a=a.slice(s).trim();const l=On(o),c=O(l.slug,t.slug),h=W(l.cover);t={title:O(l.title,t.title),slug:c,date:O(l.date,t.date),tags:te(l.tags).length>0?te(l.tags):t.tags,category:O(l.category,t.category),excerpt:W(l.excerpt)||t.excerpt,cover:h||t.cover,series:W(l.series)||t.series,seriesOrder:l.seriesOrder?parseInt(String(l.seriesOrder),10):t.seriesOrder}}return{metadata:t,body:a}}function O(e,n){return typeof e=="string"&&e.trim()?e.trim():Array.isArray(e)&&e[0]?String(e[0]).trim():n}function W(e){if(typeof e=="string"&&e.trim())return e.trim();if(Array.isArray(e)&&e[0])return String(e[0]).trim()}function te(e){return Array.isArray(e)?e:typeof e=="string"?e.split(",").map(n=>n.trim()).filter(Boolean):[]}function On(e){const n={},a=e.split(/\r?\n/);for(const t of a){const i=t.indexOf(":");if(i===-1)continue;const r=t.slice(0,i).trim();let o=t.slice(i+1).trim();if(r==="tags"){o.startsWith("[")&&o.endsWith("]")&&(o=o.slice(1,-1)),n.tags=o.split(",").map(s=>s.trim().replace(/^["']|["']$/g,"")).filter(Boolean);continue}o=o.replace(/^["']|["']$/g,""),n[r]=o}return n}function N(e){return/[:#\[\]{}|>&*!,]/.test(e)||/^[-?]/.test(e.trim())?`"${e.replace(/\\/g,"\\\\").replace(/"/g,'\\"')}"`:e}function Y(e){const n=["---",`title: ${N(e.title)}`,`slug: ${e.slug}`,`date: ${e.date}`,`tags: [${e.tags.join(", ")}]`,`category: ${N(e.category)}`];return e.excerpt&&n.push(`excerpt: ${N(e.excerpt)}`),e.cover&&n.push(`cover: ${e.cover}`),e.series&&n.push(`series: ${N(e.series)}`),e.seriesOrder!==void 0&&n.push(`seriesOrder: ${e.seriesOrder}`),n.push("---","",e.content),n.join(`
-`)}export{Rn as P,Ln as a,Vn as b,qn as c,L as d,Wn as e,Jn as f,$n as g,Hn as h,En as i,Fn as j,nt as k,Zn as l,he as m,jn as n,Kn as o,zn as p,Yn as q,Gn as r,ee as s,Un as t,Qn as u,Z as v,Bn as w,et as x,Xn as y};
+`,B=Object.assign({"/src/content/posts/ai--machine-learning/api-for-ai/README.md":me,"/src/content/posts/ai--machine-learning/computer-vision/README.md":ge,"/src/content/posts/ai--machine-learning/generative-ai-models/README.md":fe,"/src/content/posts/ai--machine-learning/gpu/README.md":ye,"/src/content/posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training/README.md":be,"/src/content/posts/ai--machine-learning/llms/README.md":we,"/src/content/posts/ai--machine-learning/loss-functions-in-ml/README.md":ve,"/src/content/posts/ai--machine-learning/ml-automation-pipelines/README.md":Te,"/src/content/posts/ai--machine-learning/ml-evaluation-metrics/README.md":ke,"/src/content/posts/ai--machine-learning/mlops/README.md":Se,"/src/content/posts/ai--machine-learning/neuron-in-neural-networks/README.md":Ie,"/src/content/posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms/README.md":Ae,"/src/content/posts/ai--machine-learning/overfitting/README.md":Pe,"/src/content/posts/ai--machine-learning/reinforcement-learning/README.md":Ce,"/src/content/posts/ai--machine-learning/tensor-cores-vs-cuda-cores/README.md":xe,"/src/content/posts/cloud--devops/evolution-of-cloud-computing/README.md":Me,"/src/content/posts/cloud--devops/kubernetes/README.md":De,"/src/content/posts/devops--tools/branching-and-merging/README.md":Re,"/src/content/posts/devops--tools/build-tools/README.md":Le,"/src/content/posts/devops--tools/git-and-github-workflow/README.md":Ee,"/src/content/posts/networking--security/https/README.md":_e,"/src/content/posts/networking--security/ipv6/README.md":Oe,"/src/content/posts/networking--security/penetration-testing-tools/README.md":Ne,"/src/content/posts/networking--security/quic/README.md":Ue,"/src/content/posts/networking--security/symmetric-vs-asymmetric-encryption/README.md":Be,"/src/content/posts/networking--security/tcp-vs-udp/README.md":Ge,"/src/content/posts/networking--security/the-dark-web/README.md":Fe,"/src/content/posts/networking--security/the-osi-model/README.md":He,"/src/content/posts/networking--security/vpn/README.md":je,"/src/content/posts/projects/hadoop-and-redis-pipeline/README.md":We,"/src/content/posts/systems--os/ip-routing/README.md":ze,"/src/content/posts/systems--os/linux-startup-sequence/README.md":qe,"/src/content/posts/systems--os/managing-services/README.md":Ve,"/src/content/posts/tech/fastapi-backend-from-scratch/README.md":Ke,"/src/content/posts/web-development/cookies-vs-local-storage/README.md":Je,"/src/content/posts/web-development/csr-vs-ssr/README.md":Ye,"/src/content/posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference/README.md":Qe,"/src/content/posts/web-development/how-browsers-render-html/README.md":Xe,"/src/content/posts/web-development/javascript-event-loop/README.md":$e,"/src/content/posts/web-development/javascript-frameworks/README.md":Ze,"/src/content/posts/web-development/javascript-frameworks/subposts/angular-a-practical-intermediate-guide-to-building-enterprise-applications/README.md":en,"/src/content/posts/web-development/javascript-frameworks/subposts/nextjs-a-practical-intermediate-guide-to-full-stack-react-development/README.md":nn,"/src/content/posts/web-development/javascript-frameworks/subposts/react-a-practical-intermediate-guide-to-building-modern-uis/README.md":tn,"/src/content/posts/web-development/javascript-frameworks/subposts/vuejs-a-practical-intermediate-guide-to-reactive-ui-development/README.md":an,"/src/content/posts/web-development/jwt-authentication/README.md":on,"/src/content/posts/web-development/modern-javascript-features/README.md":rn,"/src/content/posts/web-development/npm-and-yarn/README.md":sn,"/src/content/posts/web-development/progressive-web-apps/README.md":ln,"/src/content/project-log/auto-job-applier-linkedin-ubuntu-wayland/README.md":cn,"/src/content/project-log/building-a-git-based-cms-in-1-week/README.md":hn,"/src/content/project-log/building-autosolver-delivery-dispatch-simulator/README.md":dn,"/src/content/project-log/building-autovision-vehicle-tracking-on-a-cpu/README.md":un,"/src/content/project-log/building-docvision-ai-classic-cv-pipeline/README.md":pn,"/src/content/project-log/building-e-shop-react-frontend/README.md":mn,"/src/content/project-log/claude-code-omniroute-gemini/README.md":gn,"/src/content/project-log/context-vault-claude-history-obsidian-archive/README.md":fn,"/src/content/project-log/deploying-buildpay-ai-to-azure/README.md":yn,"/src/content/project-log/deploying-siteflowai-to-azure/README.md":bn,"/src/content/project-log/go-assistant-android-overlay-claude-vision/README.md":wn,"/src/content/project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio/README.md":vn,"/src/content/project-log/job-application-mcp-licensing-and-v1/README.md":Tn,"/src/content/project-log/job-application-mcp-tools-and-first-deploy-blockers/README.md":kn,"/src/content/project-log/job-application-mcp/README.md":Sn,"/src/content/project-log/leaking-and-fixing-a-github-token/README.md":In,"/src/content/project-log/learning-fastapi-issue-tracker/README.md":An,"/src/content/project-log/learning-makemore-part-1-bigram-language-model/README.md":Pn,"/src/content/project-log/learning-micrograd-karpathy-neural-network-from-scratch/README.md":Cn,"/src/content/project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026/README.md":xn,"/src/content/project-log/portfolio-real-stats-and-a-deploy-conflict/README.md":Mn,"/src/content/project-log/rcms-rental-car-management-system-dbms-lab/README.md":Dn,"/src/content/project-log/sql-server-docker-azure-data-studio-northwind/README.md":Rn}),M=de,$=Array.isArray(M)?null:M.sha,re=Array.isArray(M)?M:M.posts,p="Mzaq1559",u="blog-posts",se="Mzaq1559",le="My-Learning-Diary",m="main";async function G(){const e=await y();try{await e.repos.getContent({owner:p,repo:u,path:I,ref:m,headers:{"If-None-Match":""}});return}catch(n){if((n==null?void 0:n.status)===404){const a=F(`
+`);await e.repos.createOrUpdateFileContents({owner:p,repo:u,path:`${I}/.gitkeep`,message:"Initialize drafts directory",content:a,branch:m});return}throw n}}function ce(e){return`https://raw.githubusercontent.com/${p}/${u}/${m}/${e}`}function Bn(){return!!oe()}function Z(e){const n=f(e),a=n.startsWith(`${k}/`)||n.startsWith(`${I}/`)||n.startsWith(`${v}/`);return`https://raw.githubusercontent.com/${a?p:se}/${a?u:le}/${m}/${n}`}const _=new Map;async function Gn(e){var o;const n=await y(),a=f(e);if(_.has(a))return _.get(a);const t=a.startsWith(`${k}/`)||a.startsWith(`${v}/`)||a.startsWith(`${I}/`),i=t?p:se,r=t?u:le;try{if(r===u&&!pe(a))return null;const{data:s}=await n.repos.getContent({owner:i,repo:r,path:a,ref:m});if(a.startsWith(`${k}/`)||a.startsWith(`${v}/`)){const c=Z(a);return _.set(a,c),c}if(s&&typeof s=="object"&&"content"in s&&typeof s.content=="string"){const c=atob(s.content),h=new Uint8Array(c.length);for(let C=0;C<c.length;C++)h[C]=c.charCodeAt(C);const g=((o=a.split(".").pop())==null?void 0:o.toLowerCase())||"jpeg",d=g==="svg"?"image/svg+xml":`image/${g}`,b=new Blob([h],{type:d}),T=URL.createObjectURL(b);return _.set(a,T),T}return Z(a)}catch(s){return(s==null?void 0:s.status)===404||console.error(`getAuthenticatedBlobUrl failed for ${a}:`,s),null}}const Ln="__private__:";function Fn(e,n,a,t,i){if(!e)return;const r=!e.startsWith("http://")&&!e.startsWith("https://")&&!e.startsWith("/");if(e.startsWith("./")||e.startsWith("../")||r){let o=e,s=t?`${t}/${x}/${n}`:n;if(e.startsWith("./"))o=e.slice(2);else if(e.startsWith("../")){const l=s.split("/"),c=e.split("/");for(;c[0]===".."&&l.length>0;)c.shift(),l.pop();s=l.join("/"),o=c.join("/")}{let l=i;if(!l&&!a){const g=z();if(g){const d=X(g.posts,n)||X(g.projectLogPosts,n);d&&(l=d.repoPath)}}let c;if(a)c=w(n);else if(l)c=l;else{const g=z();(g==null?void 0:g.projectLogPosts.some(b=>b.slug===n))?c=f(`${v}/${s}`):s.startsWith(`${v}/`)||s.startsWith(`${k}/`)||s.includes(`/${v}/`)?c=f(s):c=f(`${k}/${s}`)}const h=ie(c,o);return`${Ln}${h}`}}return e}async function y(){const{Octokit:e}=await ue(async()=>{const{Octokit:a}=await import("./index-jNMlCxdY.js");return{Octokit:a}},[]),n=oe();return new e({auth:n||void 0})}function F(e){const n=new TextEncoder().encode(e);let a="";for(let t=0;t<n.length;t++)a+=String.fromCharCode(n[t]);return btoa(a)}function ee(e){return[...e].sort((n,a)=>{const t=new Date(n.date).getTime(),i=new Date(a.date).getTime();return(Number.isFinite(i)?i:0)-(Number.isFinite(t)?t:0)})}function H(e){const n=atob(e),a=new Uint8Array(n.length);for(let t=0;t<n.length;t++)a[t]=n.charCodeAt(t);return new TextDecoder().decode(a)}async function S(e){const n=await y();try{return await n.repos.getContent({owner:p,repo:u,path:`${v}/${e}/README.md`,ref:m}),`${v}/${e}`}catch{}try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:k,ref:m});if(!Array.isArray(a))return null;for(const t of a)if(!(t.type!=="dir"||t.name===v))try{return await n.repos.getContent({owner:p,repo:u,path:`${k}/${t.name}/${e}/README.md`,ref:m}),`${k}/${t.name}/${e}`}catch{}}catch{}return null}const ne=new Set(["images","assets","files"]);async function D(e,n,a="published"){const t=await y(),i=[];try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(r))return i;const o=r.find(d=>d.type==="dir"&&d.name===x),s=r.filter(d=>d.type==="dir"&&d.name!=="subposts"&&!ne.has(d.name.toLowerCase()));let l=[];if(o)try{const{data:d}=await t.repos.getContent({owner:p,repo:u,path:o.path,ref:m,headers:{"If-None-Match":""}});Array.isArray(d)&&(l=d.filter(b=>b.type==="dir"&&!ne.has(b.name.toLowerCase())))}catch{}const c=new Set(s.map(d=>d.name)),h=[...s,...l.filter(d=>!c.has(d.name))],g=(await Promise.all(h.map(async d=>{try{let b="";try{const{data:j}=await t.repos.getContent({owner:p,repo:u,path:`${d.path}/README.md`,ref:m,headers:{"If-None-Match":""}});"content"in j&&typeof j.content=="string"&&(b=H(j.content))}catch{}const{metadata:T,body:C}=P(b||"",d.name),E={...T,slug:T.slug||d.name,content:C,parentSlug:n,repoPath:f(d.path)};delete E.status;const Q=await D(d.path,E.slug);return Q.length>0&&(E.subposts=Q),E}catch{return null}}))).filter(d=>d!==null);i.push(...g)}catch{}return i}function V(e,n){const a=[],t=`${e}/${x}/`;for(const[i,r]of Object.entries(B))if(i.startsWith(t)){const s=i.slice(t.length).split("/");if(s.length===2&&s[1]==="README.md"){const l=s[0],{metadata:c,body:h}=P(r,l),g={...c,slug:c.slug||l,content:h,parentSlug:n,repoPath:A(e,l)},d=V(`${e}/${x}/${l}`,g.slug);d.length>0&&(g.subposts=d),a.push(g)}}return a}async function En(){const e=Object.entries(B).filter(([a])=>{const t=a.split("/");return t.length===7&&t[3]==="posts"&&t[5]!=="subposts"||t.length===6&&t[3]==="project-log"}).map(([a,t])=>{const i=a.split("/"),r=i[i.length-2],o=i.slice(0,-1).join("/"),{metadata:s,body:l}=P(t,r),c=V(o,r),h=a.startsWith("/src/content/")?f(a.replace("/src/content/","").split("/").slice(0,-1).join("/")):o;return{...s,slug:s.slug||r,content:l,repoPath:h,...c.length>0&&{subposts:c}}}),n=new Map;try{const a=await ae(),t=[...a.posts,...a.projectLogPosts];for(const i of t)n.set(i.slug,i)}catch(a){console.warn("listPosts: postDiscovery failed, falling back to bundled index.",a),re.forEach(t=>n.set(t.slug,{...t,content:t.content||""}))}return e.forEach(a=>n.set(a.slug,a)),Array.from(n.values())}async function Hn(){await G();const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:I,ref:m});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir");return(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:`${i.path}/README.md`,ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=H(r.content),{metadata:s,body:l}=P(o,i.name),c={...s,slug:s.slug||i.name,content:l,repoPath:f(i.path)},h=await D(i.path,c.slug);return h.length>0&&(c.subposts=h),c}catch{return null}}))).filter(i=>i!==null)}catch{return[]}}async function jn(e){const n=Object.keys(B).find(o=>o.includes(`/${e}/README.md`));if(n){const o=B[n],{metadata:s,body:l}=P(o,e),c=n.split("/").slice(0,-1).join("/"),h=V(c,e),g=n.startsWith("/src/content/")?f(n.replace("/src/content/","").split("/").slice(0,-1).join("/")):c;return{...s,slug:s.slug||e,content:l,repoPath:g,...h.length>0&&{subposts:h}}}{const o=z(),s=(o==null?void 0:o._sha)??null;if($!==null&&s!==null&&$===s){const c=(g,d)=>{for(const b of g){if(b.slug===d)return b;if(b.subposts){const T=c(b.subposts,d);if(T)return T}}return null},h=c(re,e);if(h&&h.content)return{...h,slug:h.slug||e}}}const a=await S(e);if(a){const o=await K(`${a}/README.md`,e);if(o){const{sha:s,...l}=o,c={...l,slug:l.slug||e,repoPath:f(a)},h=await D(a,c.slug);return h.length>0&&(c.subposts=h),c}}const t=await En(),i=(o,s)=>{for(const l of o){if(l.slug===s)return l;if(l.subposts){const c=i(l.subposts,s);if(c)return c}}return null},r=i(t,e);return r||null}async function Wn(e){const n=await S(e);if(!n)return null;const a=await K(`${n}/README.md`,e);if(!a)return null;const{sha:t,...i}=a,r={...i,slug:i.slug||e,repoPath:f(n)},o=await D(n,r.slug);return o.length>0&&(r.subposts=o),r}async function _n(e){await G();const n=await K(`${I}/${e}/README.md`,e);if(!n)return null;const{sha:a,...t}=n,i={...t,slug:t.slug||e,repoPath:w(e)},r=await D(`${I}/${e}`,i.slug);return r.length>0&&(i.subposts=r),i}async function K(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!("content"in t)||typeof t.content!="string")return null;const i=H(t.content),{metadata:r,body:o}=P(i,n);return{...r,content:o,sha:"sha"in t?t.sha:void 0}}catch{return null}}async function On(e){const n=await y();try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m});return!("content"in a)||typeof a.content!="string"?null:{content:a.content,sha:a.sha}}catch{return null}}async function zn(e,n,a){const t=await y(),r=`${U(n.category,e)}/README.md`,o=Y(n);let s=a;if(!s)try{const{data:l}=await t.repos.getContent({owner:p,repo:u,path:r,ref:m,headers:{"If-None-Match":""}});"sha"in l&&(s=l.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:r,message:`${s?"Update":"Create"} post: ${n.title}`,content:F(o),sha:s,branch:m}),!0}catch{return!1}}async function qn(e,n,a,t=!0,i){t&&await G();const r=await y();let o;if(t)o=`${A(w(e),n)}/README.md`;else{const c=await S(e);if(!c)return!1;o=`${A(f(c),n)}/README.md`}const s=Y(a);let l=i;if(!l)try{const{data:c}=await r.repos.getContent({owner:p,repo:u,path:o,ref:m,headers:{"If-None-Match":""}});"sha"in c&&(l=c.sha)}catch{}try{return await r.repos.createOrUpdateFileContents({owner:p,repo:u,path:o,message:`${l?"Update":"Create"} subpost: ${a.title}`,content:F(s),sha:l,branch:m}),!0}catch{return!1}}async function Vn(e,n,a){await G();const t=await y(),i=`${w(e)}/README.md`,r=Y(n);let o=a;if(!o)try{const{data:s}=await t.repos.getContent({owner:p,repo:u,path:i,ref:m,headers:{"If-None-Match":""}});"sha"in s&&(o=s.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:i,message:`${o?"Update":"Save"} draft: ${n.title}`,content:F(r),sha:o,branch:m}),!0}catch{return!1}}async function Kn(e,n){const a=await S(e);return!a||!await L(`${f(a)}/README.md`,`Delete post: ${e}`,n)?!1:(await R(a),!0)}async function Jn(e,n,a=!0,t){let i;if(a)i=w(n),i=A(w(e),n);else{const o=await S(e);if(!o)return!1;i=A(f(o),n)}return await L(`${i}/README.md`,`Delete subpost: ${n}`,t)?(await R(i),!0):!1}async function Yn(e,n){const a=w(e);return await L(`${a}/README.md`,`Delete draft: ${e}`,n)?(await R(a),!0):!1}async function R(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;a=t}catch{return}for(const t of a)t.type==="file"?await L(t.path,`Cleanup: ${t.name}`,t.sha):t.type==="dir"&&await R(t.path)}async function L(e,n,a){const t=await y();let i=a;try{if(!i)try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in r&&(i=r.sha)}catch(r){const o=r;if((o==null?void 0:o.status)===404)return!0;throw r}return i?(await t.repos.deleteFile({owner:p,repo:u,path:e,message:n,sha:i,branch:m}),!0):(console.error(`deleteFileAtPath: could not resolve SHA for "${e}"`),!1)}catch(r){const o=r instanceof Error?r.message:String(r);return console.error(`deleteFileAtPath failed for "${e}": ${o}`,r),!1}}async function he(e,n){const a=await y();try{const t=await On(e);if(!t)return!1;let i;try{const{data:r}=await a.repos.getContent({owner:p,repo:u,path:n,ref:m,headers:{"If-None-Match":""}});!Array.isArray(r)&&"sha"in r&&(i=r.sha)}catch{}return await a.repos.createOrUpdateFileContents({owner:p,repo:u,path:n,message:`Rename from ${e} to ${n}`,content:t.content,sha:i,branch:m}),await L(e,`Cleanup old file after rename to ${n}`,t.sha),!0}catch(t){return console.error("moveFile failed:",t),!1}}async function q(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;for(const i of t)if(i.type==="file"){const r=i.path.substring(e.length+1),o=`${n}/${r}`;await he(i.path,o)}else i.type==="dir"&&await q(i.path,`${n}/${i.name}`)}catch{}}async function Qn(e,n,a){let t,i;if(a){t=w(e);const o=await _n(e);if(!o)return console.error(`movePostDirectory: could not read draft "${e}"`),!1;i=U(o.category,n)}else{const o=await S(e);if(!o)return console.error(`movePostDirectory: could not resolve path for "${e}"`),!1;t=f(o),i=w(n)}return await he(`${t}/README.md`,`${i}/README.md`)?(await q(`${t}/images`,`${i}/images`),await q(`${t}/${x}`,`${i}/${x}`),await R(t),!0):!1}async function J(e,n,a,t){const i=await y();let r=t;if(!r)try{const{data:o}=await i.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in o&&(r=o.sha)}catch{}try{return await i.repos.createOrUpdateFileContents({owner:p,repo:u,path:e,message:a,content:n,sha:r,branch:m}),!0}catch(o){return console.error("uploadFileRepoPath:",o),!1}}async function Xn(e,n,a,t,i,r){const o=n.replace(/[^\w.\-+/]+/g,"_");let s;if(i)r?s=A(w(r),e):s=w(e);else if(r){const h=await S(r),g=h?f(h):U("uncategorized",r);s=A(g,e)}else{const h=await S(e);s=h?f(h):U("uncategorized",e)}const l=ie(s,o);return await J(l,a,`Upload asset: ${o}`)?`./images/${o}`:null}async function $n(e,n,a){const t=n.replace(/[^\w.\-+/]+/g,"_"),i=e?`${e}/${t}`:t;return await J(i,a,`Upload to ${e||"root"}: ${t}`)?ce(i):null}async function Zn(){try{const n=await ae();if(n!=null&&n.projectLogPosts&&n.projectLogPosts.length>0)return ee(n.projectLogPosts)}catch(n){console.warn("getProjectLogPosts: getPostTree failed",n)}const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:v,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir"),t=(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:f(i.path)+"/README.md",ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=H(r.content),{metadata:s,body:l}=P(o,i.name,"project-log",i.path);return{...s,slug:s.slug||i.name,category:"project-log",content:l,repoPath:i.path}}catch{return null}}))).filter(i=>i!==null);return ee(t)}catch{return[]}}async function et(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});Array.isArray(t)&&(a=t.map(i=>({type:i.type==="dir"?"dir":"file",name:i.name,path:i.path,rawUrl:ce(i.path)})))}catch(t){console.warn(`listDirectory (remote) failed for ${e}:`,t)}return a.sort((t,i)=>t.type!==i.type?t.type==="dir"?-1:1:t.name.localeCompare(i.name))}async function nt(e){const n=e?`${e}/.gitkeep`:".gitkeep";return J(n,"",`Create folder: ${e||"root"}`)}async function tt(){const e=await y();try{const{data:n}=await e.users.getAuthenticated();return n.login}catch{return null}}function P(e,n){let a=e.trim(),t={title:"Untitled",slug:n||"",date:new Date().toISOString().split("T")[0],tags:[],category:"uncategorized"};for(;a.startsWith("---");){const i=a.slice(3).match(/\n---\s*\r?\n/);if(!i)break;const r=i.index+3,o=a.slice(3,r).trim(),s=r+i[0].length;a=a.slice(s).trim();const l=Nn(o),c=O(l.slug,t.slug),h=W(l.cover);t={title:O(l.title,t.title),slug:c,date:O(l.date,t.date),tags:te(l.tags).length>0?te(l.tags):t.tags,category:O(l.category,t.category),excerpt:W(l.excerpt)||t.excerpt,cover:h||t.cover,series:W(l.series)||t.series,seriesOrder:l.seriesOrder?parseInt(String(l.seriesOrder),10):t.seriesOrder}}return{metadata:t,body:a}}function O(e,n){return typeof e=="string"&&e.trim()?e.trim():Array.isArray(e)&&e[0]?String(e[0]).trim():n}function W(e){if(typeof e=="string"&&e.trim())return e.trim();if(Array.isArray(e)&&e[0])return String(e[0]).trim()}function te(e){return Array.isArray(e)?e:typeof e=="string"?e.split(",").map(n=>n.trim()).filter(Boolean):[]}function Nn(e){const n={},a=e.split(/\r?\n/);for(const t of a){const i=t.indexOf(":");if(i===-1)continue;const r=t.slice(0,i).trim();let o=t.slice(i+1).trim();if(r==="tags"){o.startsWith("[")&&o.endsWith("]")&&(o=o.slice(1,-1)),n.tags=o.split(",").map(s=>s.trim().replace(/^["']|["']$/g,"")).filter(Boolean);continue}o=o.replace(/^["']|["']$/g,""),n[r]=o}return n}function N(e){return/[:#\[\]{}|>&*!,]/.test(e)||/^[-?]/.test(e.trim())?`"${e.replace(/\\/g,"\\\\").replace(/"/g,'\\"')}"`:e}function Y(e){const n=["---",`title: ${N(e.title)}`,`slug: ${e.slug}`,`date: ${e.date}`,`tags: [${e.tags.join(", ")}]`,`category: ${N(e.category)}`];return e.excerpt&&n.push(`excerpt: ${N(e.excerpt)}`),e.cover&&n.push(`cover: ${e.cover}`),e.series&&n.push(`series: ${N(e.series)}`),e.seriesOrder!==void 0&&n.push(`seriesOrder: ${e.seriesOrder}`),n.push("---","",e.content),n.join(`
+`)}export{Ln as P,En as a,Kn as b,Vn as c,L as d,zn as e,Yn as f,Zn as g,jn as h,_n as i,Hn as j,tt as k,et as l,he as m,Wn as n,Jn as o,qn as p,Qn as q,Fn as r,ee as s,Bn as t,Xn as u,Z as v,Gn as w,nt as x,$n as y};

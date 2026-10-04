@@ -2,6 +2,25 @@
   "sha": null,
   "posts": [
     {
+      "title": "Deploying BuildPay AI to Azure — From Local Docker Compose to a Working Production Stack",
+      "slug": "deploying-buildpay-ai-to-azure",
+      "date": "2026-10-04",
+      "excerpt": "A full deployment walkthrough of BuildPay AI on Azure — including Docker, Azure Container Apps, PostgreSQL, a broken production login, frontend build configuration, CORS debugging, and the final fix.",
+      "tags": [
+        "Azure",
+        "Docker",
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Azure Container Apps",
+        "DevOps",
+        "Deployment",
+        "Debugging"
+      ],
+      "category": "project-log",
+      "repoPath": "project-log/deploying-buildpay-ai-to-azure"
+    },
+    {
       "title": "Building Context Vault — Turning My Claude History into a Searchable Obsidian Archive",
       "slug": "context-vault-claude-history-obsidian-archive",
       "date": "2026-09-30",
