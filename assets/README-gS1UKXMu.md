@@ -175,7 +175,7 @@ Instead of reaching the dashboard, the frontend displayed:
 NetworkError when attempting to fetch resource
 ```
 
-<!-- IMAGE: BuildPay AI deployed login page showing the NetworkError when attempting to sign in. -->
+![Screenshot 1 — Failed production login](./images/1.png)
 
 At first, this could have meant almost anything:
 
@@ -274,9 +274,9 @@ This was one of the more useful debugging steps.
 
 Instead of trusting the source code, I inspected the generated Next.js build inside the Docker image.
 
-### Screenshot 1 — Terminal Debugging and Code Search
+### Screenshot 2 — Terminal Debugging and Code Search
 
-<!-- IMAGE: Terminal showing Docker-based grep commands inspecting .next for the Azure backend URL and localhost:8000. -->
+![Screenshot 2 — Inspecting the production frontend artifact](./images/2.png)
 
 I searched the generated `.next` output for the production Azure backend URL.
 
@@ -304,9 +304,9 @@ It wasn't.
 
 The most useful screenshot from the entire deployment was the browser's Network/Console inspection.
 
-### Screenshot 5 — Browser Network and Console Inspection
+### Screenshot 3 — Browser Network and Console Inspection
 
-<!-- IMAGE: BuildPay AI login page with browser Developer Tools showing the failed request. -->
+![Screenshot 3 — Browser Network and Console inspection](./images/3.png)
 
 The browser showed the actual request being attempted.
 
@@ -512,7 +512,7 @@ At this point, the important layers were all independently verified:
 
 ## Screenshot 4 — Debugging the Problem
 
-<!-- IMAGE: ChatGPT/debugging session showing the investigation, Docker verification commands, API testing, and reasoning around the deployment issue. -->
+![Screenshot 4 — Deployment debugging session](./images/4.png)
 
 The debugging process involved jumping between:
 
@@ -533,9 +533,9 @@ It was narrowing the problem down one layer at a time.
 
 ## The Landing Page Was Also Part of the Deployment
 
-### Screenshot 3 — BuildPay AI Landing Page
+### Screenshot 5 — BuildPay AI Landing Page
 
-<!-- IMAGE: Deployed BuildPay AI landing page showing the public product presentation. -->
+![Screenshot 5 — Deployed BuildPay AI landing page](./images/5.png)
 
 The landing page was an important part of this deployment because the frontend had recently been restructured.
 
@@ -869,19 +869,19 @@ and
 The screenshots from this deployment capture the debugging journey:
 
 ### Screenshot 1
-**Terminal inspection of the production frontend Docker image.**
-
-I used Docker and `grep` to inspect the generated Next.js files and verify the production API URL.
-
-### Screenshot 2
 **The failed production login.**
 
 The deployed BuildPay AI login page displayed the `NetworkError when attempting to fetch resource` message.
 
-### Screenshot 3
-**The deployed BuildPay AI landing page.**
+### Screenshot 2
+**Terminal inspection of the production frontend Docker image.**
 
-This confirmed that the new public landing experience was successfully deployed.
+I used Docker and `grep` to inspect the generated Next.js files and verify the production API URL.
+
+### Screenshot 3
+**The browser Network/Console breakthrough.**
+
+The browser revealed that the production frontend was attempting to call `localhost:8000`, exposing the actual cause of the login failure.
 
 ### Screenshot 4
 **The debugging session.**
@@ -889,9 +889,9 @@ This confirmed that the new public landing experience was successfully deployed.
 The investigation moved between source code, Docker, API testing, Azure configuration, and browser behavior.
 
 ### Screenshot 5
-**The browser Network/Console breakthrough.**
+**The deployed BuildPay AI landing page.**
 
-The browser revealed that the production frontend was attempting to call `localhost:8000`, exposing the actual cause of the login failure.
+This confirmed that the new public landing experience was successfully deployed.
 
 ---
 
