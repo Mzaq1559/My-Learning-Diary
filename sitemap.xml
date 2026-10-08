@@ -36,6 +36,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/exploring-ai-coding-agents-gemini-cli-antigravity-multi-agent-workflow</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/deploying-buildpay-ai-to-azure</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
