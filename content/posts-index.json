@@ -5,7 +5,7 @@
       "title": "Running My First Local AI Agent — Hugging Face smolagents with Ollama and Qwen2.5",
       "slug": "local-huggingface-agent-ollama-qwen",
       "date": "2026-10-25",
-      "excerpt": "Setting up the Hugging Face Agents course environment on Ubuntu, running Qwen2.5:1.5b locally with Ollama, and connecting it to smolagents through LiteLLM for my first working agent.",
+      "excerpt": "My hands-on setup diary for the Hugging Face Agents course: wrestling with Ollama on Ubuntu, getting Qwen2.5:1.5b running locally, wiring up smolagents and LiteLLM, and finally seeing my first agent return 360.",
       "tags": [
         "Hugging Face",
         "Agents",
@@ -15,7 +15,8 @@
         "LLM",
         "Python",
         "Linux",
-        "Local AI"
+        "Local AI",
+        "Learning Diary"
       ],
       "category": "project-log",
       "cover": "./images/cover.png",
