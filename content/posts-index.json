@@ -2,6 +2,26 @@
   "sha": null,
   "posts": [
     {
+      "title": "Running My First Local AI Agent — Hugging Face smolagents with Ollama and Qwen2.5",
+      "slug": "local-huggingface-agent-ollama-qwen",
+      "date": "2026-10-25",
+      "excerpt": "Setting up the Hugging Face Agents course environment on Ubuntu, running Qwen2.5:1.5b locally with Ollama, and connecting it to smolagents through LiteLLM for my first working agent.",
+      "tags": [
+        "Hugging Face",
+        "Agents",
+        "smolagents",
+        "Ollama",
+        "Qwen",
+        "LLM",
+        "Python",
+        "Linux",
+        "Local AI"
+      ],
+      "category": "project-log",
+      "cover": "./images/cover.png",
+      "repoPath": "project-log/local-huggingface-agent-ollama-qwen"
+    },
+    {
       "title": "Exploring AI Coding Agents — Gemini CLI, Antigravity, and My First Multi-Agent Workflow",
       "slug": "exploring-ai-coding-agents-gemini-cli-antigravity-multi-agent-workflow",
       "date": "2026-10-08",
