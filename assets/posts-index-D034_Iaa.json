@@ -2,6 +2,16 @@
   "sha": null,
   "posts": [
     {
+      "title": "Building a Reusable Multi-Agent Hackathon Boilerplate",
+      "slug": "building-a-reusable-multi-agent-hackathon-boilerplate",
+      "date": "2026-11-02",
+      "tags": [],
+      "category": "project-log",
+      "excerpt": "I started with an open-source GitHub Issue board and turned it into a reusable, multi-client hackathon boilerplate, with shared agent instructions, specialist skills, curated component resources, and review-based upstream synchronization.",
+      "cover": "./images/cover.png",
+      "repoPath": "project-log/building-a-reusable-multi-agent-hackathon-boilerplate"
+    },
+    {
       "title": "Running My First Local AI Agent — Hugging Face smolagents with Ollama and Qwen2.5",
       "slug": "local-huggingface-agent-ollama-qwen",
       "date": "2026-10-25",
