@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-Ch-DGKUk.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-ZFQZ9ERm.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -15411,11 +15411,11 @@ That was an interesting starting point because it uses something teams already h
 
 I cloned the upstream repository into a temporary directory and copied the relevant project configuration into my own working repository.
 
-![Cloning the original hackathon agent board and copying its files](./images/1.jpg)
+![Cloning the original hackathon agent board and copying its files](./images/1.png)
 
 I also opened the original repository in the browser to understand how the board was intended to work before adapting it.
 
-![The original hackathon-agent-board repository and its documentation](./images/2.jpg)
+![The original hackathon-agent-board repository and its documentation](./images/2.png)
 
 I wanted to reuse the useful communication mechanism, not blindly turn my repository into a copy of someone else's project. The goal was to build a broader starter template around it.
 
@@ -15439,7 +15439,7 @@ The initial structure included files and directories such as:
 - \`tools/board\` for interacting with the GitHub Issue board.
 - \`.gitignore\` and the repository documentation.
 
-![Inspecting the copied repository structure in the terminal](./images/3.jpg)
+![Inspecting the copied repository structure in the terminal](./images/3.png)
 
 This inspection also made one thing clear: the original project had Claude-specific pieces. I didn't want the new boilerplate to depend on Claude Code, because the tools I planned to use were GitHub Copilot, Gemini CLI, Antigravity CLI, and Cursor CLI.
 
@@ -15464,7 +15464,7 @@ The host-specific files would point back to it:
 
 The important distinction is that the shared engineering rules live in one place, while each client gets the configuration it needs to discover or use those rules.
 
-![Planning the move from a Claude-specific setup to a shared multi-client boilerplate](./images/4.jpg)
+![Planning the move from a Claude-specific setup to a shared multi-client boilerplate](./images/4.png)
 
 I also wanted to avoid claiming that every client discovers every file automatically. Agent configuration and skill discovery vary between tools and versions. The repository therefore tells agents to explicitly read the shared instructions and relevant skills when automatic discovery isn't available.
 
@@ -15478,7 +15478,7 @@ Once the basic structure was in place, I pushed it to my GitHub repository:
 
 I also enabled GitHub's **Template repository** setting.
 
-![The agent-board-test repository configured as a GitHub Template repository](./images/6.jpg)
+![The agent-board-test repository configured as a GitHub Template repository](./images/6.png)
 
 This is an important part of the idea. I don't want to clone the boilerplate and manually remove old project code every time. I want to create a fresh repository from the template and then customize it for the next hackathon.
 
@@ -15493,7 +15493,7 @@ The GitHub repository view shows the main structure that started taking shape:
 - \`config/\` and \`scripts/\` for upstream tracking and synchronization.
 - \`tools/board\` for optional agent communication.
 
-![The repository structure on GitHub](./images/5.jpg)
+![The repository structure on GitHub](./images/5.png)
 
 ---
 
@@ -15581,6 +15581,10 @@ The GitHub Actions workflow is designed to run this process on a schedule or thr
 
 I didn't want to test the scripts directly in my main checkout and risk leaving generated changes mixed with my ongoing work.
 
+Before that isolated test, I also checked the state of my main checkout and synchronized it with the remote using a fast-forward-only pull. I kept my existing backup stash untouched rather than applying it blindly.
+
+![Checking the stash and fast-forward synchronization of the main working tree](./images/7.png)
+
 So I used a temporary detached Git worktree.
 
 The commands were:
@@ -15603,7 +15607,7 @@ git worktree remove --force /tmp/agent-board-upstream-test
 
 A detached worktree gave me a separate checkout at the current commit. That meant I could run the update scripts and inspect their changes without mixing the test with my main working directory.
 
-![Running the upstream detection and allowlisted synchronization scripts in a temporary worktree](./images/8.jpg)
+![Running the upstream detection and allowlisted synchronization scripts in a temporary worktree](./images/8.png)
 
 The output was useful because it showed both cases I wanted to test.
 
@@ -15716,7 +15720,7 @@ Community discussions on Reddit and DEV are useful for discovering tools and und
 
 The overall structure is now easier to understand when viewed as a few connected layers.
 
-![Architecture diagram showing coding agent clients, shared instructions, skills, GitHub board, and upstream synchronization](./images/9.jpg)
+![Architecture diagram showing coding agent clients, shared instructions, skills, GitHub board, and upstream synchronization](./images/9.png)
 
 At the top are the coding clients I use:
 
