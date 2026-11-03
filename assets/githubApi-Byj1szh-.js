@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CulASEgS.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-DinrrNTE.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -15352,6 +15352,16 @@ The March sprint's whole thesis was "Git is already a perfect CMS" — every pos
 ### What I'd flag if I were reviewing this for someone else
 
 I haven't yet gone through the resulting posts and verified every technical claim against the source repos myself — I was trusting Claude's own distinction between "confirmed by a diff" and "reasonable reconstruction," which it applied consistently, but I haven't independently re-checked each one. And the accidental README overwrite, while caught immediately, is a good reminder that letting something write directly to a production repo — even a low-stakes one like a personal blog's content — means a mistake lands in the actual commit history rather than staying in a draft I'd have reviewed first.
+
+---
+
+## Update — November 2026: The Same Pattern, a Second Time
+
+The same folder-and-Git approach now carries a second kind of content. My [context vault](https://github.com/Mzaq1559/context-vault) repo holds project context in Markdown: a \`CLAUDE.md\` tells Claude to read a project's \`overview.md\` at the start of work, and to write one new dated session log per session, with the project overview updated in place. Claude reaches it through the same GitHub API route the September posts used.
+
+Nothing in the CMS itself changed to make this work. The editor still only knows how to commit Markdown files to a folder. The rules that keep the vault usable were written in plain text in the repo, not in code: summaries only, never secrets or personal identifiers, and new files per session so two sessions don't overwrite each other. Git's history made the rules easy to check afterward.
+
+The lesson I'm taking from it is that a folder convention plus Git is turning out to be enough for more than one use: a blog, an archive of old chats, and a working memory for current projects. I still haven't built a tool that checks those rules automatically, and until I do, they only hold because I keep the files honest.
 
 ---
 
