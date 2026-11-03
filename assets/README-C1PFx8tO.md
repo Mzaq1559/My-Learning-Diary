@@ -417,3 +417,24 @@ I want Context Vault to become a **personal knowledge archive** where old conver
 For now, the important milestone is complete:
 
 **512 conversations are now organized, version-controlled Markdown instead of being trapped inside an export.**
+
+---
+
+## Update — November 2026: From Archive to Working Memory
+
+The archive turned out to be only half the idea. Once the chats were Markdown in Git, the same repo could also hold *current* project context, so that a new Claude session on any account can pick up where the last one stopped.
+
+The repo now has a root `CLAUDE.md` that tells Claude how to use it:
+
+- At the start of project work, read that project's `overview.md` (current state, stack, next steps), skim its `decisions.md`, and only open the newest session logs if more detail is needed.
+- When I say "save this session," write one new dated log file under the project's `log/` folder, update the project's `overview.md` in place, and append any new design choices to `decisions.md`.
+- Never read the raw `archive/` folder unless asked, because it is large and unedited.
+
+The layout behind that is `projects/<category>/<project>/` for active work, `topics/` for general learning notes, `archive/` for the imported chats, and `_templates/` for copying into new projects. The project index in `CLAUDE.md` now lists six personal projects, from a GitHub profile review to a traffic-video prototype.
+
+Two rules carried over from the archive work and became the most important ones:
+
+- **Summaries only.** Session logs record decisions, current state, open problems, and next steps, never transcripts, and never secrets or personal identifiers.
+- **One new file per session.** Session logs are always new files, and only `overview.md` is edited in place. That keeps two sessions from colliding, which matters when more than one Claude session writes to the same repo.
+
+What is still open: the ChatGPT export has not been imported into `archive/chatgpt/` yet, the chats do not link to each other, and the archived chats still need a review before anyone else gets access to the repo. The idea of distilling archived chats into project `overview.md` and `decisions.md` files is also still on the list.
