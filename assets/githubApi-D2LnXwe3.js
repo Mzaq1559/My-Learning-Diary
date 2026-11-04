@@ -1,4 +1,4 @@
-import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as U}from"./index-CRwkgAIV.js";const me=`---
+import{A as f,n as ae,B as de,P as v,C as z,g as b,D as S,z as x,E as X,I as k,J as ie,K as A,_ as ue,O as oe,Q as pe,b as B}from"./index-Dbduk36W.js";const me=`---
 title: Overview of AI APIs : Bridging Model Power and Application Logic
 slug: api-for-ai
 date: 2026-02-28
@@ -2950,7 +2950,7 @@ Understanding this progression does not require mathematics. It requires underst
 ---
 
 *This post is part of an ongoing series on AI and databases. Next up: how vector databases are changing how LLMs retrieve and use knowledge.*
-`,Pe=`---
+`,Ce=`---
 title: "Overview of Overfitting and How to Prevent It"
 slug: overfitting
 date: 2026-03-17
@@ -3474,7 +3474,7 @@ The optimal regularization strategy is always dataset- and architecture-specific
 ---
 
 _Next reading: Methodologies for Preparing Datasets for ML Projects →_
-`,Ce=`---
+`,Pe=`---
 title: "Reinforcement Learning"
 slug: reinforcement-learning
 date: 2026-02-19
@@ -6436,7 +6436,7 @@ Penetration testing is the definitive infrastructure of the digital age. It prov
 *Next reading: The Dark Web and Cybercrime Ecosystems →*
 
 ---
-`,Ue=`---
+`,Be=`---
 title: "The Future of the Web: An Analytical Overview of QUIC and HTTP/3"
 slug: quic
 date: 2025-10-15
@@ -6685,7 +6685,7 @@ QUIC is not just a faster protocol; it is a smarter one. By breaking the 30-year
 *Next reading: An Analytical Overview of IPv6 Migration →*
 
 ---
-`,Be=`---
+`,Ue=`---
 title: "The Mathematical Fortress: An Analytical Overview of Symmetric vs Asymmetric Encryption"
 slug: symmetric-vs-asymmetric-encryption
 date: 2025-09-24
@@ -20933,7 +20933,7 @@ The project is still unfinished.
 So am I.
 
 And that is exactly why I'm keeping the development log.
-`,Pn=`---
+`,Cn=`---
 title: I Leaked My GitHub Token — and Fixed It
 slug: leaking-and-fixing-a-github-token
 date: 2026-06-25
@@ -21029,7 +21029,7 @@ Vite's \`VITE_\` prefix convention is a contract, not a suggestion — if a vari
 ---
 
 *I don't have a record of whether the token was ever actually exposed in a live production deploy, or caught before it went out — the repo history shows the fix, not the incident report. Worth treating this as "here's the mistake in the code and the fix," not "here's a public breach story."*
-`,Cn=`---
+`,Pn=`---
 title: Learning FastAPI by Building an Issue Tracker
 slug: learning-fastapi-issue-tracker
 date: 2026-08-04
@@ -22310,6 +22310,341 @@ In this lab we:
 Running databases in Docker removes all installation friction and lets you focus on what actually matters — writing SQL and understanding how relational databases work.
 
 ---
-`,B=Object.assign({"/src/content/posts/ai--machine-learning/api-for-ai/README.md":me,"/src/content/posts/ai--machine-learning/computer-vision/README.md":ge,"/src/content/posts/ai--machine-learning/generative-ai-models/README.md":fe,"/src/content/posts/ai--machine-learning/gpu/README.md":ye,"/src/content/posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training/README.md":we,"/src/content/posts/ai--machine-learning/llms/README.md":be,"/src/content/posts/ai--machine-learning/loss-functions-in-ml/README.md":ve,"/src/content/posts/ai--machine-learning/ml-automation-pipelines/README.md":Te,"/src/content/posts/ai--machine-learning/ml-evaluation-metrics/README.md":ke,"/src/content/posts/ai--machine-learning/mlops/README.md":Ie,"/src/content/posts/ai--machine-learning/neuron-in-neural-networks/README.md":Se,"/src/content/posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms/README.md":Ae,"/src/content/posts/ai--machine-learning/overfitting/README.md":Pe,"/src/content/posts/ai--machine-learning/reinforcement-learning/README.md":Ce,"/src/content/posts/ai--machine-learning/tensor-cores-vs-cuda-cores/README.md":xe,"/src/content/posts/cloud--devops/evolution-of-cloud-computing/README.md":Me,"/src/content/posts/cloud--devops/kubernetes/README.md":De,"/src/content/posts/devops--tools/branching-and-merging/README.md":Re,"/src/content/posts/devops--tools/build-tools/README.md":Le,"/src/content/posts/devops--tools/git-and-github-workflow/README.md":Ee,"/src/content/posts/networking--security/https/README.md":_e,"/src/content/posts/networking--security/ipv6/README.md":Oe,"/src/content/posts/networking--security/penetration-testing-tools/README.md":Ne,"/src/content/posts/networking--security/quic/README.md":Ue,"/src/content/posts/networking--security/symmetric-vs-asymmetric-encryption/README.md":Be,"/src/content/posts/networking--security/tcp-vs-udp/README.md":Ge,"/src/content/posts/networking--security/the-dark-web/README.md":Fe,"/src/content/posts/networking--security/the-osi-model/README.md":je,"/src/content/posts/networking--security/vpn/README.md":He,"/src/content/posts/projects/hadoop-and-redis-pipeline/README.md":We,"/src/content/posts/systems--os/ip-routing/README.md":ze,"/src/content/posts/systems--os/linux-startup-sequence/README.md":qe,"/src/content/posts/systems--os/managing-services/README.md":Ve,"/src/content/posts/tech/fastapi-backend-from-scratch/README.md":Ke,"/src/content/posts/web-development/cookies-vs-local-storage/README.md":Je,"/src/content/posts/web-development/csr-vs-ssr/README.md":Qe,"/src/content/posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference/README.md":Ye,"/src/content/posts/web-development/how-browsers-render-html/README.md":Xe,"/src/content/posts/web-development/javascript-event-loop/README.md":$e,"/src/content/posts/web-development/javascript-frameworks/README.md":Ze,"/src/content/posts/web-development/javascript-frameworks/subposts/angular-a-practical-intermediate-guide-to-building-enterprise-applications/README.md":en,"/src/content/posts/web-development/javascript-frameworks/subposts/nextjs-a-practical-intermediate-guide-to-full-stack-react-development/README.md":nn,"/src/content/posts/web-development/javascript-frameworks/subposts/react-a-practical-intermediate-guide-to-building-modern-uis/README.md":tn,"/src/content/posts/web-development/javascript-frameworks/subposts/vuejs-a-practical-intermediate-guide-to-reactive-ui-development/README.md":an,"/src/content/posts/web-development/jwt-authentication/README.md":on,"/src/content/posts/web-development/modern-javascript-features/README.md":rn,"/src/content/posts/web-development/npm-and-yarn/README.md":sn,"/src/content/posts/web-development/progressive-web-apps/README.md":ln,"/src/content/project-log/auto-job-applier-linkedin-ubuntu-wayland/README.md":cn,"/src/content/project-log/building-a-git-based-cms-in-1-week/README.md":hn,"/src/content/project-log/building-a-reusable-multi-agent-hackathon-boilerplate/README.md":dn,"/src/content/project-log/building-autosolver-delivery-dispatch-simulator/README.md":un,"/src/content/project-log/building-autovision-vehicle-tracking-on-a-cpu/README.md":pn,"/src/content/project-log/building-docvision-ai-classic-cv-pipeline/README.md":mn,"/src/content/project-log/building-e-shop-react-frontend/README.md":gn,"/src/content/project-log/claude-code-omniroute-gemini/README.md":fn,"/src/content/project-log/context-vault-claude-history-obsidian-archive/README.md":yn,"/src/content/project-log/deploying-buildpay-ai-to-azure/README.md":wn,"/src/content/project-log/deploying-siteflowai-to-azure/README.md":bn,"/src/content/project-log/exploring-ai-coding-agents-gemini-cli-antigravity-multi-agent-workflow/README.md":vn,"/src/content/project-log/go-assistant-android-overlay-claude-vision/README.md":Tn,"/src/content/project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio/README.md":kn,"/src/content/project-log/job-application-mcp-licensing-and-v1/README.md":In,"/src/content/project-log/job-application-mcp-tools-and-first-deploy-blockers/README.md":Sn,"/src/content/project-log/job-application-mcp/README.md":An,"/src/content/project-log/leaking-and-fixing-a-github-token/README.md":Pn,"/src/content/project-log/learning-fastapi-issue-tracker/README.md":Cn,"/src/content/project-log/learning-makemore-part-1-bigram-language-model/README.md":xn,"/src/content/project-log/learning-micrograd-karpathy-neural-network-from-scratch/README.md":Mn,"/src/content/project-log/local-huggingface-agent-ollama-qwen/README.md":Dn,"/src/content/project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026/README.md":Rn,"/src/content/project-log/portfolio-real-stats-and-a-deploy-conflict/README.md":Ln,"/src/content/project-log/rcms-rental-car-management-system-dbms-lab/README.md":En,"/src/content/project-log/sql-server-docker-azure-data-studio-northwind/README.md":_n}),M=de,$=Array.isArray(M)?null:M.sha,re=Array.isArray(M)?M:M.posts,p="Mzaq1559",u="blog-posts",se="Mzaq1559",le="My-Learning-Diary",m="main";async function G(){const e=await y();try{await e.repos.getContent({owner:p,repo:u,path:S,ref:m,headers:{"If-None-Match":""}});return}catch(n){if((n==null?void 0:n.status)===404){const a=F(`
-`);await e.repos.createOrUpdateFileContents({owner:p,repo:u,path:`${S}/.gitkeep`,message:"Initialize drafts directory",content:a,branch:m});return}throw n}}function ce(e){return`https://raw.githubusercontent.com/${p}/${u}/${m}/${e}`}function jn(){return!!oe()}function Z(e){const n=f(e),a=n.startsWith(`${k}/`)||n.startsWith(`${S}/`)||n.startsWith(`${v}/`);return`https://raw.githubusercontent.com/${a?p:se}/${a?u:le}/${m}/${n}`}const _=new Map;async function Hn(e){var o;const n=await y(),a=f(e);if(_.has(a))return _.get(a);const t=a.startsWith(`${k}/`)||a.startsWith(`${v}/`)||a.startsWith(`${S}/`),i=t?p:se,r=t?u:le;try{if(r===u&&!pe(a))return null;const{data:s}=await n.repos.getContent({owner:i,repo:r,path:a,ref:m});if(a.startsWith(`${k}/`)||a.startsWith(`${v}/`)){const c=Z(a);return _.set(a,c),c}if(s&&typeof s=="object"&&"content"in s&&typeof s.content=="string"){const c=atob(s.content),h=new Uint8Array(c.length);for(let C=0;C<c.length;C++)h[C]=c.charCodeAt(C);const g=((o=a.split(".").pop())==null?void 0:o.toLowerCase())||"jpeg",d=g==="svg"?"image/svg+xml":`image/${g}`,w=new Blob([h],{type:d}),T=URL.createObjectURL(w);return _.set(a,T),T}return Z(a)}catch(s){return(s==null?void 0:s.status)===404||console.error(`getAuthenticatedBlobUrl failed for ${a}:`,s),null}}const On="__private__:";function Wn(e,n,a,t,i){if(!e)return;const r=!e.startsWith("http://")&&!e.startsWith("https://")&&!e.startsWith("/");if(e.startsWith("./")||e.startsWith("../")||r){let o=e,s=t?`${t}/${x}/${n}`:n;if(e.startsWith("./"))o=e.slice(2);else if(e.startsWith("../")){const l=s.split("/"),c=e.split("/");for(;c[0]===".."&&l.length>0;)c.shift(),l.pop();s=l.join("/"),o=c.join("/")}{let l=i;if(!l&&!a){const g=z();if(g){const d=X(g.posts,n)||X(g.projectLogPosts,n);d&&(l=d.repoPath)}}let c;if(a)c=b(n);else if(l)c=l;else{const g=z();(g==null?void 0:g.projectLogPosts.some(w=>w.slug===n))?c=f(`${v}/${s}`):s.startsWith(`${v}/`)||s.startsWith(`${k}/`)||s.includes(`/${v}/`)?c=f(s):c=f(`${k}/${s}`)}const h=ie(c,o);return`${On}${h}`}}return e}async function y(){const{Octokit:e}=await ue(async()=>{const{Octokit:a}=await import("./index-jNMlCxdY.js");return{Octokit:a}},[]),n=oe();return new e({auth:n||void 0})}function F(e){const n=new TextEncoder().encode(e);let a="";for(let t=0;t<n.length;t++)a+=String.fromCharCode(n[t]);return btoa(a)}function ee(e){return[...e].sort((n,a)=>{const t=new Date(n.date).getTime(),i=new Date(a.date).getTime();return(Number.isFinite(i)?i:0)-(Number.isFinite(t)?t:0)})}function j(e){const n=atob(e),a=new Uint8Array(n.length);for(let t=0;t<n.length;t++)a[t]=n.charCodeAt(t);return new TextDecoder().decode(a)}async function I(e){const n=await y();try{return await n.repos.getContent({owner:p,repo:u,path:`${v}/${e}/README.md`,ref:m}),`${v}/${e}`}catch{}try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:k,ref:m});if(!Array.isArray(a))return null;for(const t of a)if(!(t.type!=="dir"||t.name===v))try{return await n.repos.getContent({owner:p,repo:u,path:`${k}/${t.name}/${e}/README.md`,ref:m}),`${k}/${t.name}/${e}`}catch{}}catch{}return null}const ne=new Set(["images","assets","files"]);async function D(e,n,a="published"){const t=await y(),i=[];try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(r))return i;const o=r.find(d=>d.type==="dir"&&d.name===x),s=r.filter(d=>d.type==="dir"&&d.name!=="subposts"&&!ne.has(d.name.toLowerCase()));let l=[];if(o)try{const{data:d}=await t.repos.getContent({owner:p,repo:u,path:o.path,ref:m,headers:{"If-None-Match":""}});Array.isArray(d)&&(l=d.filter(w=>w.type==="dir"&&!ne.has(w.name.toLowerCase())))}catch{}const c=new Set(s.map(d=>d.name)),h=[...s,...l.filter(d=>!c.has(d.name))],g=(await Promise.all(h.map(async d=>{try{let w="";try{const{data:H}=await t.repos.getContent({owner:p,repo:u,path:`${d.path}/README.md`,ref:m,headers:{"If-None-Match":""}});"content"in H&&typeof H.content=="string"&&(w=j(H.content))}catch{}const{metadata:T,body:C}=P(w||"",d.name),E={...T,slug:T.slug||d.name,content:C,parentSlug:n,repoPath:f(d.path)};delete E.status;const Y=await D(d.path,E.slug);return Y.length>0&&(E.subposts=Y),E}catch{return null}}))).filter(d=>d!==null);i.push(...g)}catch{}return i}function V(e,n){const a=[],t=`${e}/${x}/`;for(const[i,r]of Object.entries(B))if(i.startsWith(t)){const s=i.slice(t.length).split("/");if(s.length===2&&s[1]==="README.md"){const l=s[0],{metadata:c,body:h}=P(r,l),g={...c,slug:c.slug||l,content:h,parentSlug:n,repoPath:A(e,l)},d=V(`${e}/${x}/${l}`,g.slug);d.length>0&&(g.subposts=d),a.push(g)}}return a}async function Nn(){const e=Object.entries(B).filter(([a])=>{const t=a.split("/");return t.length===7&&t[3]==="posts"&&t[5]!=="subposts"||t.length===6&&t[3]==="project-log"}).map(([a,t])=>{const i=a.split("/"),r=i[i.length-2],o=i.slice(0,-1).join("/"),{metadata:s,body:l}=P(t,r),c=V(o,r),h=a.startsWith("/src/content/")?f(a.replace("/src/content/","").split("/").slice(0,-1).join("/")):o;return{...s,slug:s.slug||r,content:l,repoPath:h,...c.length>0&&{subposts:c}}}),n=new Map;try{const a=await ae(),t=[...a.posts,...a.projectLogPosts];for(const i of t)n.set(i.slug,i)}catch(a){console.warn("listPosts: postDiscovery failed, falling back to bundled index.",a),re.forEach(t=>n.set(t.slug,{...t,content:t.content||""}))}return e.forEach(a=>n.set(a.slug,a)),Array.from(n.values())}async function zn(){await G();const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:S,ref:m});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir");return(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:`${i.path}/README.md`,ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=j(r.content),{metadata:s,body:l}=P(o,i.name),c={...s,slug:s.slug||i.name,content:l,repoPath:f(i.path)},h=await D(i.path,c.slug);return h.length>0&&(c.subposts=h),c}catch{return null}}))).filter(i=>i!==null)}catch{return[]}}async function qn(e){const n=Object.keys(B).find(o=>o.includes(`/${e}/README.md`));if(n){const o=B[n],{metadata:s,body:l}=P(o,e),c=n.split("/").slice(0,-1).join("/"),h=V(c,e),g=n.startsWith("/src/content/")?f(n.replace("/src/content/","").split("/").slice(0,-1).join("/")):c;return{...s,slug:s.slug||e,content:l,repoPath:g,...h.length>0&&{subposts:h}}}{const o=z(),s=(o==null?void 0:o._sha)??null;if($!==null&&s!==null&&$===s){const c=(g,d)=>{for(const w of g){if(w.slug===d)return w;if(w.subposts){const T=c(w.subposts,d);if(T)return T}}return null},h=c(re,e);if(h&&h.content)return{...h,slug:h.slug||e}}}const a=await I(e);if(a){const o=await K(`${a}/README.md`,e);if(o){const{sha:s,...l}=o,c={...l,slug:l.slug||e,repoPath:f(a)},h=await D(a,c.slug);return h.length>0&&(c.subposts=h),c}}const t=await Nn(),i=(o,s)=>{for(const l of o){if(l.slug===s)return l;if(l.subposts){const c=i(l.subposts,s);if(c)return c}}return null},r=i(t,e);return r||null}async function Vn(e){const n=await I(e);if(!n)return null;const a=await K(`${n}/README.md`,e);if(!a)return null;const{sha:t,...i}=a,r={...i,slug:i.slug||e,repoPath:f(n)},o=await D(n,r.slug);return o.length>0&&(r.subposts=o),r}async function Un(e){await G();const n=await K(`${S}/${e}/README.md`,e);if(!n)return null;const{sha:a,...t}=n,i={...t,slug:t.slug||e,repoPath:b(e)},r=await D(`${S}/${e}`,i.slug);return r.length>0&&(i.subposts=r),i}async function K(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!("content"in t)||typeof t.content!="string")return null;const i=j(t.content),{metadata:r,body:o}=P(i,n);return{...r,content:o,sha:"sha"in t?t.sha:void 0}}catch{return null}}async function Bn(e){const n=await y();try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m});return!("content"in a)||typeof a.content!="string"?null:{content:a.content,sha:a.sha}}catch{return null}}async function Kn(e,n,a){const t=await y(),r=`${U(n.category,e)}/README.md`,o=Q(n);let s=a;if(!s)try{const{data:l}=await t.repos.getContent({owner:p,repo:u,path:r,ref:m,headers:{"If-None-Match":""}});"sha"in l&&(s=l.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:r,message:`${s?"Update":"Create"} post: ${n.title}`,content:F(o),sha:s,branch:m}),!0}catch{return!1}}async function Jn(e,n,a,t=!0,i){t&&await G();const r=await y();let o;if(t)o=`${A(b(e),n)}/README.md`;else{const c=await I(e);if(!c)return!1;o=`${A(f(c),n)}/README.md`}const s=Q(a);let l=i;if(!l)try{const{data:c}=await r.repos.getContent({owner:p,repo:u,path:o,ref:m,headers:{"If-None-Match":""}});"sha"in c&&(l=c.sha)}catch{}try{return await r.repos.createOrUpdateFileContents({owner:p,repo:u,path:o,message:`${l?"Update":"Create"} subpost: ${a.title}`,content:F(s),sha:l,branch:m}),!0}catch{return!1}}async function Qn(e,n,a){await G();const t=await y(),i=`${b(e)}/README.md`,r=Q(n);let o=a;if(!o)try{const{data:s}=await t.repos.getContent({owner:p,repo:u,path:i,ref:m,headers:{"If-None-Match":""}});"sha"in s&&(o=s.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:i,message:`${o?"Update":"Save"} draft: ${n.title}`,content:F(r),sha:o,branch:m}),!0}catch{return!1}}async function Yn(e,n){const a=await I(e);return!a||!await L(`${f(a)}/README.md`,`Delete post: ${e}`,n)?!1:(await R(a),!0)}async function Xn(e,n,a=!0,t){let i;if(a)i=b(n),i=A(b(e),n);else{const o=await I(e);if(!o)return!1;i=A(f(o),n)}return await L(`${i}/README.md`,`Delete subpost: ${n}`,t)?(await R(i),!0):!1}async function $n(e,n){const a=b(e);return await L(`${a}/README.md`,`Delete draft: ${e}`,n)?(await R(a),!0):!1}async function R(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;a=t}catch{return}for(const t of a)t.type==="file"?await L(t.path,`Cleanup: ${t.name}`,t.sha):t.type==="dir"&&await R(t.path)}async function L(e,n,a){const t=await y();let i=a;try{if(!i)try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in r&&(i=r.sha)}catch(r){const o=r;if((o==null?void 0:o.status)===404)return!0;throw r}return i?(await t.repos.deleteFile({owner:p,repo:u,path:e,message:n,sha:i,branch:m}),!0):(console.error(`deleteFileAtPath: could not resolve SHA for "${e}"`),!1)}catch(r){const o=r instanceof Error?r.message:String(r);return console.error(`deleteFileAtPath failed for "${e}": ${o}`,r),!1}}async function he(e,n){const a=await y();try{const t=await Bn(e);if(!t)return!1;let i;try{const{data:r}=await a.repos.getContent({owner:p,repo:u,path:n,ref:m,headers:{"If-None-Match":""}});!Array.isArray(r)&&"sha"in r&&(i=r.sha)}catch{}return await a.repos.createOrUpdateFileContents({owner:p,repo:u,path:n,message:`Rename from ${e} to ${n}`,content:t.content,sha:i,branch:m}),await L(e,`Cleanup old file after rename to ${n}`,t.sha),!0}catch(t){return console.error("moveFile failed:",t),!1}}async function q(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;for(const i of t)if(i.type==="file"){const r=i.path.substring(e.length+1),o=`${n}/${r}`;await he(i.path,o)}else i.type==="dir"&&await q(i.path,`${n}/${i.name}`)}catch{}}async function Zn(e,n,a){let t,i;if(a){t=b(e);const o=await Un(e);if(!o)return console.error(`movePostDirectory: could not read draft "${e}"`),!1;i=U(o.category,n)}else{const o=await I(e);if(!o)return console.error(`movePostDirectory: could not resolve path for "${e}"`),!1;t=f(o),i=b(n)}return await he(`${t}/README.md`,`${i}/README.md`)?(await q(`${t}/images`,`${i}/images`),await q(`${t}/${x}`,`${i}/${x}`),await R(t),!0):!1}async function J(e,n,a,t){const i=await y();let r=t;if(!r)try{const{data:o}=await i.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in o&&(r=o.sha)}catch{}try{return await i.repos.createOrUpdateFileContents({owner:p,repo:u,path:e,message:a,content:n,sha:r,branch:m}),!0}catch(o){return console.error("uploadFileRepoPath:",o),!1}}async function et(e,n,a,t,i,r){const o=n.replace(/[^\w.\-+/]+/g,"_");let s;if(i)r?s=A(b(r),e):s=b(e);else if(r){const h=await I(r),g=h?f(h):U("uncategorized",r);s=A(g,e)}else{const h=await I(e);s=h?f(h):U("uncategorized",e)}const l=ie(s,o);return await J(l,a,`Upload asset: ${o}`)?`./images/${o}`:null}async function nt(e,n,a){const t=n.replace(/[^\w.\-+/]+/g,"_"),i=e?`${e}/${t}`:t;return await J(i,a,`Upload to ${e||"root"}: ${t}`)?ce(i):null}async function tt(){try{const n=await ae();if(n!=null&&n.projectLogPosts&&n.projectLogPosts.length>0)return ee(n.projectLogPosts)}catch(n){console.warn("getProjectLogPosts: getPostTree failed",n)}const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:v,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir"),t=(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:f(i.path)+"/README.md",ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=j(r.content),{metadata:s,body:l}=P(o,i.name,"project-log",i.path);return{...s,slug:s.slug||i.name,category:"project-log",content:l,repoPath:i.path}}catch{return null}}))).filter(i=>i!==null);return ee(t)}catch{return[]}}async function at(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});Array.isArray(t)&&(a=t.map(i=>({type:i.type==="dir"?"dir":"file",name:i.name,path:i.path,rawUrl:ce(i.path)})))}catch(t){console.warn(`listDirectory (remote) failed for ${e}:`,t)}return a.sort((t,i)=>t.type!==i.type?t.type==="dir"?-1:1:t.name.localeCompare(i.name))}async function it(e){const n=e?`${e}/.gitkeep`:".gitkeep";return J(n,"",`Create folder: ${e||"root"}`)}async function ot(){const e=await y();try{const{data:n}=await e.users.getAuthenticated();return n.login}catch{return null}}function P(e,n){let a=e.trim(),t={title:"Untitled",slug:n||"",date:new Date().toISOString().split("T")[0],tags:[],category:"uncategorized"};for(;a.startsWith("---");){const i=a.slice(3).match(/\n---\s*\r?\n/);if(!i)break;const r=i.index+3,o=a.slice(3,r).trim(),s=r+i[0].length;a=a.slice(s).trim();const l=Gn(o),c=O(l.slug,t.slug),h=W(l.cover);t={title:O(l.title,t.title),slug:c,date:O(l.date,t.date),tags:te(l.tags).length>0?te(l.tags):t.tags,category:O(l.category,t.category),excerpt:W(l.excerpt)||t.excerpt,cover:h||t.cover,series:W(l.series)||t.series,seriesOrder:l.seriesOrder?parseInt(String(l.seriesOrder),10):t.seriesOrder}}return{metadata:t,body:a}}function O(e,n){return typeof e=="string"&&e.trim()?e.trim():Array.isArray(e)&&e[0]?String(e[0]).trim():n}function W(e){if(typeof e=="string"&&e.trim())return e.trim();if(Array.isArray(e)&&e[0])return String(e[0]).trim()}function te(e){return Array.isArray(e)?e:typeof e=="string"?e.split(",").map(n=>n.trim()).filter(Boolean):[]}function Gn(e){const n={},a=e.split(/\r?\n/);for(const t of a){const i=t.indexOf(":");if(i===-1)continue;const r=t.slice(0,i).trim();let o=t.slice(i+1).trim();if(r==="tags"){o.startsWith("[")&&o.endsWith("]")&&(o=o.slice(1,-1)),n.tags=o.split(",").map(s=>s.trim().replace(/^["']|["']$/g,"")).filter(Boolean);continue}o=o.replace(/^["']|["']$/g,""),n[r]=o}return n}function N(e){return/[:#\[\]{}|>&*!,]/.test(e)||/^[-?]/.test(e.trim())?`"${e.replace(/\\/g,"\\\\").replace(/"/g,'\\"')}"`:e}function Q(e){const n=["---",`title: ${N(e.title)}`,`slug: ${e.slug}`,`date: ${e.date}`,`tags: [${e.tags.join(", ")}]`,`category: ${N(e.category)}`];return e.excerpt&&n.push(`excerpt: ${N(e.excerpt)}`),e.cover&&n.push(`cover: ${e.cover}`),e.series&&n.push(`series: ${N(e.series)}`),e.seriesOrder!==void 0&&n.push(`seriesOrder: ${e.seriesOrder}`),n.push("---","",e.content),n.join(`
-`)}export{On as P,Nn as a,Yn as b,Qn as c,L as d,Kn as e,$n as f,tt as g,qn as h,Un as i,zn as j,ot as k,at as l,he as m,Vn as n,Xn as o,Jn as p,Zn as q,Wn as r,ee as s,jn as t,et as u,Z as v,Hn as w,it as x,nt as y};
+`,On=`---
+title: "Testing a Multi-Agent Coding Workflow With Copilot, Cursor, and Antigravity"
+slug: testing-a-multi-agent-coding-workflow
+date: 2026-11-04
+tags:
+  [
+    AI Coding Agents,
+    Multi-Agent Systems,
+    GitHub Copilot CLI,
+    Cursor,
+    Antigravity CLI,
+    Gemini CLI,
+    Agent Skills,
+    GitHub Issues,
+    GitHub Actions,
+    React,
+    Express,
+    Project Log,
+  ]
+category: Project Log
+excerpt: "I tested whether GitHub Copilot CLI, Cursor Agent, and Antigravity CLI could collaborate on one small application using separate roles, shared project instructions, and a GitHub Issue as their communication board."
+---
+
+# Testing a Multi-Agent Coding Workflow With Copilot, Cursor, and Antigravity
+
+I have been building a reusable multi-agent project template, but I wanted to test the idea in a real development task instead of stopping at configuration files and documentation.
+
+The question I wanted to explore was straightforward:
+
+**Can multiple AI coding agents work on the same small application when each agent has a clear responsibility and a shared place to coordinate?**
+
+For this experiment, I used three coding agents:
+
+- **GitHub Copilot CLI — Project Coordinator**
+- **Cursor Agent — Frontend Developer**
+- **Antigravity CLI — Backend Developer**
+
+The test application was a Mini Project Dashboard. The frontend and backend were intentionally kept small so I could focus on the collaboration workflow: setting up the agents, checking their access, establishing communication, assigning work, and reviewing the integration.
+
+Repository: [Mzaq1559/agent-board-test](https://github.com/Mzaq1559/agent-board-test)
+
+---
+
+## 1. Preparing the Agent Development Environment
+
+Before launching the agents, I spent some time reviewing the tools and projects that make up the current agent-development ecosystem.
+
+I looked at Google's official [Gemini CLI](https://github.com/google-gemini/gemini-cli) repository and [awesome-gemini-cli](https://github.com/Piebald-AI/awesome-gemini-cli), a community-curated directory of Gemini CLI extensions and resources.
+
+![Image 3 — awesome-gemini-cli repository](./images/3.png)
+
+![Image 4 — official Gemini CLI repository](./images/4.png)
+
+I also reviewed a few broader resources for agentic development and reusable skills:
+
+- [obra/superpowers](https://github.com/obra/superpowers), a skills framework and development methodology for structured agent workflows.
+- [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills), a large index of reusable skills for AI coding agents.
+- [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills), Vercel's collection of agent skills.
+- [github/awesome-copilot](https://github.com/github/awesome-copilot), a collection of community-contributed instructions, agents, and skills for GitHub Copilot.
+
+![Image 5 — obra/superpowers repository](./images/5.png)
+
+![Image 6 — awesome-agent-skills repository](./images/6.png)
+
+![Image 7 — Vercel agent-skills repository](./images/7.png)
+
+![Image 8 — GitHub awesome-copilot repository](./images/8.png)
+
+I was not trying to install everything I found. The purpose was to understand the available approaches and reuse ideas that could make the workflow more consistent.
+
+I then checked where the command-line tools were installed on my machine. This helped confirm that the expected executables were available in the shell environment.
+
+![Image 9 — Local executable paths for copilot, gemini, agent, and agy](./images/9.png)
+
+---
+
+## 2. Checking the GitHub Actions Validation Workflow
+
+The repository also has a GitHub Actions workflow named \`validate-template.yml\`. I wanted the project template to be checked automatically rather than relying only on a manual review.
+
+The workflow validates repository configuration and scripts. Its steps include:
+
+1. Checking out the repository.
+2. Setting up Python.
+3. Validating JSON manifests.
+4. Compiling or syntax-checking the relevant scripts.
+5. Checking shell-script syntax.
+
+The first screenshot shows a successful workflow run triggered by a push. It completed in approximately 14 seconds.
+
+![Image 1 — Successful GitHub Actions validation workflow summary](./images/1.png)
+
+The next screenshot shows the individual job steps and their execution results.
+
+![Image 2 — Detailed GitHub Actions validation job steps](./images/2.png)
+
+The run completed successfully, although GitHub displayed deprecation and migration warnings related to Node.js versions and future Ubuntu runner changes. These warnings did not fail the workflow, but they are worth revisiting before the affected runtime versions are retired.
+
+I also captured another successful validation run while working through the setup.
+
+![Additional validation workflow run](./images/1_2.jpg)
+
+---
+
+## 3. Starting Each Coding Agent and Verifying Access
+
+With the tools installed, I moved on to the most important part of the experiment: checking whether each agent could access the repository and understand the shared project setup.
+
+I did not want to assume that an agent was ready just because its CLI launched successfully. Each client needed to inspect the working directory, read the project instructions, and verify the communication setup.
+
+### Antigravity CLI
+
+I launched Antigravity CLI and checked its startup configuration. In this session, it was running version 1.4.12 with Claude Sonnet 4.6 (Thinking), using the available starter quota.
+
+![Image 10 — Antigravity CLI startup and model configuration](./images/10.png)
+
+### GitHub Copilot CLI
+
+I launched GitHub Copilot CLI and gave it an access-verification task. It inspected the repository, checked the Git working tree, looked for the communication-board instructions, and checked its available GitHub connection.
+
+![Image 11 — GitHub Copilot CLI access verification](./images/11.png)
+
+### Cursor Agent
+
+Cursor Agent completed browser authentication and then presented a workspace-trust prompt. This is an important step because the agent needs permission to read files and execute commands in the selected project directory.
+
+![Image 12 — Cursor Agent workspace trust prompt](./images/12.png)
+
+### Gemini CLI
+
+I also launched Gemini CLI and checked its authentication and startup state. The session was running version 0.66.0 and authenticated using an API key.
+
+![Image 13 — Gemini CLI startup and authentication](./images/13.png)
+
+Gemini CLI was part of the wider environment review, while the actual application-building roles in this experiment were assigned to Copilot, Cursor, and Antigravity.
+
+---
+
+## 4. Verifying Repository Access and the Shared Setup
+
+After startup, I asked the agents to report what they could access instead of immediately assigning implementation work.
+
+Cursor produced a structured verification report covering repository access, whether it could read \`AGENTS.md\`, and the status of the communication board. At that point, the \`BOARD_ISSUE\` and \`BOARD_AGENT\` environment variables were not configured in its session.
+
+![Image 14 — Cursor Agent repository and communication-board verification report](./images/14.png)
+
+Copilot's terminal log showed the commands it used to inspect the Git working tree, search for the board specification, read the README, and verify its GitHub authentication scopes.
+
+![Image 15 — GitHub Copilot CLI verification log](./images/15.png)
+
+Antigravity also produced a verification summary. It confirmed the GitHub CLI authentication and keyring integration, while identifying the same missing board environment configuration.
+
+![Image 16 — Antigravity verification dashboard](./images/16.png)
+
+This was useful because it exposed a setup issue before development began. The agents could inspect the repository, but the shared communication-board configuration still needed to be supplied to their sessions.
+
+---
+
+## 5. Creating a Shared GitHub Issue as the Communication Board
+
+I wanted the agents to have a common place to leave updates without introducing another messaging service.
+
+For this experiment, I used a GitHub Issue as a lightweight message board.
+
+The setup script was:
+
+\`\`\`bash
+bash scripts/setup-board.sh
+\`\`\`
+
+The script creates the shared issue, pins it in the repository, and prints the configuration needed by each agent, including the issue number.
+
+![Image 22 — Running the shared GitHub message-board setup script](./images/22.png)
+
+The board was created as GitHub Issue #2.
+
+Instead of relying on separate terminal sessions to keep track of everything, each agent could post a message with its identity and current status. The other agents could then inspect the same thread.
+
+The following screenshots show the issue being used as a shared communication channel by Cursor CLI, Copilot CLI, and Antigravity CLI.
+
+![Image 17 — Shared GitHub Message Board Issue #2](./images/17.png)
+
+![Image 18 — Agent messages posted to the shared GitHub Issue](./images/18.png)
+
+This approach is deliberately simple. GitHub Issues are already part of the development workflow, so they provide a convenient place to record handoffs, progress updates, and integration notes.
+
+The board does not automatically schedule agents or resolve code conflicts. It gives them a shared communication channel; I still need to launch the agents, define ownership, and supervise the work.
+
+---
+
+## 6. Assigning Separate Responsibilities
+
+Once the repository access and communication setup were ready, I assigned a specific role to each agent.
+
+I wanted to avoid having all three agents independently modify the same parts of the project.
+
+### Antigravity CLI — Backend Developer
+
+Antigravity was responsible for the backend. Its task was to create a small Express REST API, implement an in-memory task store, and provide the endpoints required by the dashboard.
+
+The requested operations included:
+
+- \`GET\` to retrieve tasks.
+- \`POST\` to create a task.
+- \`PATCH\` to update a task.
+
+![Image 19 — Antigravity CLI assigned the Backend Developer role](./images/19.png)
+
+### GitHub Copilot CLI — Project Coordinator
+
+Copilot was assigned the coordinator role. Its responsibility was to oversee the implementation plan, keep track of progress through the shared issue, and review the work delivered by the other agents.
+
+![Image 20 — GitHub Copilot CLI assigned the Project Coordinator role](./images/20.png)
+
+### Cursor Agent — Frontend Developer
+
+Cursor was responsible for the frontend. I asked it to build a responsive Vite and React interface with summary cards, task filters, and interactive forms.
+
+![Image 21 — Cursor Agent assigned the Frontend Developer role](./images/21.png)
+
+The separation was intentional:
+
+| Agent | Responsibility | Main deliverable |
+| --- | --- | --- |
+| Antigravity CLI | Backend Developer | Express API and task data store |
+| Cursor Agent | Frontend Developer | React dashboard and UI |
+| GitHub Copilot CLI | Project Coordinator | Planning, progress tracking, and integration review |
+
+The agents had different areas of ownership, but they still needed to agree on the API contract. That was one of the reasons I wanted the coordinator to review the integration rather than treating each implementation as an isolated result.
+
+---
+
+## 7. Building the Backend and Frontend
+
+After assigning the roles, I let the agents work on their respective parts.
+
+### Backend implementation
+
+Antigravity created the Express backend, configured CORS, and implemented the in-memory task store and REST endpoints.
+
+It also ran the backend tests. The test output showed that the task-related tests passed, and the development server was configured to run on port \`3001\`.
+
+![Image 23 — Antigravity backend implementation and passing tests](./images/23.png)
+
+### Frontend implementation
+
+Cursor worked on the Vite and React dashboard. Its verification report covered the production build, component tests, linting, and readiness to connect to the backend API.
+
+![Image 24 — Cursor frontend build, tests, and lint verification](./images/24.png)
+
+At this stage, both sides had their own implementation and verification results. That was a useful milestone, but I did not want to treat two individually successful builds as proof that the complete application was integrated correctly.
+
+---
+
+## 8. Reviewing the Integration
+
+This is where the coordinator role became important.
+
+Copilot inspected the files delivered by the frontend and backend agents, reviewed the API contract, and ran the project-level checks.
+
+![Image 25 — Copilot reviewing the frontend, backend, API contract, and tests](./images/25.png)
+
+I wanted this review step because parallel development can create integration problems even when each agent reports success independently.
+
+For example:
+
+- The frontend may expect a different response shape from the backend.
+- The API route or HTTP method may not match.
+- The frontend may use a different port or endpoint.
+- The task fields may have inconsistent names.
+- Tests may pass in one part of the project while the combined application still has problems.
+
+A separate review pass helps catch these issues before considering the work complete.
+
+The shared GitHub Issue also provided a record of the agents' final updates and contract acknowledgements.
+
+![Image 26 — Final coordination updates on GitHub Message Board Issue #2](./images/26.png)
+
+The final board updates showed that the frontend and backend agents had completed their work and that the coordinator had the information needed for integration review.
+
+---
+
+## 9. What This Experiment Demonstrated
+
+This was a small application, but it let me test several parts of a multi-agent workflow in one place.
+
+### What worked
+
+- I could launch multiple coding-agent CLIs in the same project environment.
+- Each agent could be assigned a focused responsibility.
+- Repository access and project-instruction checks could be performed before implementation.
+- A GitHub Issue could serve as a shared communication board.
+- The frontend and backend could be developed in parallel with separate ownership.
+- The coordinator could inspect the delivered work and review the integration.
+- GitHub Actions could validate the reusable template automatically.
+
+### What still needs attention
+
+This experiment does not mean that multi-agent development is automatically reliable.
+
+There are still practical concerns:
+
+1. **Shared context:** Each agent needs the right project instructions and enough context to understand the work.
+2. **Environment configuration:** Board identifiers and agent identity variables must be configured consistently in each session.
+3. **API contracts:** Agents need to agree on request and response formats before implementing against them.
+4. **File ownership:** Parallel agents should avoid editing the same files unless the work is deliberately coordinated.
+5. **Integration testing:** Individual build and test results are not a substitute for testing the combined application.
+6. **Human supervision:** I still need to inspect the changes, review decisions, and decide whether the result is correct.
+
+The GitHub Issue board is a coordination aid, not a full orchestration engine. It does not remove the need for clear task boundaries, integration checks, or human review.
+
+---
+
+## Final Thoughts
+
+This experiment helped me move one step beyond using AI coding tools individually.
+
+Instead of asking one agent to handle every part of a project, I gave different agents specific responsibilities and used a shared GitHub Issue to keep their work visible.
+
+The most useful part was not simply that three agents could generate code. It was being able to establish a process around them:
+
+**Verify access → Configure communication → Assign roles → Build in parallel → Review integration → Test the result.**
+
+I still see this as an experiment rather than a finished autonomous development system. There is plenty more to improve, especially around orchestration, shared context, conflict handling, and end-to-end verification.
+
+But it gave me a practical starting point for exploring how multiple coding agents can work together in a structured development workflow.
+
+**The goal is not to remove the developer from the process. It is to make collaboration between coding agents more organized, observable, and easier to review.**
+
+---
+
+## Project Links
+
+- **Demo repository:** [Mzaq1559/agent-board-test](https://github.com/Mzaq1559/agent-board-test)
+- **Reusable boilerplate project log:** [Building a Reusable Multi-Agent Hackathon Boilerplate](https://mzaq1559.github.io/My-Learning-Diary/blog/building-a-reusable-multi-agent-hackathon-boilerplate)
+`,U=Object.assign({"/src/content/posts/ai--machine-learning/api-for-ai/README.md":me,"/src/content/posts/ai--machine-learning/computer-vision/README.md":ge,"/src/content/posts/ai--machine-learning/generative-ai-models/README.md":fe,"/src/content/posts/ai--machine-learning/gpu/README.md":ye,"/src/content/posts/ai--machine-learning/gpus-and-tpus-vs-cpus-for-ai-training/README.md":we,"/src/content/posts/ai--machine-learning/llms/README.md":be,"/src/content/posts/ai--machine-learning/loss-functions-in-ml/README.md":ve,"/src/content/posts/ai--machine-learning/ml-automation-pipelines/README.md":Te,"/src/content/posts/ai--machine-learning/ml-evaluation-metrics/README.md":ke,"/src/content/posts/ai--machine-learning/mlops/README.md":Ie,"/src/content/posts/ai--machine-learning/neuron-in-neural-networks/README.md":Se,"/src/content/posts/ai--machine-learning/neurons-to-chatgpt-neural-networks-llms/README.md":Ae,"/src/content/posts/ai--machine-learning/overfitting/README.md":Ce,"/src/content/posts/ai--machine-learning/reinforcement-learning/README.md":Pe,"/src/content/posts/ai--machine-learning/tensor-cores-vs-cuda-cores/README.md":xe,"/src/content/posts/cloud--devops/evolution-of-cloud-computing/README.md":Me,"/src/content/posts/cloud--devops/kubernetes/README.md":De,"/src/content/posts/devops--tools/branching-and-merging/README.md":Re,"/src/content/posts/devops--tools/build-tools/README.md":Le,"/src/content/posts/devops--tools/git-and-github-workflow/README.md":Ee,"/src/content/posts/networking--security/https/README.md":_e,"/src/content/posts/networking--security/ipv6/README.md":Oe,"/src/content/posts/networking--security/penetration-testing-tools/README.md":Ne,"/src/content/posts/networking--security/quic/README.md":Be,"/src/content/posts/networking--security/symmetric-vs-asymmetric-encryption/README.md":Ue,"/src/content/posts/networking--security/tcp-vs-udp/README.md":Ge,"/src/content/posts/networking--security/the-dark-web/README.md":Fe,"/src/content/posts/networking--security/the-osi-model/README.md":je,"/src/content/posts/networking--security/vpn/README.md":He,"/src/content/posts/projects/hadoop-and-redis-pipeline/README.md":We,"/src/content/posts/systems--os/ip-routing/README.md":ze,"/src/content/posts/systems--os/linux-startup-sequence/README.md":qe,"/src/content/posts/systems--os/managing-services/README.md":Ve,"/src/content/posts/tech/fastapi-backend-from-scratch/README.md":Ke,"/src/content/posts/web-development/cookies-vs-local-storage/README.md":Je,"/src/content/posts/web-development/csr-vs-ssr/README.md":Qe,"/src/content/posts/web-development/from-javascript-to-typescript-a-complete-guide-to-understanding-the-difference/README.md":Ye,"/src/content/posts/web-development/how-browsers-render-html/README.md":Xe,"/src/content/posts/web-development/javascript-event-loop/README.md":$e,"/src/content/posts/web-development/javascript-frameworks/README.md":Ze,"/src/content/posts/web-development/javascript-frameworks/subposts/angular-a-practical-intermediate-guide-to-building-enterprise-applications/README.md":en,"/src/content/posts/web-development/javascript-frameworks/subposts/nextjs-a-practical-intermediate-guide-to-full-stack-react-development/README.md":nn,"/src/content/posts/web-development/javascript-frameworks/subposts/react-a-practical-intermediate-guide-to-building-modern-uis/README.md":tn,"/src/content/posts/web-development/javascript-frameworks/subposts/vuejs-a-practical-intermediate-guide-to-reactive-ui-development/README.md":an,"/src/content/posts/web-development/jwt-authentication/README.md":on,"/src/content/posts/web-development/modern-javascript-features/README.md":rn,"/src/content/posts/web-development/npm-and-yarn/README.md":sn,"/src/content/posts/web-development/progressive-web-apps/README.md":ln,"/src/content/project-log/auto-job-applier-linkedin-ubuntu-wayland/README.md":cn,"/src/content/project-log/building-a-git-based-cms-in-1-week/README.md":hn,"/src/content/project-log/building-a-reusable-multi-agent-hackathon-boilerplate/README.md":dn,"/src/content/project-log/building-autosolver-delivery-dispatch-simulator/README.md":un,"/src/content/project-log/building-autovision-vehicle-tracking-on-a-cpu/README.md":pn,"/src/content/project-log/building-docvision-ai-classic-cv-pipeline/README.md":mn,"/src/content/project-log/building-e-shop-react-frontend/README.md":gn,"/src/content/project-log/claude-code-omniroute-gemini/README.md":fn,"/src/content/project-log/context-vault-claude-history-obsidian-archive/README.md":yn,"/src/content/project-log/deploying-buildpay-ai-to-azure/README.md":wn,"/src/content/project-log/deploying-siteflowai-to-azure/README.md":bn,"/src/content/project-log/exploring-ai-coding-agents-gemini-cli-antigravity-multi-agent-workflow/README.md":vn,"/src/content/project-log/go-assistant-android-overlay-claude-vision/README.md":Tn,"/src/content/project-log/how-to-run-sql-server-in-docker-and-connect-it-with-azure-data-studio/README.md":kn,"/src/content/project-log/job-application-mcp-licensing-and-v1/README.md":In,"/src/content/project-log/job-application-mcp-tools-and-first-deploy-blockers/README.md":Sn,"/src/content/project-log/job-application-mcp/README.md":An,"/src/content/project-log/leaking-and-fixing-a-github-token/README.md":Cn,"/src/content/project-log/learning-fastapi-issue-tracker/README.md":Pn,"/src/content/project-log/learning-makemore-part-1-bigram-language-model/README.md":xn,"/src/content/project-log/learning-micrograd-karpathy-neural-network-from-scratch/README.md":Mn,"/src/content/project-log/local-huggingface-agent-ollama-qwen/README.md":Dn,"/src/content/project-log/medibook-ai-alibaba-cloud-hackathon-pakistan-2026/README.md":Rn,"/src/content/project-log/portfolio-real-stats-and-a-deploy-conflict/README.md":Ln,"/src/content/project-log/rcms-rental-car-management-system-dbms-lab/README.md":En,"/src/content/project-log/sql-server-docker-azure-data-studio-northwind/README.md":_n,"/src/content/project-log/testing-a-multi-agent-coding-workflow/README.md":On}),M=de,$=Array.isArray(M)?null:M.sha,re=Array.isArray(M)?M:M.posts,p="Mzaq1559",u="blog-posts",se="Mzaq1559",le="My-Learning-Diary",m="main";async function G(){const e=await y();try{await e.repos.getContent({owner:p,repo:u,path:S,ref:m,headers:{"If-None-Match":""}});return}catch(n){if((n==null?void 0:n.status)===404){const a=F(`
+`);await e.repos.createOrUpdateFileContents({owner:p,repo:u,path:`${S}/.gitkeep`,message:"Initialize drafts directory",content:a,branch:m});return}throw n}}function ce(e){return`https://raw.githubusercontent.com/${p}/${u}/${m}/${e}`}function Hn(){return!!oe()}function Z(e){const n=f(e),a=n.startsWith(`${k}/`)||n.startsWith(`${S}/`)||n.startsWith(`${v}/`);return`https://raw.githubusercontent.com/${a?p:se}/${a?u:le}/${m}/${n}`}const _=new Map;async function Wn(e){var o;const n=await y(),a=f(e);if(_.has(a))return _.get(a);const t=a.startsWith(`${k}/`)||a.startsWith(`${v}/`)||a.startsWith(`${S}/`),i=t?p:se,r=t?u:le;try{if(r===u&&!pe(a))return null;const{data:s}=await n.repos.getContent({owner:i,repo:r,path:a,ref:m});if(a.startsWith(`${k}/`)||a.startsWith(`${v}/`)){const c=Z(a);return _.set(a,c),c}if(s&&typeof s=="object"&&"content"in s&&typeof s.content=="string"){const c=atob(s.content),h=new Uint8Array(c.length);for(let P=0;P<c.length;P++)h[P]=c.charCodeAt(P);const g=((o=a.split(".").pop())==null?void 0:o.toLowerCase())||"jpeg",d=g==="svg"?"image/svg+xml":`image/${g}`,w=new Blob([h],{type:d}),T=URL.createObjectURL(w);return _.set(a,T),T}return Z(a)}catch(s){return(s==null?void 0:s.status)===404||console.error(`getAuthenticatedBlobUrl failed for ${a}:`,s),null}}const Nn="__private__:";function zn(e,n,a,t,i){if(!e)return;const r=!e.startsWith("http://")&&!e.startsWith("https://")&&!e.startsWith("/");if(e.startsWith("./")||e.startsWith("../")||r){let o=e,s=t?`${t}/${x}/${n}`:n;if(e.startsWith("./"))o=e.slice(2);else if(e.startsWith("../")){const l=s.split("/"),c=e.split("/");for(;c[0]===".."&&l.length>0;)c.shift(),l.pop();s=l.join("/"),o=c.join("/")}{let l=i;if(!l&&!a){const g=z();if(g){const d=X(g.posts,n)||X(g.projectLogPosts,n);d&&(l=d.repoPath)}}let c;if(a)c=b(n);else if(l)c=l;else{const g=z();(g==null?void 0:g.projectLogPosts.some(w=>w.slug===n))?c=f(`${v}/${s}`):s.startsWith(`${v}/`)||s.startsWith(`${k}/`)||s.includes(`/${v}/`)?c=f(s):c=f(`${k}/${s}`)}const h=ie(c,o);return`${Nn}${h}`}}return e}async function y(){const{Octokit:e}=await ue(async()=>{const{Octokit:a}=await import("./index-jNMlCxdY.js");return{Octokit:a}},[]),n=oe();return new e({auth:n||void 0})}function F(e){const n=new TextEncoder().encode(e);let a="";for(let t=0;t<n.length;t++)a+=String.fromCharCode(n[t]);return btoa(a)}function ee(e){return[...e].sort((n,a)=>{const t=new Date(n.date).getTime(),i=new Date(a.date).getTime();return(Number.isFinite(i)?i:0)-(Number.isFinite(t)?t:0)})}function j(e){const n=atob(e),a=new Uint8Array(n.length);for(let t=0;t<n.length;t++)a[t]=n.charCodeAt(t);return new TextDecoder().decode(a)}async function I(e){const n=await y();try{return await n.repos.getContent({owner:p,repo:u,path:`${v}/${e}/README.md`,ref:m}),`${v}/${e}`}catch{}try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:k,ref:m});if(!Array.isArray(a))return null;for(const t of a)if(!(t.type!=="dir"||t.name===v))try{return await n.repos.getContent({owner:p,repo:u,path:`${k}/${t.name}/${e}/README.md`,ref:m}),`${k}/${t.name}/${e}`}catch{}}catch{}return null}const ne=new Set(["images","assets","files"]);async function D(e,n,a="published"){const t=await y(),i=[];try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(r))return i;const o=r.find(d=>d.type==="dir"&&d.name===x),s=r.filter(d=>d.type==="dir"&&d.name!=="subposts"&&!ne.has(d.name.toLowerCase()));let l=[];if(o)try{const{data:d}=await t.repos.getContent({owner:p,repo:u,path:o.path,ref:m,headers:{"If-None-Match":""}});Array.isArray(d)&&(l=d.filter(w=>w.type==="dir"&&!ne.has(w.name.toLowerCase())))}catch{}const c=new Set(s.map(d=>d.name)),h=[...s,...l.filter(d=>!c.has(d.name))],g=(await Promise.all(h.map(async d=>{try{let w="";try{const{data:H}=await t.repos.getContent({owner:p,repo:u,path:`${d.path}/README.md`,ref:m,headers:{"If-None-Match":""}});"content"in H&&typeof H.content=="string"&&(w=j(H.content))}catch{}const{metadata:T,body:P}=C(w||"",d.name),E={...T,slug:T.slug||d.name,content:P,parentSlug:n,repoPath:f(d.path)};delete E.status;const Y=await D(d.path,E.slug);return Y.length>0&&(E.subposts=Y),E}catch{return null}}))).filter(d=>d!==null);i.push(...g)}catch{}return i}function V(e,n){const a=[],t=`${e}/${x}/`;for(const[i,r]of Object.entries(U))if(i.startsWith(t)){const s=i.slice(t.length).split("/");if(s.length===2&&s[1]==="README.md"){const l=s[0],{metadata:c,body:h}=C(r,l),g={...c,slug:c.slug||l,content:h,parentSlug:n,repoPath:A(e,l)},d=V(`${e}/${x}/${l}`,g.slug);d.length>0&&(g.subposts=d),a.push(g)}}return a}async function Bn(){const e=Object.entries(U).filter(([a])=>{const t=a.split("/");return t.length===7&&t[3]==="posts"&&t[5]!=="subposts"||t.length===6&&t[3]==="project-log"}).map(([a,t])=>{const i=a.split("/"),r=i[i.length-2],o=i.slice(0,-1).join("/"),{metadata:s,body:l}=C(t,r),c=V(o,r),h=a.startsWith("/src/content/")?f(a.replace("/src/content/","").split("/").slice(0,-1).join("/")):o;return{...s,slug:s.slug||r,content:l,repoPath:h,...c.length>0&&{subposts:c}}}),n=new Map;try{const a=await ae(),t=[...a.posts,...a.projectLogPosts];for(const i of t)n.set(i.slug,i)}catch(a){console.warn("listPosts: postDiscovery failed, falling back to bundled index.",a),re.forEach(t=>n.set(t.slug,{...t,content:t.content||""}))}return e.forEach(a=>n.set(a.slug,a)),Array.from(n.values())}async function qn(){await G();const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:S,ref:m});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir");return(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:`${i.path}/README.md`,ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=j(r.content),{metadata:s,body:l}=C(o,i.name),c={...s,slug:s.slug||i.name,content:l,repoPath:f(i.path)},h=await D(i.path,c.slug);return h.length>0&&(c.subposts=h),c}catch{return null}}))).filter(i=>i!==null)}catch{return[]}}async function Vn(e){const n=Object.keys(U).find(o=>o.includes(`/${e}/README.md`));if(n){const o=U[n],{metadata:s,body:l}=C(o,e),c=n.split("/").slice(0,-1).join("/"),h=V(c,e),g=n.startsWith("/src/content/")?f(n.replace("/src/content/","").split("/").slice(0,-1).join("/")):c;return{...s,slug:s.slug||e,content:l,repoPath:g,...h.length>0&&{subposts:h}}}{const o=z(),s=(o==null?void 0:o._sha)??null;if($!==null&&s!==null&&$===s){const c=(g,d)=>{for(const w of g){if(w.slug===d)return w;if(w.subposts){const T=c(w.subposts,d);if(T)return T}}return null},h=c(re,e);if(h&&h.content)return{...h,slug:h.slug||e}}}const a=await I(e);if(a){const o=await K(`${a}/README.md`,e);if(o){const{sha:s,...l}=o,c={...l,slug:l.slug||e,repoPath:f(a)},h=await D(a,c.slug);return h.length>0&&(c.subposts=h),c}}const t=await Bn(),i=(o,s)=>{for(const l of o){if(l.slug===s)return l;if(l.subposts){const c=i(l.subposts,s);if(c)return c}}return null},r=i(t,e);return r||null}async function Kn(e){const n=await I(e);if(!n)return null;const a=await K(`${n}/README.md`,e);if(!a)return null;const{sha:t,...i}=a,r={...i,slug:i.slug||e,repoPath:f(n)},o=await D(n,r.slug);return o.length>0&&(r.subposts=o),r}async function Un(e){await G();const n=await K(`${S}/${e}/README.md`,e);if(!n)return null;const{sha:a,...t}=n,i={...t,slug:t.slug||e,repoPath:b(e)},r=await D(`${S}/${e}`,i.slug);return r.length>0&&(i.subposts=r),i}async function K(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!("content"in t)||typeof t.content!="string")return null;const i=j(t.content),{metadata:r,body:o}=C(i,n);return{...r,content:o,sha:"sha"in t?t.sha:void 0}}catch{return null}}async function Gn(e){const n=await y();try{const{data:a}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m});return!("content"in a)||typeof a.content!="string"?null:{content:a.content,sha:a.sha}}catch{return null}}async function Jn(e,n,a){const t=await y(),r=`${B(n.category,e)}/README.md`,o=Q(n);let s=a;if(!s)try{const{data:l}=await t.repos.getContent({owner:p,repo:u,path:r,ref:m,headers:{"If-None-Match":""}});"sha"in l&&(s=l.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:r,message:`${s?"Update":"Create"} post: ${n.title}`,content:F(o),sha:s,branch:m}),!0}catch{return!1}}async function Qn(e,n,a,t=!0,i){t&&await G();const r=await y();let o;if(t)o=`${A(b(e),n)}/README.md`;else{const c=await I(e);if(!c)return!1;o=`${A(f(c),n)}/README.md`}const s=Q(a);let l=i;if(!l)try{const{data:c}=await r.repos.getContent({owner:p,repo:u,path:o,ref:m,headers:{"If-None-Match":""}});"sha"in c&&(l=c.sha)}catch{}try{return await r.repos.createOrUpdateFileContents({owner:p,repo:u,path:o,message:`${l?"Update":"Create"} subpost: ${a.title}`,content:F(s),sha:l,branch:m}),!0}catch{return!1}}async function Yn(e,n,a){await G();const t=await y(),i=`${b(e)}/README.md`,r=Q(n);let o=a;if(!o)try{const{data:s}=await t.repos.getContent({owner:p,repo:u,path:i,ref:m,headers:{"If-None-Match":""}});"sha"in s&&(o=s.sha)}catch{}try{return await t.repos.createOrUpdateFileContents({owner:p,repo:u,path:i,message:`${o?"Update":"Save"} draft: ${n.title}`,content:F(r),sha:o,branch:m}),!0}catch{return!1}}async function Xn(e,n){const a=await I(e);return!a||!await L(`${f(a)}/README.md`,`Delete post: ${e}`,n)?!1:(await R(a),!0)}async function $n(e,n,a=!0,t){let i;if(a)i=b(n),i=A(b(e),n);else{const o=await I(e);if(!o)return!1;i=A(f(o),n)}return await L(`${i}/README.md`,`Delete subpost: ${n}`,t)?(await R(i),!0):!1}async function Zn(e,n){const a=b(e);return await L(`${a}/README.md`,`Delete draft: ${e}`,n)?(await R(a),!0):!1}async function R(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;a=t}catch{return}for(const t of a)t.type==="file"?await L(t.path,`Cleanup: ${t.name}`,t.sha):t.type==="dir"&&await R(t.path)}async function L(e,n,a){const t=await y();let i=a;try{if(!i)try{const{data:r}=await t.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in r&&(i=r.sha)}catch(r){const o=r;if((o==null?void 0:o.status)===404)return!0;throw r}return i?(await t.repos.deleteFile({owner:p,repo:u,path:e,message:n,sha:i,branch:m}),!0):(console.error(`deleteFileAtPath: could not resolve SHA for "${e}"`),!1)}catch(r){const o=r instanceof Error?r.message:String(r);return console.error(`deleteFileAtPath failed for "${e}": ${o}`,r),!1}}async function he(e,n){const a=await y();try{const t=await Gn(e);if(!t)return!1;let i;try{const{data:r}=await a.repos.getContent({owner:p,repo:u,path:n,ref:m,headers:{"If-None-Match":""}});!Array.isArray(r)&&"sha"in r&&(i=r.sha)}catch{}return await a.repos.createOrUpdateFileContents({owner:p,repo:u,path:n,message:`Rename from ${e} to ${n}`,content:t.content,sha:i,branch:m}),await L(e,`Cleanup old file after rename to ${n}`,t.sha),!0}catch(t){return console.error("moveFile failed:",t),!1}}async function q(e,n){const a=await y();try{const{data:t}=await a.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(t))return;for(const i of t)if(i.type==="file"){const r=i.path.substring(e.length+1),o=`${n}/${r}`;await he(i.path,o)}else i.type==="dir"&&await q(i.path,`${n}/${i.name}`)}catch{}}async function et(e,n,a){let t,i;if(a){t=b(e);const o=await Un(e);if(!o)return console.error(`movePostDirectory: could not read draft "${e}"`),!1;i=B(o.category,n)}else{const o=await I(e);if(!o)return console.error(`movePostDirectory: could not resolve path for "${e}"`),!1;t=f(o),i=b(n)}return await he(`${t}/README.md`,`${i}/README.md`)?(await q(`${t}/images`,`${i}/images`),await q(`${t}/${x}`,`${i}/${x}`),await R(t),!0):!1}async function J(e,n,a,t){const i=await y();let r=t;if(!r)try{const{data:o}=await i.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});"sha"in o&&(r=o.sha)}catch{}try{return await i.repos.createOrUpdateFileContents({owner:p,repo:u,path:e,message:a,content:n,sha:r,branch:m}),!0}catch(o){return console.error("uploadFileRepoPath:",o),!1}}async function nt(e,n,a,t,i,r){const o=n.replace(/[^\w.\-+/]+/g,"_");let s;if(i)r?s=A(b(r),e):s=b(e);else if(r){const h=await I(r),g=h?f(h):B("uncategorized",r);s=A(g,e)}else{const h=await I(e);s=h?f(h):B("uncategorized",e)}const l=ie(s,o);return await J(l,a,`Upload asset: ${o}`)?`./images/${o}`:null}async function tt(e,n,a){const t=n.replace(/[^\w.\-+/]+/g,"_"),i=e?`${e}/${t}`:t;return await J(i,a,`Upload to ${e||"root"}: ${t}`)?ce(i):null}async function at(){try{const n=await ae();if(n!=null&&n.projectLogPosts&&n.projectLogPosts.length>0)return ee(n.projectLogPosts)}catch(n){console.warn("getProjectLogPosts: getPostTree failed",n)}const e=await y();try{const{data:n}=await e.repos.getContent({owner:p,repo:u,path:v,ref:m,headers:{"If-None-Match":""}});if(!Array.isArray(n))return[];const a=n.filter(i=>i.type==="dir"),t=(await Promise.all(a.map(async i=>{try{const{data:r}=await e.repos.getContent({owner:p,repo:u,path:f(i.path)+"/README.md",ref:m,headers:{"If-None-Match":""}});if(!("content"in r)||typeof r.content!="string")return null;const o=j(r.content),{metadata:s,body:l}=C(o,i.name,"project-log",i.path);return{...s,slug:s.slug||i.name,category:"project-log",content:l,repoPath:i.path}}catch{return null}}))).filter(i=>i!==null);return ee(t)}catch{return[]}}async function it(e){const n=await y();let a=[];try{const{data:t}=await n.repos.getContent({owner:p,repo:u,path:e,ref:m,headers:{"If-None-Match":""}});Array.isArray(t)&&(a=t.map(i=>({type:i.type==="dir"?"dir":"file",name:i.name,path:i.path,rawUrl:ce(i.path)})))}catch(t){console.warn(`listDirectory (remote) failed for ${e}:`,t)}return a.sort((t,i)=>t.type!==i.type?t.type==="dir"?-1:1:t.name.localeCompare(i.name))}async function ot(e){const n=e?`${e}/.gitkeep`:".gitkeep";return J(n,"",`Create folder: ${e||"root"}`)}async function rt(){const e=await y();try{const{data:n}=await e.users.getAuthenticated();return n.login}catch{return null}}function C(e,n){let a=e.trim(),t={title:"Untitled",slug:n||"",date:new Date().toISOString().split("T")[0],tags:[],category:"uncategorized"};for(;a.startsWith("---");){const i=a.slice(3).match(/\n---\s*\r?\n/);if(!i)break;const r=i.index+3,o=a.slice(3,r).trim(),s=r+i[0].length;a=a.slice(s).trim();const l=Fn(o),c=O(l.slug,t.slug),h=W(l.cover);t={title:O(l.title,t.title),slug:c,date:O(l.date,t.date),tags:te(l.tags).length>0?te(l.tags):t.tags,category:O(l.category,t.category),excerpt:W(l.excerpt)||t.excerpt,cover:h||t.cover,series:W(l.series)||t.series,seriesOrder:l.seriesOrder?parseInt(String(l.seriesOrder),10):t.seriesOrder}}return{metadata:t,body:a}}function O(e,n){return typeof e=="string"&&e.trim()?e.trim():Array.isArray(e)&&e[0]?String(e[0]).trim():n}function W(e){if(typeof e=="string"&&e.trim())return e.trim();if(Array.isArray(e)&&e[0])return String(e[0]).trim()}function te(e){return Array.isArray(e)?e:typeof e=="string"?e.split(",").map(n=>n.trim()).filter(Boolean):[]}function Fn(e){const n={},a=e.split(/\r?\n/);for(const t of a){const i=t.indexOf(":");if(i===-1)continue;const r=t.slice(0,i).trim();let o=t.slice(i+1).trim();if(r==="tags"){o.startsWith("[")&&o.endsWith("]")&&(o=o.slice(1,-1)),n.tags=o.split(",").map(s=>s.trim().replace(/^["']|["']$/g,"")).filter(Boolean);continue}o=o.replace(/^["']|["']$/g,""),n[r]=o}return n}function N(e){return/[:#\[\]{}|>&*!,]/.test(e)||/^[-?]/.test(e.trim())?`"${e.replace(/\\/g,"\\\\").replace(/"/g,'\\"')}"`:e}function Q(e){const n=["---",`title: ${N(e.title)}`,`slug: ${e.slug}`,`date: ${e.date}`,`tags: [${e.tags.join(", ")}]`,`category: ${N(e.category)}`];return e.excerpt&&n.push(`excerpt: ${N(e.excerpt)}`),e.cover&&n.push(`cover: ${e.cover}`),e.series&&n.push(`series: ${N(e.series)}`),e.seriesOrder!==void 0&&n.push(`seriesOrder: ${e.seriesOrder}`),n.push("---","",e.content),n.join(`
+`)}export{Nn as P,Bn as a,Xn as b,Yn as c,L as d,Jn as e,Zn as f,at as g,Vn as h,Un as i,qn as j,rt as k,it as l,he as m,Kn as n,$n as o,Qn as p,et as q,zn as r,ee as s,Hn as t,nt as u,Z as v,Wn as w,ot as x,tt as y};

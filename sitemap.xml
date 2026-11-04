@@ -36,6 +36,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/testing-a-multi-agent-coding-workflow</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mzaq1559.github.io/My-Learning-Diary/blog/building-a-reusable-multi-agent-hackathon-boilerplate</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

@@ -2,6 +2,15 @@
   "sha": null,
   "posts": [
     {
+      "title": "Testing a Multi-Agent Coding Workflow With Copilot, Cursor, and Antigravity",
+      "slug": "testing-a-multi-agent-coding-workflow",
+      "date": "2026-11-04",
+      "tags": [],
+      "category": "project-log",
+      "excerpt": "I tested whether GitHub Copilot CLI, Cursor Agent, and Antigravity CLI could collaborate on one small application using separate roles, shared project instructions, and a GitHub Issue as their communication board.",
+      "repoPath": "project-log/testing-a-multi-agent-coding-workflow"
+    },
+    {
       "title": "Building a Reusable Multi-Agent Hackathon Boilerplate",
       "slug": "building-a-reusable-multi-agent-hackathon-boilerplate",
       "date": "2026-11-02",
